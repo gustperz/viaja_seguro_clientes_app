@@ -1,0 +1,24 @@
+<ion-side-menu side="left" ng-controller="MenuCtrl">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Viaja Seguro</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="home">
+            <img src="img/profile.jpg" class="img-perfil img-rounded">
+            <p class="nombre-conductor">Cliente</p>
+            <p class="nombre-conductor">123456</p>
+            <p class="nombre-conductor">Cliente</p>
+        </div>
+        </div>
+        <ion-list>
+            <ion-item ng-repeat="menu in menuList" menu-close ui-sref="{{menu.statego}}">
+                <i class="icon {{menu.icon}}"></i>
+                {{menu.nombre}}
+            </ion-item>
+            <ion-item ng-click="logout()">
+                <i class="icon ion-ios-undo"></i>
+                Salir
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-side-menu>
