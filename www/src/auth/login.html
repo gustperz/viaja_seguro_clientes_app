@@ -1,0 +1,32 @@
+<ion-view title="Inicio de sesion">
+    <ion-content overflow-scroll="true" class="has-header">
+        <h1 class="center padding">LOGO</h1>
+        <h5 class="center">lema</h5>
+        <form name="formLogin">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <span class="input-label">Usuario</span>
+                    <input type="text"  name="usuario" ng-model="usuario.name" ng-required="true">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Contraseña</span>
+                    <input type="password" name="contrasena" ng-model="usuario.pass" ng-required="true">
+                </label>
+                <br>
+                <ion-toggle ng-model="matenerSesion" toggle-class="toggle-positive" class="separador">Recordar Datos</ion-toggle>
+
+
+                <br>
+                <button class="button button-block button-positive"
+                        ng-click="iniciarSesion()" ng-disabled="formLogin.$invalid">
+                    Inciar Sesión
+                </button>
+            </div>
+        </form>
+        <div class="center">
+            <a ui-sref="register">
+                <span>Registrarse</span>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,75 @@
+<ion-view title="Registrarse">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content overflow-scroll="true" class="has-header">
+        <form name="formConductor">
+            <div class="list list-inset">
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-card placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Identificación:</span>
+                    <input
+                            type="number"
+                            name="docuento" ng-model="conductor.identificacion" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-person placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Nombres:</span>
+                    <input type="text" name="nombre" ng-model="conductor.nombres" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-person placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Apellidos:</span>
+                    <input type="text" name="apellidos" ng-model="conductor.apellidos" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-android-pin placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Dirección:</span>
+                    <input type="text" name="direccion" ng-model="conductor.direccion" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-android-phone-portrait placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Telefono:</span>
+                    <input type="number" name="telefono" ng-model="conductor.telefono" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-email placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Correo:</span>
+                    <input type="email" name="correo" ng-model="conductor.correo" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-key placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Contraseña:</span>
+                    <input type="password" name="contrasena" ng-model="conductor.contrasena" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-key placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Confirmar Contraseña:</span>
+                    <input type="password" name="confirmarContrasena" ng-model="conductor.confirmarContrasena"
+                           ng-required="true">
+                </label>
+                <label class="item item-input item-select item-light">
+                    <div class="input-label">Empresa</div>
+                    <select ng-model="conductor.empresa_id" name="empresa" ng-required="true">
+                        <option ng-repeat="empresa in listaEmpesas" value="{{empresa.id}}">{{empresa.nombre}}</option>
+                    </select>
+                </label>
+
+                <button class="button button-block button-positive"
+                        ng-click="registarConductor()" ng-disabled="formConductor.$invalid">
+                        Registrar
+                </button>
+                <span class="text-center positive" ng-show="mostrarAdvertencia">Las contraseñas no coinciden</span>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
