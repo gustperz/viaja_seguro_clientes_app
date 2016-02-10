@@ -10,6 +10,10 @@
             return $http.post(API_URL+'/login', usuario);
         };
 
+        this.register = function (usuario){
+            return $http.post(API_URL+'/usuarios/clientes', usuario);
+        };
+
         this.updatePassword = function (usuario, contrasenas){
             return $http.post(API_URL+'/usuarios/'+usuario.id+'/change_pass',
                 contrasenas,
