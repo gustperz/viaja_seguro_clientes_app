@@ -9,21 +9,23 @@
         .module('empresas')
         .controller('ListaEmpresasCtrl', ListaEmpresasCtrl);
 
-    function ListaEmpresasCtrl($scope, $state) {
-        $scope.empresas = [
-            {nombre: 'Empresa 1',
-                direccion: 'calle 25',
-                telefono: '9348756',
-                id: '1'
-            },
-            {nombre: 'Empresa 3',
-                direccion: 'calle 98',
-                telefono: '657483',
-                id: 2
-            }
-        ]
+    function ListaEmpresasCtrl($scope, $state, empresasService) {
+        $scope.$on('$ionicView.loaded',function(){
+            $scope.empresas = [];
+            loadEmpresas();
+        });
 
         $scope.showServiciosEmpresa = showServiciosEmpresa;
+
+        function loadEmpresas(){
+            empresasService.getAll().then(success, error);
+            function success(p) {
+                $scope.empresas = p.data;
+            }
+            function error(error) {
+                console.log('Error al cargar datos', error);
+            }
+        }
 
         function showServiciosEmpresa(empresa){
             $state.go('app.servicios_empresa', {'empresa_id' : 1});

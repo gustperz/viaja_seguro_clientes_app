@@ -40,4 +40,4 @@ angular.module('starter', [
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/login');
     })
-    .constant('API_URL', 'http://localhost/mydev/viaja_seguro/public/api');
+    .constant('API_URL', 'http://dev.viajaseguro.co/public/api');
