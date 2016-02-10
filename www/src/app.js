@@ -28,7 +28,13 @@ angular.module('starter', [
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, jwtInterceptorProvider, $httpProvider) {
+        jwtInterceptorProvider.tokenGetter = function() {
+            return sessionStorage.getItem('jwt');
+        };
+
+        $httpProvider.interceptors.push('jwtInterceptor');
+
         $ionicConfigProvider.navBar.alignTitle('center');
         $stateProvider
             .state('app', {
