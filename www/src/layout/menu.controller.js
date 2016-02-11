@@ -9,20 +9,17 @@
         .module('starter')
         .controller('MenuCtrl', MenuCtrl);
 
-    function MenuCtrl($scope) {
+    function MenuCtrl($scope, $state) {
         $scope.menuList = [
-            {nombre: 'Home',
-                statego : 'app',
-                icon: 'ion-ios-undo'
-            },
-            {nombre: 'Asd',
-                statego : 'app',
-                icon: 'ion-ios-undo'
-            },
-            {nombre: 'Asd',
-                statego : 'app',
-                icon: 'ion-ios-undo'
+            {nombre: 'Empresas',
+                statego : 'app.empresas',
+                icon: 'ion-ios-list'
             }
-        ]
+        ];
+
+        $scope.logout = function (){
+            sessionStorage.clear();
+            $state.go('login');
+        }
     }
 })();
