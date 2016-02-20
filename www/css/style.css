@@ -64,3 +64,14 @@
     font-weight: bold;
 
 }
+
+.loading{
+    height: 100%;
+    width: 100%;
+}
+
+.loading div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

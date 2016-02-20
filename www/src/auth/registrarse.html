@@ -10,57 +10,57 @@
                     <i class="icon ion-card placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Identificación:</span>
-                    <input type="number" name="docuento" ng-model="usuario.identificacion" ng-required="true">
+                    <input type="number" name="docuento" ng-model="vm.usuario.identificacion" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-person placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Nombres:</span>
-                    <input type="text" name="nombre" ng-model="usuario.nombres" ng-required="true">
+                    <input type="text" name="nombre" ng-model="vm.usuario.nombres" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-person placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Apellidos:</span>
-                    <input type="text" name="apellidos" ng-model="usuario.apellidos" ng-required="true">
+                    <input type="text" name="apellidos" ng-model="vm.usuario.apellidos" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-android-pin placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Dirección:</span>
-                    <input type="text" name="direccion" ng-model="usuario.direccion" ng-required="true">
+                    <input type="text" name="direccion" ng-model="vm.usuario.direccion" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-android-phone-portrait placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Telefono:</span>
-                    <input type="number" name="telefono" ng-model="usuario.telefono" ng-required="true">
+                    <input type="number" name="telefono" ng-model="vm.usuario.telefono" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-email placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Correo:</span>
-                    <input type="email" name="correo" ng-model="usuario.correo" ng-required="true">
+                    <input type="email" name="correo" ng-model="vm.usuario.correo" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-key placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Contraseña:</span>
-                    <input type="password" name="contrasena" ng-model="usuario.contrasena" ng-required="true">
+                    <input type="password" name="contrasena" ng-model="vm.usuario.contrasena" ng-required="true">
                 </label>
                 <label class="item item-input input-bottom">
                     <i class="icon ion-key placeholder-icon"></i>
                     &nbsp;
                     <span class="input-label">Confirmar Contraseña:</span>
-                    <input type="password" name="confirmarContrasena" ng-model="usuario.confirmarContrasena"
+                    <input type="password" name="confirmarContrasena" ng-model="vm.usuario.confirmarContrasena"
                            ng-required="true">
                 </label>
 
                 <button class="button button-block button-positive"
-                        ng-click="registarCliente()" ng-disabled="formCliente.$invalid">
+                        ng-click="vm.registarCliente()" ng-disabled="formCliente.$invalid">
                         Registrar
                 </button>
-                <span class="text-center positive" ng-show="mostrarAdvertencia">Las contraseñas no coinciden</span>
+                <span class="text-center positive" ng-show="vm.mostrarAdvertencia">Las contraseñas no coinciden</span>
             </div>
         </form>
     </ion-content>

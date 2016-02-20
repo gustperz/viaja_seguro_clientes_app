@@ -10,21 +10,22 @@
         .controller('RegisterCtrl', RegisterCtrl);
 
     function RegisterCtrl($scope, authService, $ionicPopup, $state) {
+        var vm = this;
         $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
             viewData.enableBack = true;
 
-            $scope.usuario = {};
-            $scope.mostrarAdvertencia = false;
+            vm.usuario = {};
+            vm.mostrarAdvertencia = false;
 
-            $scope.registarCliente = registarCliente;
+            vm.registarCliente = registarCliente;
         });
 
         function registarCliente(){
-            if($scope.usuario.contrasena != $scope.usuario.confirmarContrasena ){
-                $scope.mostrarAdvertencia = true;
+            if(vm.usuario.contrasena != vm.usuario.confirmarContrasena ){
+                vm.mostrarAdvertencia = true;
                 return;
             }
-            authService.register($scope.usuario).then(success, error);
+            authService.register(vm.usuario).then(success, error);
             function success(p) {
                 if(p.status == 201){
                     mostarAlert("", "Se ha registrado satisfatoriamente");

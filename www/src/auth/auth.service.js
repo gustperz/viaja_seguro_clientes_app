@@ -5,9 +5,15 @@
         .module('auth')
         .service('authService', authService);
 
-    function authService($http, API_URL, jwtHelper, $state) {
+    function authService($http, API_URL, jwtHelper, $state, $window) {
         this.login = function (usuario){
             return $http.post(API_URL+'/login', usuario);
+        };
+
+        this.logout = function (){
+            sessionStorage.clear();
+            $window.localStorage.removeItem('credenciales');
+            $state.go('login');
         };
 
         this.register = function (usuario){
@@ -26,11 +32,23 @@
             var usuario = jwtHelper.decodeToken(jwt).usuario;
             sessionStorage.setItem('usuario',JSON.stringify(usuario));
             return usuario;
-        }
+        };
+
+        this.local = {
+            setCredenciales: function(credenciales) {
+                $window.localStorage['credenciales'] = JSON.stringify(credenciales);
+            },
+            getCredenciales: function() {
+                return JSON.parse($window.localStorage['credenciales'] || false);
+            },
+            destroyCredenciales: function() {
+                $window.localStorage.removeItem('credenciales');
+            }
+        };
 
         this.currentUser = function(){
             return JSON.parse(sessionStorage.getItem('usuario'));
-        }
+        };
 
     }
 })();

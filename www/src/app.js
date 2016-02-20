@@ -29,9 +29,7 @@ angular.module('starter', [
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, jwtInterceptorProvider, $httpProvider) {
-        jwtInterceptorProvider.tokenGetter = function() {
-            return sessionStorage.getItem('jwt');
-        };
+        jwtInterceptorProvider.tokenGetter = tokenGetter;
 
         $httpProvider.interceptors.push('jwtInterceptor');
 
@@ -46,4 +44,35 @@ angular.module('starter', [
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/login');
     })
-    .constant('API_URL', 'http://dev.viajaseguro.co/public/api');
+
+    .constant('API_URL', 'http://dev.viajaseguro.co/public/api')
+
+    .constant('$ionicLoadingConfig', {
+        templateUrl: 'src/layout/ionicLoading.html',
+        noBackdrop: true,
+        hideOnStateChange: true
+    });
+
+function tokenGetter(jwtHelper, $http, API_URL) {
+    var jwt = sessionStorage.getItem('jwt');
+    if(jwt){
+        if(jwtHelper.isTokenExpired(jwt)){
+            return $http({
+                url : API_URL+'/new_token',
+                skipAuthorization : true,
+                method: 'GET',
+                headers : { Authorization : 'Bearer '+ jwt}
+            }).then(
+                function(response){
+                    sessionStorage.setItem('jwt',response.data.token);
+                    return response.data.token;
+                },
+                function(response){
+                    store.remove('jwt');
+                }
+            );
+        }else{
+            return jwt;
+        }
+    }
+}

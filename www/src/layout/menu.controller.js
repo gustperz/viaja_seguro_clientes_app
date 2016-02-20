@@ -9,7 +9,7 @@
         .module('starter')
         .controller('MenuCtrl', MenuCtrl);
 
-    function MenuCtrl($scope, $state) {
+    function MenuCtrl($scope, authService) {
         $scope.menuList = [
             {nombre: 'Empresas',
                 statego : 'app.empresas',
@@ -17,9 +17,6 @@
             }
         ];
 
-        $scope.logout = function (){
-            sessionStorage.clear();
-            $state.go('login');
-        }
+        $scope.logout = authService.logout;
     }
 })();
