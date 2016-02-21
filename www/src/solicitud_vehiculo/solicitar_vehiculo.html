@@ -1,0 +1,13 @@
+<ion-view title="Empresas">
+    <ion-content overflow-scroll="true" class="has-header">
+        <ion-list>
+            <ion-item ng-repeat="empresa in empresas" class="item-thumbnail-left">
+                <img ng-click="showServiciosEmpresa(empresa)" ng-src="http://{{empresa.logo}}">
+                <h2 ng-click="showServiciosEmpresa(empresa)">{{empresa.nombre}}</h2>
+                <p ng-click="showServiciosEmpresa(empresa)">{{empresa.direccion}}</p>
+                <p ng-click="showServiciosEmpresa(empresa)">{{empresa.telefono}}</p>
+                <p><a ui-sref="app.empresa_detalles({empresa_id: '{{empresa.id}}'})">Deatalles</a></p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
