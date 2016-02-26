@@ -5,16 +5,13 @@
 (function() {
     'use strict';
 
-    angular
-        .module('app')
-        .config('SolicitarVehiculoCtrl', SolicitarVehiculoCtrl);
-
-    function SolicitarVehiculoCtrl($scope) {
-        var vm = this;
-        $scope.$on('$ionicView.loaded',function(){
-            vm.empresas = [];
+    angular.module('solicitud_vehiculo', [])
+        .config(function ($stateProvider) {
+            $stateProvider
+                .state('app.solicitud_vehiculo', {
+                    url: '/empresas/:empresa_id/solicitar_vehiculo',
+                    templateUrl: 'src/solicitud_vehiculo/solicitar_vehiculo.html',
+                    controller: 'SolicitarVehiculoCtrl'
+                })
         });
-
-
-    }
 })();

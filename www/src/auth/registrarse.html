@@ -27,6 +27,33 @@
                 <label class="item item-input input-bottom">
                     <i class="icon ion-android-pin placeholder-icon"></i>
                     &nbsp;
+                    <span class="input-label">Departamento:</span>
+                    <!--<input type="text" name="direccion" ng-model="vm.usuario.direccion" ng-required="true">-->
+                    <select-box ng-Selected-Value="selectedValue"
+                                ng-Item-Name="nombre"
+                                ng-Item-Id="id"
+                                ng-header-class="bar-positive"
+                                ng-data="vm.departamentos"
+                                ng-placeholder="no seleccionado"
+                                ng-select-changed="vm.loadCiudades(selectedValue)">
+                    </select-box>
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-android-pin placeholder-icon"></i>
+                    &nbsp;
+                    <span class="input-label">Ciudad:</span>
+                    <select-box ng-Selected-Value="vm.usuario.municipio_id"
+                                ng-Item-Name="nombre"
+                                ng-Item-Id="codigo"
+                                ng-header-class="bar-positive"
+                                ng-data="vm.ciudades"
+                                ng-placeholder="no seleccionada">
+                    </select-box>
+                    <input ng-hide="true" type="text" ng-model="vm.usuario.municipio_id" ng-required="true">
+                </label>
+                <label class="item item-input input-bottom">
+                    <i class="icon ion-android-pin placeholder-icon"></i>
+                    &nbsp;
                     <span class="input-label">Dirección:</span>
                     <input type="text" name="direccion" ng-model="vm.usuario.direccion" ng-required="true">
                 </label>

@@ -7,12 +7,14 @@
 angular.module('starter', [
     'ionic',
     'angular-jwt',
+    '$selectBox',
 
     'auth',
-    'empresas'
+    'empresas',
+    'solicitud_vehiculo'
 ])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $rootScope, $state, jwtHelper) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -24,6 +26,16 @@ angular.module('starter', [
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
+            }
+        });
+
+        $rootScope.$on('$stateChangeStart', function(e, to) {
+            if (!to.data || !to.data.noRequiresLogin) {
+                var jwt = sessionStorage.getItem('jwt');
+                if (!jwt || jwtHelper.isTokenExpired(jwt)) {
+                    e.preventDefault();
+                    $state.go('login');
+                }
             }
         });
     })
@@ -45,7 +57,7 @@ angular.module('starter', [
         $urlRouterProvider.otherwise('/login');
     })
 
-    .constant('API_URL', 'http://dev.viajaseguro.co/public/api')
+    .constant('API_URL', 'http://localhost:8000/api')
 
     .constant('$ionicLoadingConfig', {
         templateUrl: 'src/layout/ionicLoading.html',

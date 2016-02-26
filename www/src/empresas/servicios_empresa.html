@@ -1,18 +1,18 @@
 <ion-view view-title="Servicios">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <div class="card" ng-click="loadService('Pasajeros')">
-            <div class="item item-text-wrap center">
+        <div ng-if="vm.pasajeros" class="card">
+            <a class="item item-text-wrap center" ui-sref="app.solicitud_vehiculo({empresa_id: vm.empresa.id})">
                 <i class="icon ion-person icon-size"></i>
                 <h2>Solicitar Vehiculo</h2>
-            </div>
+            </a>
         </div>
-        <div class="card" ng-click="loadService('Pasajeros')">
+        <div ng-if="vm.encomiendas"  class="card" >
             <div class="item item-text-wrap center">
                 <i class="icon ion-email icon-size"></i>
                 <h2>Encomiendas</h2>
             </div>
         </div>
-        <div class="card" ng-click="loadService('Pasajeros')">
+        <div ng-if="vm.giros"  class="card" >
             <div class="item item-text-wrap center">
                 <i class="icon ion-social-usd icon-size"></i>
                 <h2>Giros</h2>
