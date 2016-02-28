@@ -75,3 +75,30 @@
     top: 50%;
     left: 50%;
 }
+
+/*asd*/
+.item-button-right{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.item-button-right .button{
+    height: 34px;
+}
+
+.item-button-right input, .item-button-right input[readonly]{
+    margin-right: 70px;
+    background-color: white;
+}
+
+.input-readonly-white input[readonly]{
+    background-color: white;
+}
+
+.angular-google-map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}

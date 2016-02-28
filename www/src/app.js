@@ -8,6 +8,8 @@ angular.module('starter', [
     'ionic',
     'angular-jwt',
     '$selectBox',
+    'uiGmapgoogle-maps',
+    'ngCordova',
 
     'auth',
     'empresas',
@@ -40,7 +42,8 @@ angular.module('starter', [
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, jwtInterceptorProvider, $httpProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, jwtInterceptorProvider,
+                      $httpProvider, uiGmapGoogleMapApiProvider) {
         jwtInterceptorProvider.tokenGetter = tokenGetter;
 
         $httpProvider.interceptors.push('jwtInterceptor');
@@ -55,9 +58,17 @@ angular.module('starter', [
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/login');
+
+        // angular-google-maps
+        uiGmapGoogleMapApiProvider.configure({
+            //    key: 'your api key',
+            libraries: 'places,geometry,visualization',
+            language: 'es'
+        });
     })
 
-    .constant('API_URL', 'http://localhost:8000/api')
+    //.constant('API_URL', 'http://localhost:8000/api')
+    .constant('API_URL', 'http://dev.viajaseguro.co/public/api')
 
     .constant('$ionicLoadingConfig', {
         templateUrl: 'src/layout/ionicLoading.html',
@@ -80,7 +91,7 @@ function tokenGetter(jwtHelper, $http, API_URL) {
                     return response.data.token;
                 },
                 function(response){
-                    store.remove('jwt');
+                    sessionStorage.removeItem('jwt');
                 }
             );
         }else{

@@ -13,5 +13,10 @@
                     templateUrl: 'src/solicitud_vehiculo/solicitar_vehiculo.html',
                     controller: 'SolicitarVehiculoCtrl'
                 })
+                .state('app.solicitud_vehiculo_midireccion', {
+                    url: '/midireccion',
+                    templateUrl: 'src/solicitud_vehiculo/mapa.html',
+                    controller: 'MapaMiDireccionCtrl as vm'
+                })
         });
 })();

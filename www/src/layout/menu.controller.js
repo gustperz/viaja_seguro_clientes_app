@@ -12,7 +12,7 @@
     function MenuCtrl($scope, authService) {
         $scope.menuList = [
             {nombre: 'Empresas',
-                statego : 'app.empresas',
+                statego : 'app.lista_empresas',
                 icon: 'ion-ios-list'
             }
         ];

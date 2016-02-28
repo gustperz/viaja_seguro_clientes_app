@@ -1,2 +1,35 @@
 <ion-view title="Solicitar Vehiculo">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+
+        <h4>Direccion donde sera recojido</h4>
+        <form class="list">
+            <label class="item item-input item-button-right">
+                <input type="search" placeholder="calle 12 # 15 49" readonly>
+                <a ui-sref="app.solicitud_vehiculo_midireccion" class="button button-positive icon ion-search "></a>
+            </label>
+        </form>
+        <h4>Destino</h4>
+        <form class="list">
+            <label class="item item-input input-bottom">
+                <span class="input-label">Ciudad:</span>
+                <!--<input type="text" name="direccion" ng-model="vm.usuario.direccion" ng-required="true">-->
+                <select-box ng-Selected-Value="selectedValue"
+                            ng-Item-Name="nombre"
+                            ng-Item-Id="id"
+                            ng-header-class="bar-positive"
+                            ng-data="vm.departamentos"
+                            ng-placeholder="no seleccionada">
+                </select-box>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Direccion</span>
+                <input type="text" placeholder="">
+            </label>
+            <div class="spacer" style="height: 50px;"></div>
+            <label class="item item-input">
+                <span class="input-label"><h3>Numero de Pasajeros</h3></span>
+                <input type="number" placeholder="">
+            </label>
+        </form>
+    </ion-content>
 </ion-view>

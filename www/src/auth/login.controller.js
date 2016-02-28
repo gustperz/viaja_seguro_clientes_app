@@ -35,7 +35,7 @@
             }
             function error(error) {
                 $ionicLoading.hide();
-                mostarAlert("Error login","Error al logear verifique que los datos ingresados sean correctos");
+                mostarAlert("Error login "+error.status,"Error al logear verifique que los datos ingresados sean correctos");
             }
         }
 

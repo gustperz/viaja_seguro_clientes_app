@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos; *; style-src  &apos;self&apos; &apos;unsafe-inline&apos; *">
     <title></title>
 
     <!-- compiled css output -->
@@ -17,11 +19,15 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <!--<script src="cordova.js"></script>-->
+    <script src="lib/utils/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
 
     <!-- ext libs js -->
-    <script src="lib/angular-jwt.js"></script>
-    <script src="lib/SelectBox.js"></script>
+    <script src="lib/utils/angular-jwt.js"></script>
+    <script src="lib/utils/SelectBox.js"></script>
+    <script src="lib/utils/lodash.min.js"></script>
+    <script src="lib/utils/angular-simple-logger.min.js"></script>
+    <script src="lib/utils/angular-google-maps.js"></script>
 
 </head>
 
@@ -32,6 +38,7 @@
 <script src="src/app.js"></script>
 <script src="src/layout/app.controller.js"></script>
 <script src="src/layout/menu.controller.js"></script>
+<script src="src/commons/geolocationService.js"></script>
 
 <!--auth-->
 <script src="src/auth/auth.js"></script>
@@ -49,5 +56,6 @@
 <!-- solicitud vehiculo -->
 <script src="src/solicitud_vehiculo/solicitud_vehiculo.js"></script>
 <script src="src/solicitud_vehiculo/solicitar_vehiculo.controller.js"></script>
+<script src="src/solicitud_vehiculo/mapa.controller.js"></script>
 </body>
 </html>

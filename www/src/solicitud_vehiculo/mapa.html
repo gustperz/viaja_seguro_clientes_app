@@ -1,0 +1,32 @@
+<ion-view title="Su ubicacion">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <ui-gmap-google-map
+                center="vm.map.center"
+                zoom="vm.map.zoom"
+                draggable="true"
+                options="vm.map.options"
+                events="vm.map.events">
+            <ui-gmap-marker
+                    idkey="vm.marker.id"
+                    coords="vm.marker.coords">
+            </ui-gmap-marker>
+                <ui-gmap-map-control
+                        template="control.tpl.html"
+                        position="top"
+                        controller="direccionCtrl as vm">
+                </ui-gmap-map-control>
+        </ui-gmap-google-map>
+    </ion-content>
+</ion-view>
+<script type="text/ng-template" id="control.tpl.html">
+    <div class="card col col-90">
+        <div class="item item-text-wrap row-no-padding">
+            <label class="item item-input input-readonly-white">
+                <input type="text" ng-model="vm.ciudad" readonly>
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="vm.direccion">
+            </label>
+        </div>
+    </div>
+</script>
