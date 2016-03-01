@@ -30,6 +30,7 @@
                 }
                 authService.storeUser(p.data.token);
                 if(authService.currentUser().rol == "CLIENTE"){
+                    $ionicLoading.hide();
                     $state.go('app.lista_empresas');
                 }
             }
@@ -50,6 +51,7 @@
             function success(p) {
                 authService.storeUser(p.data.token);
                 if(authService.currentUser().rol == "CLIENTE"){
+                    $ionicLoading.hide();
                     $state.go('app.lista_empresas');
                 }
             }
