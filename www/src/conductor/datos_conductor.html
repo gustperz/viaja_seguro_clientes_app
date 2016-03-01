@@ -1,0 +1,24 @@
+<ion-view title="Informacion de Conductor">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img ng-src="http://{{vm.conductor.imagen}}">
+                <h2>{{vm.conductor.apellidos}}</h2>
+                <h2>{{vm.conductor.nombres}}</h2>
+            </div>
+
+            <div class="item item-body">
+                <h2>Vehiculo</h2>
+                <img class="full-image" ng-src="http://{{vm.vehiculo.imagen}}">
+                <p>
+                    Codigo: &nbsp;{{vm.vehiculo.codigo_vial}}<br>
+                    Placa: &nbsp;&nbsp;&nbsp;{{vm.vehiculo.placa}}<br>
+                    Model: &nbsp;&nbsp;{{vm.vehiculo.modelo}}<br>
+                    Color: &nbsp;&nbsp;&nbsp;{{vm.vehiculo.color}}<br>
+                </p>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
