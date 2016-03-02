@@ -9,7 +9,7 @@
         .module('auth')
         .controller('LoginCtrl', LoginCtrl);
 
-    function LoginCtrl($scope, authService, $ionicPopup, $state, $ionicLoading) {
+    function LoginCtrl($scope, authService, mostarAlert, $state, $ionicLoading) {
         var vm = this;
         $scope.$on('$ionicView.beforeEnter',function(){
             autologin();
@@ -59,15 +59,6 @@
                 $ionicLoading.hide();
                 authService.local.destroyCredenciales();
             }
-        }
-
-        function mostarAlert(titulo,contenido){
-            var alertPopup = $ionicPopup.alert({
-                title: titulo,
-                template: contenido
-            });
-            alertPopup.then(function (res) {
-            });
         }
     }
 })();

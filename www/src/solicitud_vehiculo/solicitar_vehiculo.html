@@ -1,35 +1,69 @@
 <ion-view title="Solicitar Vehiculo">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-
-        <h4>Direccion donde sera recojido</h4>
         <form class="list">
-            <label class="item item-input item-button-right">
-                <input type="search" placeholder="calle 12 # 15 49" readonly>
-                <a ui-sref="app.solicitud_vehiculo_midireccion" class="button button-positive icon ion-search "></a>
-            </label>
-        </form>
-        <h4>Destino</h4>
-        <form class="list">
-            <label class="item item-input input-bottom">
-                <span class="input-label">Ciudad:</span>
+            <h4 class="padding-left">Seleccione su ciudad de destino</h4>
+            <label class="item item-input">
                 <!--<input type="text" name="direccion" ng-model="vm.usuario.direccion" ng-required="true">-->
                 <select-box ng-Selected-Value="selectedValue"
-                            ng-Item-Name="nombre"
-                            ng-Item-Id="id"
+                            ng-Item-Name="nombre_ciudad"
+                            ng-Item-Id="ruta_id"
                             ng-header-class="bar-positive"
-                            ng-data="vm.departamentos"
-                            ng-placeholder="no seleccionada">
+                            ng-data="vm.ciudades"
+                            ng-placeholder="no seleccionada"
+                            ng-select-changed="vm.loadCupos(selectedValue)">
                 </select-box>
             </label>
-            <label class="item item-input">
-                <span class="input-label">Direccion</span>
-                <input type="text" placeholder="">
+            <div class="card positive-bg row" ng-if="vm.cupos_disponibles && !vm.sin_cupos">
+                <div class="item row">
+                    <span class="col col-90 item-text-wrap">
+                        {{vm.conductores_ruta}} vehículos disponibles.<br>
+                        Quedan {{vm.cupos_disponibles}} cupos para el siguiente viaje
+                        <span ng-show="vm.cupos_disponibles_siguiente && vm.cupos_disponibles_siguiente > 0">
+                            y {{vm.cupos_disponibles_siguiente}} cupos para el siguiente a este.
+                        </span>
+                    </span>
+                    <a ui-sref="app.datos_conductor({conductor_id: vm.conductor_id})"
+                       class="button-icon button button-clear button-positive col col-center row-no-padding">
+                        <i class="icon ion-android-car"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card positive-bg row" ng-if="vm.sin_cupos">
+                <div class="item row">
+                    <span class="col col-90 item-text-wrap">
+                        No hay vehículos disponibles, por favor intente más tarde
+                        o comuníquese directamente con la empresa
+                    </span>
+                </div>
+            </div>
+            <div class="spacer" style="height: 10px;"></div>
+            <h4 class="padding-left">Direccion donde sera recojido</h4>
+            <label class="item item-input item-button-right">
+                <input type="search" placeholder="{{vm.location.direccion}}" readonly>
+                <a ui-sref="app.solicitud_vehiculo_midireccion" class="button button-positive icon ion-search "></a>
             </label>
-            <div class="spacer" style="height: 50px;"></div>
             <label class="item item-input">
                 <span class="input-label"><h3>Numero de Pasajeros</h3></span>
-                <input type="number" placeholder="">
+                <input type="number" ng-model="vm.numero_pasajeros" ng-change="vm.refreshPasajeros()"
+                       ng-blur="vm.refreshPasajeros()" min="1" required>
             </label>
+            <div class="card" ng-repeat="pasajero in vm.pasajeros">
+                <div class="item item-divider">
+                    <b>Datos Pasajero {{$index+1}}</b>
+                </div>
+                <label class="item item-input">
+                    <span class="input-label">Nombre</span>
+                    <input type="text" ng-model="pasajero.nombre" placeholder="" min="1" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label"><h3>Identificacion</h3></span>
+                    <input type="text" ng-model="pasajero.identificacion" placeholder="" min="1" required>
+                </label>
+            </div>
+            <button class="button button-block button-positive"
+                    ng-click="vm.enviarSolicitud()" ng-disabled="formLogin.$invalid">
+                Enviar Solicitud
+            </button>
         </form>
     </ion-content>
 </ion-view>

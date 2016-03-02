@@ -72,8 +72,7 @@ angular.module('starter', [
 
     .constant('$ionicLoadingConfig', {
         templateUrl: 'src/layout/ionicLoading.html',
-        noBackdrop: true,
-        hideOnStateChange: true
+        noBackdrop: true
     });
 
 function tokenGetter(jwtHelper, $http, API_URL) {

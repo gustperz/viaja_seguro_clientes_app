@@ -8,13 +8,31 @@
                 events="vm.map.events">
             <ui-gmap-marker
                     idkey="vm.marker.id"
-                    coords="vm.marker.coords">
+                    coords="vm.marker.coords"
+                    options="vm.marker.options">
             </ui-gmap-marker>
-                <ui-gmap-map-control
-                        template="control.tpl.html"
-                        position="top"
-                        controller="direccionCtrl as vm">
-                </ui-gmap-map-control>
+            <ui-gmap-map-control
+                    template="control.tpl.html"
+                    position="top"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
+            <ui-gmap-map-control
+                    template="controlCenterMarquer.tpl.html"
+                    position="CENTER"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
+            <ui-gmap-map-control
+                    template="buttonLocate.tpl.html"
+                    position="bottom-right"
+                    index="1"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
+            <ui-gmap-map-control
+                    template="buttonAceptar.tpl.html"
+                    position="bottom-left"
+                    index="-1"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
         </ui-gmap-google-map>
     </ion-content>
 </ion-view>
@@ -22,11 +40,31 @@
     <div class="card col col-90">
         <div class="item item-text-wrap row-no-padding">
             <label class="item item-input input-readonly-white">
-                <input type="text" ng-model="vm.ciudad" readonly>
+                <input type="text" ng-model="vm.location.fullnameCiudad" readonly>
             </label>
-            <label class="item item-input">
-                <input type="text" ng-model="vm.direccion">
+            <label class="item item-input item-button-right">
+                <input type="text" ng-model="vm.location.direccion">
+                <button class="button button-clear button-positive icon ion-ios-navigate"
+                    ng-click="alert('asdfg')"></button>
             </label>
         </div>
     </div>
+</script>
+<script type="text/ng-template" id="controlCenterMarquer.tpl.html">
+    <div class="icon-marker-center">
+        <i class="icon ion-location positive"></i>
+    </div>
+</script>
+<script type="text/ng-template" id="buttonAceptar.tpl.html">
+    <div class="container-button-aceptar-control-gm">
+        <button class="button button-positive button-aceptar-control-gm"
+                ng-click="vm.enviarSolicitud()">
+            Estoy Aqui
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="buttonLocate.tpl.html">
+    <button class="button icon ion-android-locate button-locate-control-gm"
+            ng-click="vm.goCurentPos()">
+    </button>
 </script>

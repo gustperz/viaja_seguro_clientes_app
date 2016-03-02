@@ -77,6 +77,13 @@
 }
 
 /*asd*/
+select-box {
+    width: 95%;
+}
+select-box input[readonly]{
+    padding-left: 10px;
+}
+
 .item-button-right{
     padding-top: 7px;
     padding-bottom: 7px;
@@ -101,4 +108,30 @@
     bottom: 0;
     right: 0;
     left: 0;
+}
+
+.container-button-aceptar-control-gm{
+    position: absolute;
+    bottom: 24px !important;
+    left: 12px !important;
+    width: 100%;
+    padding-right: 125px !important;
+}
+
+.button-aceptar-control-gm{
+    height: 55px;
+    width: 100%;
+}
+
+.button-locate-control-gm{
+    position: absolute;
+    right: 50px !important;
+    bottom: 24px !important;
+    height: 55px;
+}
+
+.icon-marker-center{
+    padding: 0;
+    height: 114px;
+    font-size: 50px;
 }
