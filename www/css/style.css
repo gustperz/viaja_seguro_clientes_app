@@ -17,7 +17,7 @@
 }
 
 .card{
-    box-shadow: 0 1px 3px rgba(214, 35, 35, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2)
 }
 
 .notificacion{
@@ -100,6 +100,22 @@ select-box input[readonly]{
 
 .input-readonly-white input[readonly]{
     background-color: white;
+}
+
+.no-padding{
+    padding: 0 0;
+}
+
+.boton-add-pasajero{
+    min-height: 34px !important;
+    height: 34px;
+    min-width: 42px;
+    width: 42px;
+    position: absolute;
+    right: 18px;
+}
+.boton-add-pasajero.icon:before{
+    line-height: 33px !important;
 }
 
 .angular-google-map-container {

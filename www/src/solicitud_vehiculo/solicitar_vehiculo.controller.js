@@ -10,21 +10,25 @@
         .controller('SolicitarVehiculoCtrl', SolicitarVehiculoCtrl);
 
     function SolicitarVehiculoCtrl($scope, $ionicLoading, $stateParams, geoLocationService,
-                                   solicitudVehiculoService, authService) {
+                                   solicitudVehiculoService, authService, mostarAlert, $ionicPopup) {
         var vm = this;
         var conductoresRuta = [];
-        $scope.$on('$ionicView.loaded',function(){
-            vm.ciudades = [];
-            var user = authService.currentUser();
-            vm.pasajeros = [{'nombre': user.nombre, identificacion: user.identificacion}];
-            vm.numero_pasajeros = 1;
+        vm.ciudades = [];
+        vm.solicitud= {};
 
+        vm.user = authService.currentUser();
+        vm.solicitud.pasajeros = [{'nombre': vm.user.nombre, identificacion: vm.user.identificacion}];
+
+        vm.loadCupos = loadCupos;
+        vm.enviarSolicitud = enviarSolicitud;
+        vm.showModalAddPasajero = showModalAddPasajero;
+        vm.showModalEditPasajero = showModalEditPasajero;
+
+        $scope.$on('$ionicView.loaded',function(){
             geoLocationService.current().then(function(pos){
                 vm.location = pos;
                 loadCiudades();
             },function(error) {});
-            vm.loadCupos = loadCupos;
-            vm.refreshPasajeros = refreshPasajeros;
         });
 
         function loadCiudades(){
@@ -74,6 +78,7 @@
             }
             function success(p){
                 vm.cupos_disponibles = p.data;
+                vm.solicitud.ruta_id = ruta_id;
                 if(vm.conductores_ruta > 1){
                     vm.conductor2_id = conductoresRuta[ruta_id][1].conductor_id;
                     solicitudVehiculoService.getCupos(vm.conductor2_id).then(success2, error);
@@ -91,20 +96,112 @@
             }
         }
 
-        function refreshPasajeros(){
-            if(vm.numero_pasajeros < 1){
-                return vm.numero_pasajeros = 1;
-            }else {
-                if(vm.pasajeros.length < vm.numero_pasajeros) {
-                    var num = vm.pasajeros.length;
-                    for (var i = 0; i < vm.numero_pasajeros-num; i++) {
-                        vm.pasajeros.push({'nombre': '', identificacion: ''});
-                    }
-                } else {
-                    vm.pasajeros = vm.pasajeros.slice(vm.numero_pasajeros, vm.pasajeros.length-1);
-                }
+        function enviarSolicitud(){
+            vm.solicitud.pasajeros = vm.pasajeros;
+            vm.solicitud.direccion_recogida = vm.location.direccion;
+            vm.tipo = 'vehiculo';
+            solicitudVehiculoService.post(vm.solicitud).then(success, error);
+            function success(p) {
+                mostarAlert('', 'Solicitud Enviada');
+            }
+            function error(error) {
+
             }
         }
 
+        function showModalAddPasajero(){
+            $scope.pasajero = {};
+            var popup = {
+                templateUrl: 'src/solicitud_vehiculo/modal_pasajero.html',
+                title: 'Agregar pasajero',
+                scope: $scope
+            };
+            if(vm.solicitud.pasajeros.length < 1){
+                popup.buttons = [
+                    { type: 'button-icon ion-plus button-positive button-clear',
+                        onTap: function(e) {
+                            if (!$scope.pasajero.nombre || !$scope.pasajero.identificacion) {
+                                e.preventDefault();
+                            } else {
+                                return $scope.pasajero;
+                            }
+                        }
+                    }
+                ];
+            }else{
+                popup.buttons = [
+                    { type: 'button-icon ion-reply button-positive button-clear' },
+                    { type: 'button-icon ion-plus button-positive button-clear',
+                        onTap: function(e) {
+                            if (!$scope.pasajero.nombre || !$scope.pasajero.identificacion) {
+                                e.preventDefault();
+                            } else {
+                                return $scope.pasajero;
+                            }
+                        }
+                    }
+                ];
+            }
+            var myPopup = $ionicPopup.show(popup);
+            myPopup.then(addPasajero);
+        }
+
+        function addPasajero(pasajero){
+            if(pasajero){
+                vm.solicitud.pasajeros.push(pasajero);
+            }
+        }
+
+        function showModalEditPasajero(pasajero, index){
+            $scope.pasajero = pasajero;
+            var _pasajero = {
+                nombre: pasajero.nombre,
+                identificacion: pasajero.identificacion
+            };
+            var myPopup = $ionicPopup.show({
+                templateUrl: 'src/solicitud_vehiculo/modal_pasajero.html',
+                title: 'Pasajero',
+                scope: $scope,
+                buttons: [
+                    { //cancelar
+                        type: 'button-icon ion-reply button-positive button-clear',
+                        onTap: function() {
+                            console.log(pasajero, _pasajero);
+                            pasajero.nomre = _pasajero.nombre;
+                            pasajero.identificacion = _pasajero.identificacion;
+                            console.log(pasajero, _pasajero);
+                        }
+                    },
+                    { //eliminar
+                        type: 'button-icon ion-close button-positive button-clear',
+                        onTap: function(e) {
+                            return { eliminar: true, index: index}
+                        }
+                    },
+                    { //guardar
+                        type: 'button-icon ion-checkmark button-positive button-clear',
+                        onTap: function(e) {
+                            if (!$scope.pasajero.nombre || !$scope.pasajero.identificacion) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                ]
+            });
+            myPopup.then(updatePasajeros);
+        }
+
+        function updatePasajeros(res){
+            if(res){
+                if(res.eliminar){
+                    vm.solicitud.pasajeros.splice(res.index, 1);
+                    if(vm.solicitud.pasajeros.length < 1){
+                        showModalAddPasajero();
+                    }
+                }else{
+                    vm.solicitud.pasajeros[res.index] = res.pasajero;
+                }
+            }
+        }
     }
 })();

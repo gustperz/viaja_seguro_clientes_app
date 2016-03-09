@@ -1,6 +1,6 @@
 <ion-view title="Solicitar Vehiculo">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <form class="list">
+        <form name="formSolicitud" class="list">
             <h4 class="padding-left">Seleccione su ciudad de destino</h4>
             <label class="item item-input">
                 <!--<input type="text" name="direccion" ng-model="vm.usuario.direccion" ng-required="true">-->
@@ -12,6 +12,7 @@
                             ng-placeholder="no seleccionada"
                             ng-select-changed="vm.loadCupos(selectedValue)">
                 </select-box>
+                <input ng-hide="true" type="text" ng-model="vm.solicitud.ruta_id" ng-required="true">
             </label>
             <div class="card positive-bg row" ng-if="vm.cupos_disponibles && !vm.sin_cupos">
                 <div class="item row">
@@ -37,28 +38,37 @@
                 </div>
             </div>
             <div class="spacer" style="height: 10px;"></div>
-            <h4 class="padding-left">Direccion donde sera recojido</h4>
+            <div class="row row-no-padding">
+                <div class="col col-80 no-padding">
+                    <h4 class="padding-left">Donde sera recojido</h4>
+                </div>
+                <div class="col col-20 no-padding">
+                    <a ui-sref="app.solicitud_vehiculo_midireccion">
+                        <button class="button button-positive icon ion-search boton-add-pasajero" type="button">
+                        </button>
+                    </a>
+                </div>
+            </div>
             <label class="item item-input item-button-right">
                 <input type="search" placeholder="{{vm.location.direccion}}" readonly>
-                <a ui-sref="app.solicitud_vehiculo_midireccion" class="button button-positive icon ion-search "></a>
             </label>
-            <label class="item item-input">
-                <span class="input-label"><h3>Numero de Pasajeros</h3></span>
-                <input type="number" ng-model="vm.numero_pasajeros" ng-change="vm.refreshPasajeros()"
-                       ng-blur="vm.refreshPasajeros()" min="1" required>
-            </label>
-            <div class="card" ng-repeat="pasajero in vm.pasajeros">
-                <div class="item item-divider">
-                    <b>Datos Pasajero {{$index+1}}</b>
+            <div class="spacer" style="height: 10px;"></div>
+            <div class="row row-no-padding">
+                <div class="col col-80 no-padding"><h4 class="padding-left">Pasajeros</h4></div>
+                <div class="col col-20 no-padding">
+                    <button class="button button-positive icon ion-plus boton-add-pasajero"
+                            ng-click="vm.showModalAddPasajero()" type="button">
+                    </button>
                 </div>
-                <label class="item item-input">
-                    <span class="input-label">Nombre</span>
-                    <input type="text" ng-model="pasajero.nombre" placeholder="" min="1" required>
-                </label>
-                <label class="item item-input">
-                    <span class="input-label"><h3>Identificacion</h3></span>
-                    <input type="text" ng-model="pasajero.identificacion" placeholder="" min="1" required>
-                </label>
+            </div>
+            <div class="list">
+                <div class="item item-button-right" style="padding: 16px 16px"
+                     ng-repeat="pasajero in vm.solicitud.pasajeros">
+                    {{pasajero.nombre}}
+                    <button class="button button-positive button-clear" type="button" ng-click="vm.showModalEditPasajero(pasajero, $index)">
+                        <i class="icon ion-edit"></i>
+                    </button>
+                </div>
             </div>
             <button class="button button-block button-positive"
                     ng-click="vm.enviarSolicitud()" ng-disabled="formLogin.$invalid">
