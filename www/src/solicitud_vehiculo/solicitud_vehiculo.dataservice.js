@@ -20,7 +20,7 @@
             return $http.get(API_URL+'/conductores/'+conductor_id+'/cupos');
         }
         this.post = function(solicitud) {
-            return $http.post(API_URL+'/clientes/'+authService.currentUser().clliente_id, solicitud);
+            return $http.post(API_URL+'/clientes/'+authService.currentUser().cliente_id+'/solicitudes', solicitud);
         }
     }
 })();

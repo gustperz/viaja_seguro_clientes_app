@@ -52,7 +52,7 @@
             <label class="item item-input item-button-right">
                 <input type="search" placeholder="{{vm.location.direccion}}" readonly>
             </label>
-            <div class="spacer" style="height: 10px;"></div>
+            <div class="spacer" style="height: 15px;"></div>
             <div class="row row-no-padding">
                 <div class="col col-80 no-padding"><h4 class="padding-left">Pasajeros</h4></div>
                 <div class="col col-20 no-padding">
@@ -70,10 +70,12 @@
                     </button>
                 </div>
             </div>
-            <button class="button button-block button-positive"
-                    ng-click="vm.enviarSolicitud()" ng-disabled="formLogin.$invalid">
+        </form>
+        <div class="row row-bottom">
+            <button class="button button-block button-positive col"
+                    ng-click="vm.enviarSolicitud()" ng-disabled="formSolicitud.$invalid || vm.sin_cupos">
                 Enviar Solicitud
             </button>
-        </form>
+        </div>
     </ion-content>
 </ion-view>

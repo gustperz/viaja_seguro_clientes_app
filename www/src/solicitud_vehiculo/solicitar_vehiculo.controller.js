@@ -97,9 +97,10 @@
         }
 
         function enviarSolicitud(){
-            vm.solicitud.pasajeros = vm.pasajeros;
             vm.solicitud.direccion_recogida = vm.location.direccion;
-            vm.tipo = 'vehiculo';
+            vm.solicitud.ciudad_direccion = vm.location.ciudad;
+            vm.solicitud.central_id = vm.centralLocal.id;
+            vm.solicitud.tipo = 'vehiculo';
             solicitudVehiculoService.post(vm.solicitud).then(success, error);
             function success(p) {
                 mostarAlert('', 'Solicitud Enviada');
