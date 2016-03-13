@@ -15,7 +15,7 @@
                 })
                 .state('app.solicitud_vehiculo_midireccion', {
                     url: '/midireccion',
-                    templateUrl: 'src/solicitud_vehiculo/mapa.html',
+                    templateUrl: 'src/mapa_ubicacion/mapa.html',
                     controller: 'MapaMiDireccionCtrl as vm'
                 })
         });
