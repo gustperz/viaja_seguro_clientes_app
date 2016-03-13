@@ -16,6 +16,9 @@
         this.getRutasCentral = function (central_id){
             return $http.get(API_URL+'/centrales/'+central_id+'/rutas');
         }
+        this.getTurnos = function (ruta_id){
+            return $http.get(API_URL+'/rutas/'+ruta_id+'/turnos');
+        }
         this.getCupos = function (conductor_id){
             return $http.get(API_URL+'/conductores/'+conductor_id+'/cupos');
         }

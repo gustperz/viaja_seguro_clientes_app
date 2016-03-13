@@ -17,7 +17,7 @@
             <div class="card positive-bg row" ng-if="vm.cupos_disponibles && !vm.sin_cupos">
                 <div class="item row">
                     <span class="col col-90 item-text-wrap">
-                        {{vm.conductores_ruta}} vehículos disponibles.<br>
+                        {{vm.n_conductores_ruta}} vehículos disponibles.<br>
                         Quedan {{vm.cupos_disponibles}} cupos para el siguiente viaje
                         <span ng-show="vm.cupos_disponibles_siguiente && vm.cupos_disponibles_siguiente > 0">
                             y {{vm.cupos_disponibles_siguiente}} cupos para el siguiente a este.
@@ -35,6 +35,10 @@
                         No hay vehículos disponibles, por favor intente más tarde
                         o comuníquese directamente con la empresa
                     </span>
+                    <a class="button-icon button button-clear button-positive col col-center row-no-padding"
+                        ng-click="vm.loadCupos(selectedValue)">
+                        <i class="icon ion-refresh"></i>
+                    </a>
                 </div>
             </div>
             <div class="spacer" style="height: 10px;"></div>

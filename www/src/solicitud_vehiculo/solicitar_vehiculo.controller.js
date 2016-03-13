@@ -25,6 +25,7 @@
         vm.showModalEditPasajero = showModalEditPasajero;
 
         $scope.$on('$ionicView.loaded',function(){
+            $ionicLoading.show();
             geoLocationService.current().then(function(pos){
                 vm.location = pos;
                 loadCiudades();
@@ -54,9 +55,8 @@
                         central_id: p.data[i].destino.id,
                         nombre_ciudad: p.data[i].destino.ciudad.nombre
                     });
-                    conductoresRuta[p.data[i].id] = p.data[i].turnos;
-                    $ionicLoading.hide();
                 }
+                $ionicLoading.hide();
             }
             function error(error) {
                 console.log('Error al cargar datos', error);
@@ -65,22 +65,28 @@
         }
 
         function loadCupos(ruta_id){
+            $ionicLoading.show();
             vm.sin_cupos = false;
-            vm.conductores_ruta = 0;
+            vm.n_conductores_ruta = 0;
             vm.cupos_disponibles = 0;
             vm.cupos_disponibles_siguiente = 0;
-            if(conductoresRuta[ruta_id].length) {
-                vm.conductores_ruta = conductoresRuta[ruta_id].length;
-                vm.conductor_id = conductoresRuta[ruta_id][0].conductor_id;
-                solicitudVehiculoService.getCupos(vm.conductor_id).then(success, error);
-            }else{
-                vm.sin_cupos = true;
-            }
+            solicitudVehiculoService.getTurnos(ruta_id).then(function(p){
+                vm.n_conductores_ruta = p.data.length;
+                if(vm.n_conductores_ruta) {
+                    conductoresRuta = p.data;
+                    vm.conductor_id = conductoresRuta[0].conductor_id;
+                    solicitudVehiculoService.getCupos(vm.conductor_id).then(success, error);
+                }else{
+                    vm.sin_cupos = true;
+                    $ionicLoading.hide();
+                }
+            }, error);
             function success(p){
                 vm.cupos_disponibles = p.data;
                 vm.solicitud.ruta_id = ruta_id;
-                if(vm.conductores_ruta > 1){
-                    vm.conductor2_id = conductoresRuta[ruta_id][1].conductor_id;
+                $ionicLoading.hide();
+                if(vm.n_conductores_ruta > 1){
+                    vm.conductor2_id = conductoresRuta[1].conductor_id;
                     solicitudVehiculoService.getCupos(vm.conductor2_id).then(success2, error);
                 }
 
@@ -92,6 +98,7 @@
                 }
             }
             function error(error) {
+                $ionicLoading.hide();
                 console.log('Error al cargar datos', error);
             }
         }
