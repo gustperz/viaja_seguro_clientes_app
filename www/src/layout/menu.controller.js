@@ -14,6 +14,10 @@
             {nombre: 'Empresas',
                 statego : 'app.lista_empresas',
                 icon: 'ion-ios-list'
+            },
+            {nombre: 'Mi ubicacion',
+                statego : 'app.mapa_midireccion',
+                icon: 'ion-ios-location'
             }
         ];
 

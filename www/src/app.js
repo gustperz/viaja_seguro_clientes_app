@@ -12,8 +12,10 @@ angular.module('starter', [
     'ngCordova',
 
     'auth',
+    'mapa_ubicacion',
     'empresas',
-    'solicitud_vehiculo'
+    'solicitud_vehiculo',
+    'solicitud_giropaquete'
 ])
 
     .run(function ($ionicPlatform, $rootScope, $state, jwtHelper) {
@@ -35,8 +37,8 @@ angular.module('starter', [
             if (!to.data || !to.data.noRequiresLogin) {
                 var jwt = sessionStorage.getItem('jwt');
                 if (!jwt || jwtHelper.isTokenExpired(jwt)) {
-                    e.preventDefault();
-                    $state.go('login');
+                    //e.preventDefault();
+                    //$state.go('login');
                 }
             }
         });
@@ -75,9 +77,10 @@ angular.module('starter', [
         noBackdrop: true
     });
 
-function tokenGetter(jwtHelper, $http, API_URL) {
+
+function tokenGetter(config, jwtHelper, $http, API_URL) {
     var jwt = sessionStorage.getItem('jwt');
-    if(jwt){
+    if(jwt && config.url.indexOf('http://dev.viajaseguro.co/public/api/') === 0){
         if(jwtHelper.isTokenExpired(jwt)){
             return $http({
                 url : API_URL+'/new_token',

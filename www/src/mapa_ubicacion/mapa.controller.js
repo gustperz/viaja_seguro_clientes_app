@@ -7,13 +7,23 @@
 
     angular
         .module('mapa_ubicacion')
-        .controller('MapaMiDireccionCtrl', MapaMiDireccionCtrl)
-        .controller('direccionCtrl', direccionCtrl);
+        .controller('MapaMiDireccionCtrl', MapaMiDireccionCtrl);
 
     function MapaMiDireccionCtrl($scope, $ionicLoading, posicionActual, geoLocationService, $timeout) {
         var vm = this;
+        var basedir = '';
+
+        vm.decodeDireccion = decodeDireccion;
+        vm.checkLength = checkLength;
+
+        $scope.$on('$ionicView.beforeEnter', function(){
+            screen.lockOrientation('portrait');
+        });
+        $scope.$on('$ionicView.leave', function(){
+            screen.unlockOrientation();
+        });
         $scope.$on('$ionicView.loaded',function(){
-            vm.ciudad = 'Fonsega - La Guajira';
+            vm.location = posicionActual;
             if(!posicionActual.lat || !posicionActual.lng){
                 $ionicLoading.show();
                 geoLocationService.current().then(function(){
@@ -24,21 +34,26 @@
                 setMap();
             }
         });
+        $scope.$on("center_map", function(event){
+            var map = vm.map.control.getGMap();
+            map.panTo({lat: posicionActual.latitude, lng: posicionActual.longitude})
+        });
 
         function setMap(){
-            vm.location = posicionActual;
             vm.map = {
                 center: {latitude: posicionActual.latitude, longitude: posicionActual.longitude},
                 zoom: 17,
                 options: {
                     streetViewControl: false,
+                    zoomControl: false,
                     mapTypeControl: false
                 },
                 events:{
                     dragend: function(){
                         $timeout(decodeLocation, 900)
                     }
-                }
+                },
+                control: {}
             };
             vm.marker = {
                 coords: {latitude: posicionActual.latitude, longitude: posicionActual.longitude},
@@ -63,28 +78,17 @@
             });
         }
 
-    }
-
-    function direccionCtrl(posicionActual, geoLocationService, $ionicLoading){
-        var vm = this;
-        vm.location = posicionActual;
-        vm.goCurentPos = goCurentPos;
-        vm.decodeDireccion = decodeDireccion;
-
-        function goCurentPos(){
-            $ionicLoading.show();
-            geoLocationService.current().then(function(){
-                $ionicLoading.hide();
+        function decodeDireccion(){
+            var direccion = vm.location.ciudad+', colombia, '+vm.location.direccion;
+            geoLocationService.geocode(direccion).then(function(){
+                $scope.$emit('center_map');
             },function(error) {});
         }
 
-        function decodeDireccion(){
-            $ionicLoading.show();
-            var direccion = vm.location.ciudad+', '+vm.location.direccion;
-            geoLocationService.geocode(direccion).then(function(){
-                console.log(posicionActual);
-                $ionicLoading.hide();
-            },function(error) {});
+        function checkLength() {
+            if(vm.location.direccion.indexOf(vm.location.basedir)!=0){
+                vm.location.direccion = vm.location.basedir;
+            }
         }
     }
 })();

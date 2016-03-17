@@ -14,7 +14,8 @@
         var service = {
             current: current,
             decode: decode,
-            geocode: geocode
+            geocode: geocode,
+            setPosicionActual: setPosicionActual,
         };
         return service;
 
@@ -46,7 +47,9 @@
                 geocoder.geocode({'latLng': latlng}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var res = results[0].formatted_address.split(',');
-                        pos.direccion = res[0].replace(/^\s+|\s+$/g, "");
+                        var resdir = res[0].replace(/^\s+|\s+$/g, "").split('-');
+                        pos.direccion = resdir[0]+'-';
+                        pos.basedir = resdir[0]+'-';
                         pos.ciudad = res[2].replace(/^\s+|\s+$/g, "");
                         pos.departamento = res[3].replace(/^\s+|\s+$/g, "");
                         pos.fullnameCiudad = res[2].replace(/^\s+|\s+$/g, "")+', '+res[3].replace(/^\s+|\s+$/g, "");
@@ -72,6 +75,16 @@
                 });
                 return deferred.promise;
             });
+        }
+
+        function setPosicionActual(pos){
+            posicionActual.latitude = pos.latitude;
+            posicionActual.longitude = pos.longitude;
+            posicionActual.posCurrentSensor = pos.posCurrentSensor;
+            posicionActual.direccion = pos.direccion;
+            posicionActual.ciudad = pos.ciudad;
+            posicionActual.departamento = pos.departamento;
+            posicionActual.fullnameCiudad = pos.fullnameCiudad;
         }
     }
 })();

@@ -6,13 +6,13 @@
                 <h2>Solicitar Vehiculo</h2>
             </a>
         </div>
-        <div ng-if="vm.encomiendas"  class="card" >
+        <div ng-if="vm.encomiendas"  class="card" ui-sref="app.solicitud_paquete({empresa_id: vm.empresa.id})">
             <div class="item item-text-wrap center">
                 <i class="icon ion-email icon-size"></i>
                 <h2>Encomiendas</h2>
             </div>
         </div>
-        <div ng-if="vm.giros"  class="card" >
+        <div ng-if="vm.giros"  class="card" ui-sref="app.solicitud_giro({empresa_id: vm.empresa.id})">
             <div class="item item-text-wrap center">
                 <i class="icon ion-social-usd icon-size"></i>
                 <h2>Giros</h2>

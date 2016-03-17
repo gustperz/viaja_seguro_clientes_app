@@ -1,0 +1,100 @@
+.angular-google-map-container {
+    position: absolute;
+    top: 50px;
+    bottom: 45px;
+    right: 0;
+    left: 0;
+}
+
+.button-aceptar-control-gm {
+    height: 40px;
+    width: 100%;
+    margin: 0 0 !important;
+    position: absolute;
+    bottom: 0;
+}
+
+.button-control-gm {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    -webkit-user-select: none;
+    cursor: pointer;
+    width: 38px;
+    height: 37.5px;
+}
+
+.button-control-gm .icon:before{
+    font-size: 19px;
+}
+
+.locate{
+    right: 10px !important;
+    bottom: 20px !important;
+}
+
+.star{
+    right: 10px !important;
+    bottom: 60px !important;
+    color: #d50002;
+}
+
+.icon-marker-center {
+    ppadding: 0;
+    height: 118px;
+    font-size: 55px;
+}
+
+.control-direccion {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 30;
+    padding: 5px 5px;
+    max-height: 50px;
+    /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
+}
+
+.control-direccion .card {
+    margin: 0 0;
+    max-height: 50px;
+    /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
+}
+
+.control-direccion .card .item-input{
+    max-width: 87% !important;
+    /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
+}
+
+.control-direccion .card .button{
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+
+.control-direccion #ciudad {
+    position: relative;
+    float: right;
+    padding: 0 6px;
+    margin-top: 3px;
+    max-height: 18px;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: rgb(68, 68, 68);
+    background-color: rgb(245, 245, 245);
+    opacity: 0.7;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+}
+
+.control-direccion #ciudad span{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.control-direccion #direccion input {
+    font-size: 17px;
+}

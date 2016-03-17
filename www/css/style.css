@@ -117,37 +117,3 @@ select-box input[readonly]{
 .boton-add-pasajero.icon:before{
     line-height: 33px !important;
 }
-
-.angular-google-map-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-}
-
-.container-button-aceptar-control-gm{
-    position: absolute;
-    bottom: 24px !important;
-    left: 12px !important;
-    width: 100%;
-    padding-right: 125px !important;
-}
-
-.button-aceptar-control-gm{
-    height: 55px;
-    width: 100%;
-}
-
-.button-locate-control-gm{
-    position: absolute;
-    right: 50px !important;
-    bottom: 24px !important;
-    height: 55px;
-}
-
-.icon-marker-center{
-    padding: 0;
-    height: 114px;
-    font-size: 50px;
-}
