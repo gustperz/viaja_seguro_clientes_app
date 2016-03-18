@@ -9,17 +9,14 @@
         .module('auth')
         .controller('LoginCtrl', LoginCtrl);
 
-    function LoginCtrl($scope, authService, mostarAlert, $state, $ionicLoading) {
+    function LoginCtrl(authService, mostarAlert, $state, $ionicLoading) {
         var vm = this;
-        $scope.$on('$ionicView.beforeEnter',function(){
-            autologin();
-        });
-        $scope.$on('$ionicView.enter',function(){
-            vm.usuario = {};
-            vm.matenerSesion = true;
+        vm.usuario = {};
+        vm.matenerSesion = true;
 
-            vm.iniciarSesion = iniciarSesion;
-        });
+        vm.iniciarSesion = iniciarSesion;
+
+        autologin();
 
         function iniciarSesion(){
             $ionicLoading.show();

@@ -37,8 +37,8 @@ angular.module('starter', [
             if (!to.data || !to.data.noRequiresLogin) {
                 var jwt = sessionStorage.getItem('jwt');
                 if (!jwt || jwtHelper.isTokenExpired(jwt)) {
-                    //e.preventDefault();
-                    //$state.go('login');
+                    e.preventDefault();
+                    $state.go('login');
                 }
             }
         });
@@ -56,10 +56,11 @@ angular.module('starter', [
                 url: '/app',
                 abstract: true,
                 templateUrl: 'src/layout/layout.html',
-                controller: 'AppCtrl'
+                controller: 'AppCtrl',
+                controllerAs: 'vm'
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/app/empresas');
 
         // angular-google-maps
         uiGmapGoogleMapApiProvider.configure({

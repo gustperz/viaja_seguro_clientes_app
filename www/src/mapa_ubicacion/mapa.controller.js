@@ -16,8 +16,11 @@
         vm.decodeDireccion = decodeDireccion;
         vm.checkLength = checkLength;
 
-        $scope.$on('$ionicView.beforeEnter', function(){
+        $scope.$on('$ionicView.beforeEnter', function(event){
             screen.lockOrientation('portrait');
+            if(!geoLocationService.checkLocation()){
+                event.preventDefault();
+            }
         });
         $scope.$on('$ionicView.leave', function(){
             screen.unlockOrientation();

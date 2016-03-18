@@ -1,41 +1,40 @@
-<ion-view title="Inicio de sesion">
-    <ion-content overflow-scroll="true" class="has-header">
-        <img class="full-image" ng-src="img/nombre.jpg">
-        <!--<h5 class="center">lema</h5>-->
-        <form name="formLogin">
-            <div class="list list-inset">
-                <label class="item item-input input-bottom">
-                    <i class="icon ion-person placeholder-icon"></i>
-                    &nbsp;
-                    <span class="input-label">Usuario</span>
-                    <input type="text"  name="usuario" ng-model="vm.usuario.name" ng-required="true">
-                </label>
-                <label class="item item-input input-bottom">
-                    <i class="icon ion-key placeholder-icon"></i>
-                    &nbsp;
-                    <span class="input-label">Contraseña</span>
-                    <input type="password" name="contrasena" ng-model="vm.usuario.pass" ng-required="true">
-                </label>
-                <br>
-                <ion-toggle ng-model="vm.matenerSesion" toggle-class="toggle-positive">Recordar Datos</ion-toggle>
-                <br>
-                <button class="button button-block button-positive"
-                        ng-click="vm.iniciarSesion()" ng-disabled="formLogin.$invalid">
-                    Inciar Sesión
-                </button>
-            </div>
-        </form>
-        <br>
-        <div class="center">
-            <a ui-sref="register">
-                <span>Registrarse</span>
-            </a>
+<div class="spacer" style="height: 100px;"></div>
+<ion-content overflow-scroll="true" class="has-header" ng-controller="LoginCtrl as vm">
+    <img class="full-image" ng-src="img/nombre.jpg">
+    <!--<h5 class="center">lema</h5>-->
+    <form name="formLogin">
+        <div class="list list-inset">
+            <label class="item item-input input-bottom">
+                <i class="icon ion-person placeholder-icon"></i>
+                &nbsp;
+                <span class="input-label">Usuario</span>
+                <input type="text"  name="usuario" ng-model="vm.usuario.name" ng-required="true">
+            </label>
+            <label class="item item-input input-bottom">
+                <i class="icon ion-key placeholder-icon"></i>
+                &nbsp;
+                <span class="input-label">Contraseña</span>
+                <input type="password" name="contrasena" ng-model="vm.usuario.pass" ng-required="true">
+            </label>
+            <br>
+            <ion-toggle ng-model="vm.matenerSesion" toggle-class="toggle-positive">Recordar Datos</ion-toggle>
+            <br>
+            <button class="button button-block button-positive"
+                    ng-click="vm.iniciarSesion()" ng-disabled="formLogin.$invalid">
+                Inciar Sesión
+            </button>
         </div>
-        <br>
-        <div class="center">
-            <a ui-sref="register">
-                <span>Olvidé mi contraseña</span>
-            </a>
-        </div>
-    </ion-content>
-</ion-view>
+    </form>
+    <div class="spacer" style="height: 20px;"></div>
+    <div class="center">
+        <a ui-sref="register">
+            <span>Registrarse</span>
+        </a>
+    </div>
+    <div class="spacer" style="height: 20px;"></div>
+    <div class="center">
+        <a ui-sref="register">
+            <span>Olvidé mi contraseña</span>
+        </a>
+    </div>
+</ion-content>
