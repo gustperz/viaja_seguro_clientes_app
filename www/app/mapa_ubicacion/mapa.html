@@ -1,0 +1,77 @@
+<ion-view title="Su ubicacion">
+    <ion-content style="background-color: #e5e3df">
+        <ui-gmap-google-map
+                center="vm.map.center"
+                zoom="vm.map.zoom"
+                draggable="true"
+                control="vm.map.control"
+                options="vm.map.options"
+                events="vm.map.events">
+            <ui-gmap-marker
+                    idkey="vm.marker.id"
+                    coords="vm.marker.coords"
+                    options="vm.marker.options">
+            </ui-gmap-marker>
+            <!--macardor centro-->
+            <ui-gmap-map-control
+                    template="controlCenterMarquer.tpl.html"
+                    position="CENTER"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
+            <!--posicion actul-->
+            <ui-gmap-map-control
+                    template="buttonLocate.tpl.html"
+                    position="bottom-right"
+                    index="1"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
+            <!--ubicaciones faboritas-->
+            <!--<ui-gmap-map-control-->
+                    <!--template="buttonFavorites.tpl.html"-->
+                    <!--position="bottom-right"-->
+                    <!--index="1"-->
+                    <!--controller="direccionesFavoritasCtrl as vm">-->
+            <!--</ui-gmap-map-control>-->
+        </ui-gmap-google-map>
+        <div class="control-direccion">
+            <div class="card row">
+                <label class="item-input col-90" id="direccion">
+                    <input type="text" ng-model="vm.location.direccion" ng-change="vm.checkLength()">
+                </label>
+                <div ng-controller="direccionesFavoritasCtrl as vm">
+                    <button class="button button-clear button-positive"
+                            ng-click="vm.showfavoritas()">
+                        <i class="icon ion-star"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ciudad">
+                <span>{{vm.location.fullnameCiudad}}</span>
+            </div>
+        </div>
+        <button class="button button-positive button-full button-aceptar-control-gm"
+                ng-click="vm.confirmarUbicacion()">
+            Estoy Aquí
+        </button>
+    </ion-content>
+</ion-view>
+<script type="text/ng-template" id="control.tpl.html">
+
+</script>
+<script type="text/ng-template" id="controlCenterMarquer.tpl.html">
+    <div class="icon-marker-center">
+        <i class="icon ion-location positive"></i>
+    </div>
+</script>
+<script type="text/ng-template" id="buttonLocate.tpl.html">
+    <button class="button button-small button-control-gm locate"
+            ng-click="vm.goCurentPos()">
+        <i class="icon ion-android-locate"></i>
+    </button>
+</script>
+<script type="text/ng-template" id="buttonFavorites.tpl.html">
+    <button class="button button-small button-control-gm star"
+            ng-click="vm.showfavoritas()">
+        <i class="icon ion-star"></i>
+    </button>
+</script>

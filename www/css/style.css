@@ -65,16 +65,16 @@
 
 }
 
-.loading{
-    height: 100%;
-    width: 100%;
-}
+/*.loading{*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+/*}*/
 
-.loading div{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
+/*.loading div{*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+/*}*/
 
 /*asd*/
 select-box {
@@ -116,4 +116,10 @@ select-box input[readonly]{
 }
 .boton-add-pasajero.icon:before{
     line-height: 33px !important;
+}
+
+.pas_time{
+    color: white;
+    font-size: 78px;
+    text-align: center;
 }

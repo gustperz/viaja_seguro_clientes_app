@@ -39,7 +39,4 @@
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
-    <plugin name="cordova.plugins.diagnostic" spec="~2.3.11" />
-    <plugin name="cordova-plugin-geolocation" spec="~2.1.0" />
-    <plugin name="cordova-plugin-whitelist" spec="~1.2.1" />
 </widget>

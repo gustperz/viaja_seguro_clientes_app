@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-
-    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos; *; style-src  &apos;self&apos; &apos;unsafe-inline&apos; *">
     <title></title>
 
     <!-- compiled css output -->
@@ -19,60 +17,72 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="lib/utils/ng-cordova.js"></script>
-    <script src="cordova.js"></script>
+    <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
+    <script src="lib/lodash/dist/lodash.min.js"></script>
+    <script src="lib/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="app/commons/SelectBox.js"></script>
 
-    <!-- ext libs js -->
-    <script src="lib/utils/angular-jwt.js"></script>
-    <script src="lib/utils/SelectBox.js"></script>
-    <script src="lib/utils/lodash.min.js"></script>
-    <script src="lib/utils/angular-simple-logger.min.js"></script>
-    <script src="lib/utils/angular-google-maps.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+
+    <!-- your app's js -->
+    <script src="app/app.js"></script>
+    <script src="app/config/general_config.js"></script>
+    <script src="app/config/routes_config.js"></script>
+    <script src="app/config/http_config.js"></script>
+    <script src="app/config/app_run.js"></script>
+    <!--<script src="app/config/push_notifications.js"></script>-->
+
+    <script src="app/commons/mostrarAlert.js"></script>
+    <script src="app/commons/geolocationService.js"></script>
+
+    <!--layout-->
+    <script src="app/layout/menu.controller.js"></script>
+
+    <!--auth-->
+    <script src="app/auth/auth.js"></script>
+    <script src="app/auth/auth.service.js"></script>
+    <script src="app/auth/login.controller.js"></script>
+    <script src="app/auth/register.controller.js"></script>
+
+    <!-- mapa_mi ubicacion -->
+    <script src="app/mapa_ubicacion/mapa_ubicacion.js"></script>
+    <script src="app/mapa_ubicacion/mapa.controller.js"></script>
+    <script src="app/mapa_ubicacion/controls_direccion.controller.js"></script>
+    <script src="app/mapa_ubicacion/direcciones_favoritas.service.js"></script>
+    <script src="app/mapa_ubicacion/control_direcciones_favoritas.controller.js"></script>
+
+    <!-- empresas -->
+    <script src="app/empresas/empresas.js"></script>
+    <script src="app/empresas/empresas.service.js"></script>
+    <script src="app/empresas/lista_empresas.controller.js"></script>
+    <script src="app/empresas/info_empresa.controller.js"></script>
+    <script src="app/empresas/servicios_empresa.controller.js"></script>
+
+    <!-- solicitud vehiculo -->
+    <script src="app/solicitud_vehiculo/solicitud_vehiculo.js"></script>
+    <script src="app/solicitud_vehiculo/solicitud_vehiculo.dataservice.js"></script>
+    <script src="app/solicitud_vehiculo/solicitar_vehiculo.controller.js"></script>
+
+    <!-- solicitud giro-paquete -->
+    <script src="app/solicitud_giropaquete/solicitud_giropaquete.js"></script>
+    <script src="app/solicitud_giropaquete/solicitar_paquete.controller.js"></script>
+    <script src="app/solicitud_giropaquete/solicitar_giro.controller.js"></script>
+
+    <!-- conductor -->
+    <script src="app/conductor/conductor.js"></script>
+    <script src="app/conductor/conductor.dataservice.js"></script>
+    <script src="app/conductor/datos_conductor.controller.js"></script>
+    <script src="app/conductor/mapa/mapa.controller.js"></script>
+
+    <script src="app/esperar_servicio/espera.js"></script>
+    <script src="app/esperar_servicio/contador.controller.js"></script>
 
 </head>
 
-<body ng-app="starter">
+<body ng-app="app">
 <ion-nav-view></ion-nav-view>
-
-<!-- your app's js -->
-<script src="src/app.js"></script>
-<script src="src/layout/app.controller.js"></script>
-<script src="src/layout/menu.controller.js"></script>
-<script src="src/commons/geolocationService.js"></script>
-<script src="src/commons/mostrarAlert.factory.js"></script>
-
-<!--auth-->
-<script src="src/auth/auth.js"></script>
-<script src="src/auth/auth.service.js"></script>
-<script src="src/auth/login.controller.js"></script>
-<script src="src/auth/register.controller.js"></script>
-<script src="src/auth/geografic.service.js"></script>
-
-<!-- mapa_mi ubicacion -->
-<script src="src/mapa_ubicacion/mapa_ubicacion.js"></script>
-<script src="src/mapa_ubicacion/mapa.controller.js"></script>
-<script src="src/mapa_ubicacion/controls_direccion.controller.js"></script>
-<script src="src/mapa_ubicacion/direcciones_favoritas.service.js"></script>
-<script src="src/mapa_ubicacion/control_direcciones_favoritas.controller.js"></script>
-
-<!-- empresas -->
-<script src="src/empresas/empresas.js"></script>
-<script src="src/empresas/empresas.service.js"></script>
-<script src="src/empresas/lista_empresas.controller.js"></script>
-<script src="src/empresas/info_empresa.controller.js"></script>
-<script src="src/empresas/servicios_empresa.controller.js"></script>
-<!-- solicitud vehiculo -->
-<script src="src/solicitud_vehiculo/solicitud_vehiculo.js"></script>
-<script src="src/solicitud_vehiculo/solicitud_vehiculo.dataservice.js"></script>
-<script src="src/solicitud_vehiculo/solicitar_vehiculo.controller.js"></script>
-<!-- solicitud giro-paquete -->
-<script src="src/solicitud_giropaquete/solicitud_giropaquete.js"></script>
-<script src="src/solicitud_giropaquete/solicitar_paquete.controller.js"></script>
-<script src="src/solicitud_giropaquete/solicitar_giro.controller.js"></script>
-<!-- conductor -->
-<script src="src/conductor/conductor.js"></script>
-<script src="src/conductor/conductor.dataservice.js"></script>
-<script src="src/conductor/datos_conductor.controller.js"></script>
 </body>
 </html>

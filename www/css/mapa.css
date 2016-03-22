@@ -6,6 +6,10 @@
     left: 0;
 }
 
+#map_conductor .angular-google-map-container{
+    top: 0px !important;
+}
+
 .button-aceptar-control-gm {
     height: 40px;
     width: 100%;
