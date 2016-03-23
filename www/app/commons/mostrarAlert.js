@@ -6,15 +6,15 @@
     'use strict';
 
     angular
-        .module('starter')
-        .factory('mostarAlert', function($ionicPopup){
-            return mostarAlert;
-            function mostarAlert(titulo,contenido){
+        .module('app')
+        .factory('mostrarAlert', function($ionicPopup){
+            return function (titulo, contenido, callable){
                 var alertPopup = $ionicPopup.alert({
                     title: titulo,
                     template: contenido
                 });
                 alertPopup.then(function (res) {
+                    callable ? callable() : null;
                 });
             }
         });
