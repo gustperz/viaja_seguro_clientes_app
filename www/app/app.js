@@ -13,6 +13,6 @@
             'empresas',
             'solicitud_vehiculo',
             'solicitud_giropaquete',
-            'esperar_servicio'
+            // 'esperar_servicio'
         ]);
 })();
