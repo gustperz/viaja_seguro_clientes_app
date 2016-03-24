@@ -7,15 +7,13 @@
 
     angular
         .module('mapa_ubicacion')
-        .controller('MapaMiDireccionCtrl', MapaMiDireccionCtrl);
+        .controller('MapaConductorCtrl', MapaConductorCtrl);
 
     /* @ngInject */
-    function MapaMiDireccionCtrl($scope, $ionicLoading, posicionActual, geoLocationService, $timeout, $ionicHistory) {
+    function MapaConductorCtrl($scope, posicionActual, geoLocationService, socketCh, $stateParams, $ionicLoading) {
         var vm = this;
-
-        vm.decodeDireccion = decodeDireccion;
-        vm.checkLength = checkLength;
-        vm.confirmarUbicacion = confirmarUbicacion;
+        var conductor = {};
+        vm.markers = [];
 
         $scope.$on('$ionicView.beforeEnter', function(event){
             screen.lockOrientation('portrait');
@@ -42,6 +40,9 @@
             var map = vm.map.control.getGMap();
             map.panTo({lat: posicionActual.latitude, lng: posicionActual.longitude})
         });
+        socketCh.on('updatePos', function (data) {
+            updatePosConductor(data);
+        });
 
         function setMap(){
             vm.map = {
@@ -52,51 +53,35 @@
                     zoomControl: false,
                     mapTypeControl: false
                 },
-                events:{
-                    dragend: function(){
-                        $timeout(decodeLocation, 900)
-                    }
-                },
                 control: {}
             };
-            vm.marker = {
-                coords: {latitude: posicionActual.latitude, longitude: posicionActual.longitude},
+            vm.markers.push({
+                latitude: posicionActual.latitude,
+                longitude: posicionActual.longitude,
                 options: {
                     icon: {
                         url: 'img/map-marker-current-location.png',
-                        scaledSize: new google.maps.Size(20, 20)
+                        scaledSize: {width: 20, height: 20, ma: "px", W: "px"}
                     }
                 },
-                show: false,
-                id: 0
-            };
-        }
-
-        function decodeLocation(){
-            posicionActual.latitude = vm.map.center.latitude;
-            posicionActual.longitude = vm.map.center.longitude;
-            geoLocationService.decode(posicionActual)
-                .then(function(pos){
-            },function(){
-                console.log('error');
+                id: 'yo'
             });
+            socketCh.emit('loginCliente', {conductor_id: $stateParams.conductor_id})
         }
 
-        function decodeDireccion(){
-            var direccion = vm.location.ciudad+', colombia, '+vm.location.direccion;
-            geoLocationService.geocode(direccion).then(function(){
-                $scope.$emit('center_map');
-            },function(error) {});
-        }
-
-        function checkLength() {
-            if(vm.location.direccion.indexOf(vm.location.basedir)!=0){
-                vm.location.direccion = vm.location.basedir;
+        function updatePosConductor(data){
+            if(conductor.length) {
+                conductor.latitude = data.lat;
+                conductor.longitude = data.lng;
+            }else{
+                conductor = {
+                    latitude: data.lat,
+                    longitude: data.lng,
+                    options: {},
+                    id: 'conductor'
+                }
+                vm.markers.push(conductor);
             }
-        }
-        
-        function confirmarUbicacion() {
-            $ionicHistory.goBack();
         }
     }
 })();

@@ -116,8 +116,7 @@
             vm.solicitud.ciudad_direccion = vm.location.ciudad;
             vm.solicitud.central_id = vm.centralLocal.id;
             vm.solicitud.tipo = 'vehiculo';
-            success();
-            // solicitudVehiculoService.post(vm.solicitud).then(success, error);
+            solicitudVehiculoService.post(vm.solicitud).then(success, error);
             function success() {
                 mostrarAlert('', 'Solicitud Enviada', function () {
                     $rootScope.$emit('contarstart');

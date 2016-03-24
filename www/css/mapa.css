@@ -8,6 +8,7 @@
 
 #map_conductor .angular-google-map-container{
     top: 0px !important;
+    bottom: 0px !important;
 }
 
 .button-aceptar-control-gm {

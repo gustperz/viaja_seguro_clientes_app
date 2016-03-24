@@ -1,0 +1,30 @@
+<ion-view title="Su ubicacion">
+    <ion-content style="background-color: #e5e3df">
+        <ui-gmap-google-map id="map_conductor"
+                center="vm.map.center"
+                zoom="vm.map.zoom"
+                draggable="true"
+                control="vm.map.control"
+                options="vm.map.options"
+                events="vm.map.events">
+            <ui-gmap-markers
+                    models="vm.markers"
+                    coords="'self'"
+                    options="'self'">
+            </ui-gmap-markers>
+            <!--posicion actul-->
+            <ui-gmap-map-control
+                    template="buttonLocate.tpl.html"
+                    position="bottom-right"
+                    index="1"
+                    controller="direccionCtrl as vm">
+            </ui-gmap-map-control>
+        </ui-gmap-google-map>
+    </ion-content>
+</ion-view>
+<script type="text/ng-template" id="buttonLocate.tpl.html">
+    <button class="button button-small button-control-gm locate"
+            ng-click="vm.goCurentPos()">
+        <i class="icon ion-android-locate"></i>
+    </button>
+</script>

@@ -14,7 +14,7 @@
                     controller: 'ConductorCtrl as vm'
                 })
                 .state('app.location_conductor', {
-                    url: '/conductor/:conductor_id/geolocation',
+                    url: '/conductor/:conductor_id/location',
                     templateUrl: 'app/conductor/mapa/mapa.html',
                     controller: 'MapaConductorCtrl as vm'
                 });
