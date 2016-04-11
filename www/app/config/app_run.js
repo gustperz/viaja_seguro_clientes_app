@@ -11,7 +11,7 @@
 
 
         /* @ngInject */
-        function appRun($ionicPlatform, $rootScope, jwtHelper, $state) {
+        function appRun($ionicPlatform, $state, authService, $ionicLoading) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -24,16 +24,18 @@
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
+
+                autenticate();
             });
 
-            $rootScope.$on('$stateChangeStart', function(e, to) {
-                if (!to.data || !to.data.noRequiresLogin) {
-                    var jwt = sessionStorage.getItem('jwt');
-                    if (!jwt || jwtHelper.isTokenExpired(jwt)) {
-                        e.preventDefault();
-                        $state.go('login');
-                    }
-                }
-            });
+           function autenticate(){
+               if(!authService.currentUser()) {
+                   $ionicLoading.show();
+                   authService.autologin().then(function (res) {
+                       if (res === false) $state.go('login');
+                       $ionicLoading.hide();
+                   })
+               }
+            }
         }
     })();

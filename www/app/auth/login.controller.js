@@ -10,34 +10,24 @@
         .controller('LoginCtrl', LoginCtrl);
 
     /* @ngInject */
-    function LoginCtrl($scope, authService, mostrarAlert, $state, HOME, $ionicLoading) {
+    function LoginCtrl(authService, mostrarAlert, $state, HOME, $ionicLoading) {
         var vm = this;
         vm.usuario = {};
         vm.matenerSesion = true;
 
         vm.iniciarSesion = iniciarSesion;
 
-        $scope.$on('$ionicView.beforeEnter', function () {
-            autologin();
-        });
-
         function iniciarSesion(){
             $ionicLoading.show();
-            authService.login(vm.usuario).then(success, error);
-            function success(p) {
-                if(vm.matenerSesion){
-                    authService.local.setCredenciales(vm.usuario);
-                }
-                authService.storeUser(p.data.token);
-                authService.updateRegId();
-                if(authService.currentUser().rol == "CLIENTE"){
+            authService.login(vm.usuario, vm.matenerSesion).then(success, error);
+            function success(user) {
+                if(user.rol == "CLIENTE"){
                     $ionicLoading.hide();
                     $state.go(HOME);
                 }
             }
             function error(error) {
                 $ionicLoading.hide();
-                authService.local.destroyCredenciales();
                 mostrarAlert("Error login "+error.status,"Error al logear verifique que los datos ingresados sean correctos");
             }
         }
