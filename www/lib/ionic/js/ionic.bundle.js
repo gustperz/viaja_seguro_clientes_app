@@ -61024,7 +61024,7 @@ IonicModule
 
         innerElement.append($element.contents());
 
-        $element.addClass('item item-complex')
+        $element.addClass('item')
                 .append(innerElement);
       } else {
         $element.addClass('item');

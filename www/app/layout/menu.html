@@ -2,22 +2,22 @@
     <ion-header-bar class="bar-positive">
         <h1 class="title">Viaja Seguro</h1>
     </ion-header-bar>
-    <ion-content>
-        <div class="home">
-            <img src="img/profile.jpg" class="img-perfil img-rounded">
+    <ion-content class="custom">
+        <div class="home center">
+            <img style="width:120px;height:120px;margin-top:10%;" src="img/profile.jpg" class="img-perfil img-rounded">
             <p class="nombre-conductor">Cliente</p>
-            <p class="nombre-conductor">123456</p>
-            <p class="nombre-conductor">Cliente</p>
+            <p class="id-conductor">123456</p>
+            <!--<p class="nombre-conductor">Cliente</p>-->
         </div>
         </div>
-        <ion-list>
+        <ion-list class="center">
             <ion-item ng-repeat="menu in menuList" menu-close ui-sref="{{menu.statego}}">
-                <i class="icon {{menu.icon}}"></i>
-                {{menu.nombre}}
+                <i style="font-size: 25px;" class="icon {{menu.icon}}"></i>
+                <h2>{{menu.nombre}}</h2>
             </ion-item>
-            <ion-item ng-click="logout()">
-                <i class="icon ion-ios-undo"></i>
-                Salir
+            <ion-item  ng-click="logout()">
+                <i style="font-size: 25px;" class="icon ion-ios-undo"></i>
+                <h2>Salir</h2>
             </ion-item>
         </ion-list>
     </ion-content>

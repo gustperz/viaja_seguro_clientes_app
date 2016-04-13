@@ -14,7 +14,7 @@
 
 .padding-notificacion{text-align: right;}
 
-.card{box-shadow: 0 1px 3px rgba(214, 35, 35, 0.3);}
+.card{width: 90%}
 
 .notificacion{margin-top: 5px;margin-bottom: 5px;margin-left: 5px;}
 
@@ -42,17 +42,19 @@
 
 label#rounded{border-radius:15px; }
 
+div#rounded{border-radius:15px; }
+
 div#container{width: 300px; margin-left:auto; margin-right: auto; }
 
 .background-lista-menu{background: #000;}
 
 .button-login{border-radius:15px}
 
-.custom {background-color: #000 !important; /* This sets the background color*/}
+.custom {background-color: #6E6E6E !important; /* This sets the background color*/}
 
-.custom .item {background-color: transparent;border:none;border-top: 1px solid;border-bottom:2px solid;border-color: #666;color: white; }
+.custom .item {background-color: transparent;border:none;border-bottom:1px solid;border-color: #000;color: white; }
 
-.custom .item:last-child {border-bottom: 1px solid #666;}
+.custom .item:last-child {border-bottom: 1px solid #000;}
  
 .custom .item-complex .item-content, .dark .item-radio .item-content {background-color: transparent;}
 
@@ -78,4 +80,24 @@ div#container{width: 300px; margin-left:auto; margin-right: auto; }
 .button-bar.button-pill .button:last-child {
   -webkit-border-radius: 0 30px 30px 0;
   border-radius: 0 30px 30px 0;
+}
+
+.button{
+  border-radius: 15px;
+}
+
+.item-input{
+  border-radius: 15px;
+}
+
+.card-services{
+  background-color: #ededed !important;
+  border-radius: 25px !important;
+}
+
+.item {
+  text-align: center !important;
+  width: 100% !important;
+  background-color: #ededed !important;
+  border-radius: 25px !important;
 }
