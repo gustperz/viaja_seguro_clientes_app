@@ -1,95 +1,46 @@
-<ion-view title="Solicitar servicio">
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <form name="formSolicitud" class="list">
-            <!--ciudad destino-->
-            <h4 class="padding-left">Seleccione su ciudad de destino</h4>
-            <label class="item item-input">
-                <select-box ng-Selected-Value="selectedValue"
-                            ng-Item-Name="nombre_ciudad"
-                            ng-Item-Id="ruta_id"
-                            ng-header-class="bar-positive"
-                            ng-data="vm.ciudades"
-                            ng-placeholder="no seleccionada"
-                            ng-select-changed="vm.loadCupos(selectedValue)">
-                </select-box>
-                <input ng-hide="true" type="text" ng-model="vm.solicitud.ruta_id" ng-required="true">
-            </label>
-            <div class="card positive-bg row" ng-if="vm.sin_cupos">
-                <div class="item row">
-                    <span class="col col-90 item-text-wrap">
-                        No hay vehículos disponibles, por favor intente más tarde
-                        o comuníquese directamente con la empresa
-                    </span>
-                    <a class="button-icon button button-clear button-positive col col-center row-no-padding"
-                        ng-click="vm.loadCupos(selectedValue)">
-                        <i class="icon ion-refresh"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="spacer" style="height: 10px;"></div>
-            <!--remitente-->
-            <h4 class="padding-left">Informacion destinatario</h4>
-            <label class="item item-input input-bottom">
-                <i class="icon ion-card placeholder-icon"></i>
-                &nbsp;
-                <span class="input-label">Identificacion:</span>
-                <input type="text" name="direccion" ng-model="vm.solicitud.detalles.identificacion" required>
-            </label>
-            <label class="item item-input input-bottom">
-                <i class="icon ion-person placeholder-icon"></i>
-                &nbsp;
-                <span class="input-label">Nombre:</span>
-                <input type="text" name="direccion" ng-model="vm.solicitud.detalles.destinatario" required>
-            </label>
-            <label class="item item-input input-bottom">
-                <i class="icon ion-android-phone-portrait placeholder-icon"></i>
-                &nbsp;
-                <span class="input-label">Telefono:</span>
-                <input type="text" name="direccion" ng-model="vm.solicitud.detalles.telefono" required>
-            </label>
-            <label class="item item-input input-bottom">
-                <i class="icon ion-android-pin placeholder-icon"></i>
-                &nbsp;
-                <span class="input-label">Dirección:</span>
-                <input type="text" name="direccion" ng-model="vm.solicitud.detalles.direccion" required>
-            </label>
-            <div ng-if="vm.paquete">
-                <h4 class="padding-left">Descripcion paquete</h4>
-                <label class="item item-input">
-                    <textarea ng-model="solicitud.detalles.descripcion"
-                              placeholder="Escriba una descripción corta del paquete" required></textarea>
-                </label>
-            </div>
-            <div ng-if="vm.giro">
-                <h4 class="padding-left">Monto</h4>
-                <label class="item item-input">
-                    <i class="icon ion-social-usd placeholder-icon"></i>
-                    <input type="number" ng-model="solicitud.detalles.descripcion" required>
-                </label>
-            </div>
-            <div class="spacer" style="height: 15px;"></div>
-            <!--direccion-->
-            <div class="row row-no-padding">
-                <div class="col col-80 no-padding">
-                    <h4 class="padding-left">Donde sera recojido</h4>
-                </div>
-                <div class="col col-20 no-padding">
-                    <a ui-sref="app.solicitud_vehiculo_midireccion">
-                        <button class="button button-positive icon ion-search boton-add-pasajero" type="button">
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <label class="item item-input item-button-right">
-                <input type="search" placeholder="{{vm.location.direccion}}" readonly>
-            </label>
-            <div class="spacer" style="height: 15px;"></div>
-        </form>
-        <div class="row row-bottom">
-            <button class="button button-block button-positive col"
-                    ng-click="vm.enviarSolicitud()" ng-disabled="formSolicitud.$invalid || vm.sin_cupos">
-                Enviar Solicitud
-            </button>
-        </div>
-    </ion-content>
-</ion-view>
+<div class="spacer" style="height: 10px;"></div>
+<!--remitente-->
+<h4 class="padding-left">Informacion destinatario</h4>
+<label class="item item-input input-bottom">
+    <i class="icon ion-card placeholder-icon"></i>
+    &nbsp;
+    <span class="input-label">Identificacion:</span>
+    <input type="text" name="direccion" ng-model="vm.solicitud.detalles.identificacion" required>
+</label>
+<label class="item item-input input-bottom">
+    <i class="icon ion-person placeholder-icon"></i>
+    &nbsp;
+    <span class="input-label">Nombre:</span>
+    <input type="text" name="direccion" ng-model="vm.solicitud.detalles.destinatario" required>
+</label>
+<label class="item item-input input-bottom">
+    <i class="icon ion-android-phone-portrait placeholder-icon"></i>
+    &nbsp;
+    <span class="input-label">Telefono:</span>
+    <input type="text" name="direccion" ng-model="vm.solicitud.detalles.telefono" required>
+</label>
+<label class="item item-input input-bottom">
+    <i class="icon ion-android-pin placeholder-icon"></i>
+    &nbsp;
+    <span class="input-label">Dirección:</span>
+    <input type="text" name="direccion" ng-model="vm.solicitud.detalles.direccion" required>
+</label>
+
+<div ng-if="vm.paquete">
+    <h4 class="padding-left">Descripcion paquete</h4>
+    <label class="item item-input">
+        <textarea ng-model="solicitud.detalles.descripcion"
+                  placeholder="Escriba una descripción corta del paquete"
+                  required>
+        </textarea>
+    </label>
+</div>
+
+<div ng-if="vm.giro">
+    <h4 class="padding-left">Monto</h4>
+    <label class="item item-input">
+        <i class="icon ion-social-usd placeholder-icon"></i>
+        <input type="number" ng-model="solicitud.detalles.descripcion" required>
+    </label>
+</div>
+<div class="spacer" style="height: 15px;"></div>

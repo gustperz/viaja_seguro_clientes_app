@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('mapa_ubicacion')
+        .module('conductor')
         .controller('MapaConductorCtrl', MapaConductorCtrl);
 
     /* @ngInject */

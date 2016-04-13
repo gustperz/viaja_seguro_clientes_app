@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('solicitud_vehiculo')
+        .module('conductor')
         .service('ConductorService', ConductorService);
 
     /* @ngInject */

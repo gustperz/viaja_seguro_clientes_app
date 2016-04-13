@@ -11,25 +11,29 @@
 
     /* @ngInject */
     function SolicitudesCtrl($scope, $ionicLoading, $stateParams, geoLocationService, $state, $rootScope,
-                                   solicitudesService, mostrarAlert, SolicitudData) {
+                                   solicitudesService, mostrarAlert, Solicitud, $ionicHistory) {
         var vm = this;
         var conductoresRuta = [];
         vm.ciudades = [];
+        vm.solicitud = Solicitud;
 
         vm.loadCupos = loadCupos;
         vm.enviarSolicitud = enviarSolicitud;
 
-        $scope.$on('$ionicView.loaded', function (event) {
+        $scope.$on('$ionicView.beforeEnter', function (event) {
             $ionicLoading.show();
-            if(!geoLocationService.checkLocation()){
-                event.preventDefault();
-            } else {
-                geoLocationService.current().then(function (pos) {
-                    vm.location = pos;
-                    loadCiudades();
-                }, function (error) {
-                });
-            }
+            geoLocationService.checkLocation().then(function (res) {
+                if(!res){
+                    $ionicLoading.hide();
+                    $ionicHistory.goBack();
+                } else {
+                    geoLocationService.current().then(function (pos) {
+                        vm.location = pos;
+                        loadCiudades();
+                    }, function (error) {
+                    });
+                }
+            })
         });
 
         function loadCiudades() {
@@ -85,8 +89,7 @@
             }, error);
             function success(p) {
                 vm.cupos_disponibles = p.data;
-                SolicitudData.ruta_id = ruta_id;
-                vm.solicitud_ruta_id = ruta_id;
+                Solicitud.data.ruta_id = ruta_id;
                 $ionicLoading.hide();
                 if (vm.n_conductores_ruta > 1) {
                     vm.conductor2_id = conductoresRuta[1].conductor_id;
@@ -109,13 +112,12 @@
         }
 
         function enviarSolicitud() {
-            SolicitudData.direccion_recogida = vm.location.direccion;
-            SolicitudData.latitud = vm.location.latitude;
-            SolicitudData.longitud = vm.location.longitude;
-            SolicitudData.ciudad_direccion = vm.location.ciudad;
-            SolicitudData.central_id = vm.centralLocal.id;
-            SolicitudData.tipo = 'vehiculo';
-            solicitudesService.post(SolicitudData).then(success, error);
+            Solicitud.data.direccion_recogida = vm.location.direccion;
+            Solicitud.data.latitud = vm.location.latitude;
+            Solicitud.data.longitud = vm.location.longitude;
+            Solicitud.data.ciudad_direccion = vm.location.ciudad;
+            Solicitud.data.central_id = vm.centralLocal.id;
+            solicitudesService.post(Solicitud.data).then(success, error);
             function success() {
                 mostrarAlert('', 'Solicitud Enviada', function () {
                     $rootScope.$emit('contarstart');

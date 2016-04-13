@@ -13,9 +13,10 @@
                             ng-placeholder="no seleccionada"
                             ng-select-changed="vm.loadCupos(selectedValue)">
                 </select-box>
-                <input ng-hide="true" type="text" ng-model="vm.solicitud_ruta_id" ng-required="true">
+                <input ng-hide="true" type="text" ng-model="vm.solicitud.data.ruta_id" ng-required="true">
             </label>
-            <div class="card positive-bg row" ng-if="vm.cupos_disponibles && !vm.sin_cupos">
+            <div class="card positive-bg row"
+                 ng-if="vm.cupos_disponibles && !vm.sin_cupos && vm.solicitud.data.tipo  == 'vehiculo'">
                 <div class="item row">
                     <span class="col col-90 item-text-wrap">
                         {{vm.n_conductores_ruta}} vehículos disponibles.<br>
@@ -50,7 +51,7 @@
                     <h4 class="padding-left">Donde sera recojido</h4>
                 </div>
                 <div class="col col-20 no-padding">
-                    <a ui-sref="app.solicitud_vehiculo_midireccion">
+                    <a ui-sref="app.mapa_midireccion">
                         <button class="button button-positive icon ion-search boton-add-pasajero" type="button">
                         </button>
                     </a>

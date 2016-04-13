@@ -89,26 +89,28 @@
         }
 
         function checkLocation(){
-            return true;
+            var defered = $q.defer();
+            var promise = defered.promise;
             cordova.plugins.diagnostic.isLocationEnabled(
                 function(enabled) {
                     if (enabled){
-                        return true;
-                    }
-                    else {
+                        defered.resolve(true);
+                    } else {
+                        defered.resolve(false);
                         $ionicPopup.alert({
                             content: 'Debe habilitar los servicios de ubicación',
                             buttons: [{type: 'button-icon ion-checkmark button-positive button-clear'}]
                         }).then(function(res) {
                             cordova.plugins.diagnostic.switchToLocationSettings();
                         });
-                        return false;
                     }
                 },
                 function(e) {
                     alert('Error ' + e);
+                    defered.reject(e)
                 }
             );
+            return promise;
         }
     }
 })();

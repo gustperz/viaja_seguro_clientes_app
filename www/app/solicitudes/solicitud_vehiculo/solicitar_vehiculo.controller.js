@@ -6,15 +6,18 @@
     'use strict';
 
     angular
-        .module('solicitud_vehiculo')
+        .module('solicitudes')
         .controller('SolicitarVehiculoCtrl', SolicitarVehiculoCtrl);
 
     /* @ngInject */
-    function SolicitarVehiculoCtrl($scope, authService, $ionicPopup, SolicitudData) {
+    function SolicitarVehiculoCtrl($scope, authService, $ionicPopup, Solicitud) {
         var vm = this;
 
         vm.user = authService.currentUser();
-        SolicitudData.pasajeros = [{'nombre': vm.user.nombre, identificacion: vm.user.identificacion}];
+        Solicitud.data = {};
+        vm.solicitud = Solicitud.data;
+        Solicitud.data.tipo = 'vehiculo';
+        vm.solicitud.pasajeros = [{'nombre': vm.user.nombre, identificacion: vm.user.identificacion}];
 
         vm.showModalAddPasajero = showModalAddPasajero;
         vm.showModalEditPasajero = showModalEditPasajero;
@@ -26,7 +29,7 @@
                 title: 'Agregar pasajero',
                 scope: $scope
             };
-            if (SolicitudData.pasajeros.length < 1) {
+            if (Solicitud.data.pasajeros.length < 1) {
                 popup.buttons = [
                     {
                         type: 'button-icon ion-plus button-positive button-clear',
@@ -60,7 +63,7 @@
 
         function addPasajero(pasajero) {
             if (pasajero) {
-                SolicitudData.pasajeros.push(pasajero);
+                Solicitud.data.pasajeros.push(pasajero);
             }
         }
 
@@ -106,12 +109,12 @@
         function updatePasajeros(res) {
             if (res) {
                 if (res.eliminar) {
-                    SolicitudData.pasajeros.splice(res.index, 1);
-                    if (SolicitudData.pasajeros.length < 1) {
+                    Solicitud.data.pasajeros.splice(res.index, 1);
+                    if (Solicitud.data.pasajeros.length < 1) {
                         showModalAddPasajero();
                     }
                 } else {
-                    SolicitudData.pasajeros[res.index] = res.pasajero;
+                    Solicitud.data.pasajeros[res.index] = res.pasajero;
                 }
             }
         }

@@ -7,9 +7,9 @@
 
     angular
         .module('solicitudes')
-        .factory('SolicitudData', function(){
+        .factory('Solicitud', function(){
             return {
-
+                data: {}
             };
         });
 
