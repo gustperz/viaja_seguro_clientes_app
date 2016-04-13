@@ -1,125 +1,81 @@
 /* Empty. Add your own CSS if you like */
-.center{
-    text-align:center;
+
+#map {height: 100%;}
+
+.center{text-align:center;}
+
+.center-div {margin-left: auto;margin-right: auto;display: inline;}
+
+.col {padding: 0px;}
+
+.input-bottom{margin-bottom:0%;}
+
+.padding-button{padding-top: 15%;padding-bottom: 15%;font-size: 50%;}
+
+.padding-notificacion{text-align: right;}
+
+.card{box-shadow: 0 1px 3px rgba(214, 35, 35, 0.3);}
+
+.notificacion{margin-top: 5px;margin-bottom: 5px;margin-left: 5px;}
+
+.item-center {left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%)}
+
+.icon-size{font-size: 30px;}
+
+.img-perfil{margin-left: 5%;margin-top: 2%;border:2px solid #FFFFFF;overflow: hidden;}
+
+.img-rounded{border-radius: 50%;background: #fff;}
+
+.nombre-conductor{margin-left: 5%;color: #d50002;margin-top: 3%;font-size: 120%;font-weight: bold;font-style: oblique;}
+
+.sub-items-info-menu{margin-left: 5%;color: #fff;font-size: 100%;font-weight: bold;}
+
+.angular-google-map-container { height: 700px; }
+
+.item-input-wrapper{background: #fff;}
+
+.animate-show {line-height: 20px;opacity: 1;padding: 10px;border: 1px solid black;background: white;}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {transition: all linear 0.5s;}
+
+.animate-show.ng-hide {line-height: 0;opacity: 0;padding: 0 10px;}
+
+label#rounded{border-radius:15px; }
+
+div#container{width: 300px; margin-left:auto; margin-right: auto; }
+
+.background-lista-menu{background: #000;}
+
+.button-login{border-radius:15px}
+
+.custom {background-color: #000 !important; /* This sets the background color*/}
+
+.custom .item {background-color: transparent;border:none;border-top: 1px solid;border-bottom:2px solid;border-color: #666;color: white; }
+
+.custom .item:last-child {border-bottom: 1px solid #666;}
+ 
+.custom .item-complex .item-content, .dark .item-radio .item-content {background-color: transparent;}
+
+.custom h2,
+.custom h3,
+.custom p,
+.custom a {color: white;}
+
+.home{background: white;padding-bottom: 10px;}
+
+.id-conductor{font-size: 90%;margin-bottom: 10px;margin-top: -10px;}
+
+.button-bar.button-pill {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  border-radius: 30px;
 }
 
-.input-bottom{
-    margin-bottom:0%;
+.button-bar.button-pill .button:first-child {
+  -webkit-border-radius: 30px 0 0 30px;
+  border-radius: 30px 0 0 30px;
 }
 
-.padding-button{
-    padding-top: 15%;
-    padding-bottom: 15%;
-}
-
-.padding-notificacion{
-    text-align: right;
-}
-
-.card{
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2)
-}
-
-.notificacion{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-}
-
-.item-center {
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%)
-}
-
-.icon-size{
-    font-size: 30px;
-}
-
-.home{
-    width: 100%;
-    height: 40%;
-    background-image: url(../img/header.jpg);
-    background-size: cover;
-}
-
-.img-perfil{
-    max-width: 60px;
-    max-height: 60px;
-    margin-left: 5%;
-    margin-top: 10%;
-    border:2px solid #FFFFFF;
-}
-
-.img-rounded{
-    border-radius: 50%;
-    background: #fff;
-}
-
-.nombre-conductor{
-    margin-left: 5%;
-    color: #fff;
-    margin-top: 3%;
-    font-size: 135%;
-    font-weight: bold;
-
-}
-
-/*.loading{*/
-    /*height: 100%;*/
-    /*width: 100%;*/
-/*}*/
-
-/*.loading div{*/
-    /*position: absolute;*/
-    /*top: 50%;*/
-    /*left: 50%;*/
-/*}*/
-
-/*asd*/
-select-box {
-    width: 95%;
-}
-select-box input[readonly]{
-    padding-left: 10px;
-}
-
-.item-button-right{
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-
-.item-button-right .button{
-    height: 34px;
-}
-
-.item-button-right input, .item-button-right input[readonly]{
-    margin-right: 70px;
-    background-color: white;
-}
-
-.input-readonly-white input[readonly]{
-    background-color: white;
-}
-
-.no-padding{
-    padding: 0 0;
-}
-
-.boton-add-pasajero{
-    min-height: 34px !important;
-    height: 34px;
-    min-width: 42px;
-    width: 42px;
-    position: absolute;
-    right: 18px;
-}
-.boton-add-pasajero.icon:before{
-    line-height: 33px !important;
-}
-
-.pas_time{
-    color: white;
-    font-size: 78px;
-    text-align: center;
+.button-bar.button-pill .button:last-child {
+  -webkit-border-radius: 0 30px 30px 0;
+  border-radius: 0 30px 30px 0;
 }

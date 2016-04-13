@@ -1,0 +1,18 @@
+<ion-view title="Servicio pendiente" class="positive-bg">
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header">
+        <div class="spacer" style="height: 31px;"></div>
+        <div style="color:#FFFFFF;text-align:center;">
+            tiempo transcurrido desde que solicito el servicio:
+        </div>
+        <h1 style="color:#FFFFFF;text-align:center;">{{vm.tTranscurrido}}min</h1>
+        <form class="list">
+            <div class="spacer" style="height: 52px;"></div>
+            <ion-item class="item-divider">estado</ion-item>
+            <ion-radio name="sss">Pediente</ion-radio>
+            <ion-radio>En espera</ion-radio>
+            <ion-radio>Vehiculo en caminno</ion-radio>
+        </form>
+        <div class="spacer" style="height: 31px;"></div>
+        <button class="button button-stable button-block icon-left ion-sad-outline">Cancelar</button>
+    </ion-content>
+</ion-view>

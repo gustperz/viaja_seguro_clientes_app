@@ -1,7 +1,7 @@
 .angular-google-map-container {
     position: absolute;
-    top: 50px;
-    bottom: 45px;
+    top: 0px;
+    bottom: 0px;
     right: 0;
     left: 0;
 }
@@ -13,10 +13,16 @@
 
 .button-aceptar-control-gm {
     height: 40px;
-    width: 100%;
-    margin: 0 0 !important;
-    position: absolute;
-    bottom: 0;
+    position: absolute !important;
+    left: 5px !important;
+    right: 5px !important;
+}
+
+.button-aceptar-control-gm button{
+    height: 40px;
+    position: absolute !important;
+    bottom: 18px !important;
+    border-radius: 15px;
 }
 
 .button-control-gm {
@@ -36,7 +42,8 @@
 
 .locate{
     right: 10px !important;
-    bottom: 20px !important;
+    bottom: 85px !important;
+    border-radius: 12px;
 }
 
 .star{
@@ -53,6 +60,7 @@
 
 .control-direccion {
     position: absolute;
+    top: 10px !important;
     right: 0;
     left: 0;
     z-index: 30;
@@ -64,11 +72,13 @@
 .control-direccion .card {
     margin: 0 0;
     max-height: 50px;
+    border-radius: 15px;
     /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
 }
 
 .control-direccion .card .item-input{
     max-width: 87% !important;
+    padding-left: 35px;
     /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
 }
 

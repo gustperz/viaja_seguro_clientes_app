@@ -1,0 +1,18 @@
+
+<div class="row row-no-padding">
+    <div class="col col-80 no-padding"><h4 class="padding-left">Pasajeros</h4></div>
+    <div class="col col-20 no-padding">
+        <button class="button button-positive icon ion-plus boton-add-pasajero"
+                ng-click="vm.showModalAddPasajero()" type="button">
+        </button>
+    </div>
+</div>
+<div class="list">
+    <div class="item item-button-right" style="padding: 16px 16px"
+         ng-repeat="pasajero in vm.solicitud.pasajeros">
+        {{pasajero.nombre}}
+        <button class="button button-positive button-clear" type="button" ng-click="vm.showModalEditPasajero(pasajero, $index)">
+            <i class="icon ion-edit"></i>
+        </button>
+    </div>
+</div>

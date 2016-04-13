@@ -21,8 +21,8 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
-    "cordova.plugins.diagnostic",
     "cordova-plugin-geolocation",
+    "cordova.plugins.diagnostic",
     "cordova-plugin-screen-orientation",
     {
       "locator": "https://github.com/phonegap-build/PushPlugin.git",

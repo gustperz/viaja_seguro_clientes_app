@@ -25,7 +25,7 @@
                         url : API_URL+'/new_token',
                         skipAuthorization : true,
                         method: 'GET',
-                        headers : { Authorization : 'Bearer '+ jwt}
+                        headers : {Authorization : 'Bearer '+ jwt}
                     }).then(
                         function(response){
                             sessionStorage.setItem('jwt',response.data.token);

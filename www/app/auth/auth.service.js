@@ -6,7 +6,7 @@
         .service('authService', authService);
 
     /* @ngInject */
-    function authService($http, API_URL, jwtHelper, $state, $window, $q) {
+    function authService($http, API_URL, jwtHelper, $state, $window, $q, pushService) {
         var local = {
             setCredenciales: setCredenciales,
             getCredenciales: getCredenciales,
@@ -38,7 +38,7 @@
                     setCredenciales(usuario);
                 }
                 storeUser(p.data.token);
-                updateRegId();
+                pushService.register();
                 defered.resolve(currentUser());
             }
             function error(error) {
@@ -61,9 +61,10 @@
             return promise;
         }
 
-        function updateRegId(){
+        function updateRegId(regid){
+            sessionStorage.setItem('regid', regid);
             var usuario_id = JSON.parse(sessionStorage.getItem('usuario')).id;
-            return $http.put(API_URL+'/usuario/'+usuario_id+'/reg_id/'+sessionStorage.getItem('regid'));
+            return $http.put(API_URL+'/usuarios/'+usuario_id+'/reg_id/'+regid);
         };
 
         function logout(){

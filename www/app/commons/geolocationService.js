@@ -9,7 +9,7 @@
         .module('app')
         .factory('geoLocationService', factory)
         .factory('posicionActual', function(){return {};});
-    
+
     /* @ngInject */
     function factory($cordovaGeolocation, uiGmapGoogleMapApi, posicionActual, $q, $ionicPopup) {
         var service = {
@@ -30,7 +30,7 @@
                 posicionActual.longitude = position.coords.longitude;
                 posicionActual.posCurrentSensor = {lat:position.coords.latitude, lng:position.coords.longitude};
                 return decode(posicionActual).then(
-                    function(pos){return pos},
+                    function(pos){return pos;},
                     error);
             }
             function error(error) {
@@ -89,27 +89,26 @@
         }
 
         function checkLocation(){
-            if (window.cordova) {
-                cordova.plugins.diagnostic.isLocationEnabled(
-                    function(enabled) {
-                        if (enabled){
-                            return true;
-                        }
-                        else {
-                            $ionicPopup.alert({
-                                content: 'Debe habilitar los servicios de ubicación',
-                                buttons: [{type: 'button-icon ion-checkmark button-positive button-clear'}]
-                            }).then(function(res) {
-                                cordova.plugins.diagnostic.switchToLocationSettings();
-                            });
-                            return false;
-                        }
-                    },
-                    function(e) {
-                        alert('Error ' + e);
+            return true;
+            cordova.plugins.diagnostic.isLocationEnabled(
+                function(enabled) {
+                    if (enabled){
+                        return true;
                     }
-                );
-            }
+                    else {
+                        $ionicPopup.alert({
+                            content: 'Debe habilitar los servicios de ubicación',
+                            buttons: [{type: 'button-icon ion-checkmark button-positive button-clear'}]
+                        }).then(function(res) {
+                            cordova.plugins.diagnostic.switchToLocationSettings();
+                        });
+                        return false;
+                    }
+                },
+                function(e) {
+                    alert('Error ' + e);
+                }
+            );
         }
     }
 })();

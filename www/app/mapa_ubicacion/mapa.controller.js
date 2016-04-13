@@ -14,7 +14,6 @@
         var vm = this;
 
         vm.decodeDireccion = decodeDireccion;
-        vm.checkLength = checkLength;
         vm.confirmarUbicacion = confirmarUbicacion;
 
         $scope.$on('$ionicView.beforeEnter', function(event){
@@ -40,7 +39,7 @@
         });
         $scope.$on("center_map", function(event){
             var map = vm.map.control.getGMap();
-            map.panTo({lat: posicionActual.latitude, lng: posicionActual.longitude})
+            map.panTo({lat: posicionActual.latitude, lng: posicionActual.longitude});
         });
 
         function setMap(){
@@ -54,7 +53,7 @@
                 },
                 events:{
                     dragend: function(){
-                        $timeout(decodeLocation, 900)
+                        $timeout(decodeLocation, 900);
                     }
                 },
                 control: {}
@@ -73,7 +72,7 @@
         }
 
         function decodeLocation(){
-            posicionActual.latitude = vm.map.center.latitude;
+        posicionActual.latitude = vm.map.center.latitude;
             posicionActual.longitude = vm.map.center.longitude;
             geoLocationService.decode(posicionActual)
                 .then(function(pos){
@@ -89,12 +88,6 @@
             },function(error) {});
         }
 
-        function checkLength() {
-            if(vm.location.direccion.indexOf(vm.location.basedir)!=0){
-                vm.location.direccion = vm.location.basedir;
-            }
-        }
-        
         function confirmarUbicacion() {
             $ionicHistory.goBack();
         }

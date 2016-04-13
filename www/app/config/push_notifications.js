@@ -7,50 +7,32 @@
 
     angular
         .module('app')
-        .config(config)
+        .run(runconfig)
 
 
     /* @ngInject */
-    function config($cordovaPush) {
-        var config = null;
-
-        if (ionic.Platform.isAndroid()) {
-            config = {
-                "senderID": "984044898845"
-            };
-        }else if (ionic.Platform.isIOS()) {
-            config = {
-                "badge": "true",
-                "sound": "true",
-                "alert": "true"
-            };
-        }
-
-        $cordovaPush.register(config).then(function (result) {
-            if (ionic.Platform.isIOS()) {}
-
-        }, function (err) {
-            //alert("Register error " + err)
+    function runconfig($ionicPlatform, $cordovaPush, $rootScope, authService) {
+        $ionicPlatform.ready(function() {
+            $rootScope.$on('$cordovaPush:notificationReceived', notificationReceived);
         });
-
-        $rootScope.$on('$cordovaPush:notificationReceived', function (event, notification) {
-            switch(notification.event) {
+        function notificationReceived(event, notification) {
+            switch (notification.event) {
                 case 'registered':
-                    if (notification.regid.length > 0 ) {
+                    if (notification.regid.length > 0) {
                         //alert('registration ID = ' + notification.regid);
-                        sessionStorage.setItem('regid', notification.regid);
+                        authService.updateRegId(notification.regid);
                     }
                     break;
 
                 case 'message':
-                    if(notification.payload.tipo == "Pasajeros"){
-                        $location.path("/pasajeros");
-                    }else if(notification.payload.tipo == "Paquetes"){
-                        $location.path("/encomienda");
-                    }else if(notification.payload.tipo == "Giros"){
-                        $location.path("/giro");
+                    switch (notification.payload.tipo) {
+                        case 'Confrimacion':
+                            $rootScope.$emit('servicio_aceptado');
+                            break;
+                        case 'Rechazo':
+                            $rootScope.$emit('servicio_rechazado');
+                            break;
                     }
-
                     break;
 
                 case 'error':
@@ -61,6 +43,6 @@
                     alert('An unknown GCM event has occurred');
                     break;
             }
-        });
+        }
     }
 })();

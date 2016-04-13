@@ -11,8 +11,7 @@
             'auth',
             'mapa_ubicacion',
             'empresas',
-            'solicitud_vehiculo',
-            'solicitud_giropaquete',
-            // 'esperar_servicio'
+            'solicitudes',
+            'espera_servicio'
         ]);
 })();
