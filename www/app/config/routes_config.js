@@ -12,7 +12,7 @@
 
 
     /* @ngInject */
-    function config($stateProvider, $urlRouterProvider, HOME) {
+    function config($stateProvider) {
         $stateProvider
             .state('app', {
                 url: '/app',
@@ -20,9 +20,9 @@
                 templateUrl: 'app/layout/layout.html'
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise( function($injector) {
-            var $state = $injector.get("$state");
-            $state.go(HOME);
-        });
+        // $urlRouterProvider.otherwise( function($injector) {
+        //     var $state = $injector.get("$state");
+        //     $state.go(HOME);
+        // });
     }
 })();

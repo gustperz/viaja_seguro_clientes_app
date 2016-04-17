@@ -21,7 +21,7 @@
 
             if (ionic.Platform.isAndroid()) {
                 config = {
-                    "senderID": "984044898845"
+                    "senderID": "1096165577625"
                 };
             } else if (ionic.Platform.isIOS()) {
                 config = {

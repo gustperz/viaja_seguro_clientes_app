@@ -120,6 +120,7 @@
             solicitudesService.post(Solicitud.data).then(success, error);
             function success() {
                 mostrarAlert('', 'Solicitud Enviada', function () {
+                    Solicitud.estado = 'p';
                     $rootScope.$emit('contarstart');
                     $state.go('app.espera_servicio');
                 });

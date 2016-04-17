@@ -26,5 +26,14 @@
         this.post = function(solicitud) {
             return $http.post(API_URL+'/clientes/'+authService.currentUser().cliente_id+'/solicitudes', solicitud);
         }
+        this.put = function(solicitud) {
+            return $http.put(
+                API_URL+'/clientes/'+authService.currentUser().cliente_id+
+                '/solicitudes/'+solicitud.id, solicitud
+            );
+        }
+        this.getLast = function() {
+            return $http.get(API_URL+'/clientes/'+authService.currentUser().cliente_id+'/solicitudes');
+        }
     }
 })();

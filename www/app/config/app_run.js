@@ -9,9 +9,8 @@
             .module('app')
             .run(appRun);
 
-
         /* @ngInject */
-        function appRun($ionicPlatform, $state, authService, $ionicLoading) {
+        function appRun($ionicPlatform, $state, authService, $ionicLoading, Solicitud, HOME, solicitudesService) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -29,12 +28,40 @@
 
            function autenticate(){
                if(!authService.currentUser()) {
-                   $ionicLoading.show();
                    authService.autologin().then(function (res) {
-                       if (res === false) $state.go('login');
-                       $ionicLoading.hide();
+                       hideSplash();
+                       if (res) {
+                           solicitusPendiente();
+                       }else{
+                           $state.go('login');
+                       }
                    })
                }
+            }
+            
+            function solicitusPendiente() {
+                solicitudesService.getLast().then(function (s) {
+                    $ionicLoading.hide();
+                    // sino esta finalizada (f) o cancelada (c)
+                    if(s.data && (['f', 'c', 'r'].indexOf(s.data.estado) === -1)){
+                        Solicitud.estado = s.data.estado;
+                        var t = s.data.created_at.split(/[- :]/);
+                        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+                        var min = Math.floor((new Date - d) / (1000*60))
+                        Solicitud.tTranscurrido = min;
+                        $state.go('app.espera_servicio');
+                    }else{
+                        $state.go(HOME);
+                    }
+                });
+            }
+
+            function hideSplash() {
+                if(navigator.splashscreen){
+                    setTimeout(function () {
+                        navigator.splashscreen.hide();
+                    }, 100);
+                }
             }
         }
     })();

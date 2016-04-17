@@ -6,7 +6,7 @@
         .service('authService', authService);
 
     /* @ngInject */
-    function authService($http, API_URL, jwtHelper, $state, $window, $q, pushService) {
+    function authService($http, API_URL, jwtHelper, $state, $window, $q, pushService, $ionicHistory) {
         var local = {
             setCredenciales: setCredenciales,
             getCredenciales: getCredenciales,
@@ -69,6 +69,7 @@
 
         function logout(){
             sessionStorage.clear();
+            $ionicHistory.clearHistory();
             $window.localStorage.removeItem('credenciales');
             $state.go('login');
         };
