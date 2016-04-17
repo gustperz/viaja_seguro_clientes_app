@@ -38,7 +38,7 @@
                     setCredenciales(usuario);
                 }
                 storeUser(p.data.token);
-                pushService.register();
+                // pushService.register();
                 defered.resolve(currentUser());
             }
             function error(error) {
