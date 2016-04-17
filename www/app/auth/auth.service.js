@@ -38,7 +38,7 @@
                     setCredenciales(usuario);
                 }
                 storeUser(p.data.token);
-                // pushService.register();
+                pushService.register();
                 defered.resolve(currentUser());
             }
             function error(error) {
@@ -71,6 +71,7 @@
             sessionStorage.clear();
             $ionicHistory.clearHistory();
             $window.localStorage.removeItem('credenciales');
+            updateRegId('undefined');
             $state.go('login');
         };
 
