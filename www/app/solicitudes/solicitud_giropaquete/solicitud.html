@@ -1,4 +1,3 @@
-<div class="spacer" style="height: 10px;"></div>
 <!--remitente-->
 <h4 class="padding-left">Informacion destinatario</h4>
 <label class="item item-input input-bottom">
@@ -29,7 +28,7 @@
 <div ng-if="vm.paquete">
     <h4 class="padding-left">Descripcion paquete</h4>
     <label class="item item-input">
-        <textarea ng-model="solicitud.detalles.descripcion"
+        <textarea ng-model="vm.solicitud.detalles.descripcion"
                   placeholder="Escriba una descripción corta del paquete"
                   required>
         </textarea>
@@ -40,7 +39,6 @@
     <h4 class="padding-left">Monto</h4>
     <label class="item item-input">
         <i class="icon ion-social-usd placeholder-icon"></i>
-        <input type="number" ng-model="solicitud.detalles.descripcion" required>
+        <input type="number" ng-model="vm.solicitud.detalles.descripcion" required>
     </label>
 </div>
-<div class="spacer" style="height: 15px;"></div>

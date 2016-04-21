@@ -12,9 +12,9 @@
     /* @ngInject */
     function SolicitarGiroCtrl(Solicitud) {
         var vm = this;
-        vm.paquete = true;
+        vm.giro = true;
         Solicitud.data = {};
         vm.solicitud = Solicitud.data;
-        Solicitud.data.tipo = 'paquete';
+        Solicitud.data.tipo = 'giro';
     }
 })();

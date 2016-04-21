@@ -1,18 +1,22 @@
-
 <div class="row row-no-padding">
     <div class="col col-80 no-padding"><h4 class="padding-left">Pasajeros</h4></div>
     <div class="col col-20 no-padding">
-        <button class="button button-positive icon ion-plus boton-add-pasajero"
-                ng-click="vm.showModalAddPasajero()" type="button">
-        </button>
+        <!--<button class="button button-positive icon ion-plus boton-add-pasajero"-->
+                <!--ng-click="vm.showModalAddPasajero()" type="button">-->
+        <!--</button>-->
     </div>
 </div>
-<div class="list">
-    <div class="item item-button-right" style="padding: 16px 16px"
+<div class="list list-pasajeros">
+    <div class="item item-button-right item-borderless" style="padding: 16px 16px"
          ng-repeat="pasajero in vm.solicitud.pasajeros">
         {{pasajero.nombre}}
         <button class="button button-positive button-clear" type="button" ng-click="vm.showModalEditPasajero(pasajero, $index)">
             <i class="icon ion-edit"></i>
         </button>
+    </div>
+    <div style="padding: 5px">
+        <div style="width: 100% !important; border-radius: 25px; background-color: #d50002; height: 25px; margin-top: 10px; text-align: center">
+            <h2 style="color: white; font-size: 16px; line-height: 1.7" ng-click="vm.showModalAddPasajero()"><i class="icon ion-plus"></i>  Agregar</h2>
+        </div>
     </div>
 </div>

@@ -32,7 +32,7 @@
                             return response.data.token;
                         },
                         function(response){
-                            sessionStorage.removeItem('jwt');
+                            //sessionStorage.removeItem('jwt');
                         }
                     );
                 }else{

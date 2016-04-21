@@ -17,7 +17,7 @@
         Solicitud.data = {};
         vm.solicitud = Solicitud.data;
         Solicitud.data.tipo = 'vehiculo';
-        vm.solicitud.pasajeros = [{'nombre': vm.user.nombre, identificacion: vm.user.identificacion}];
+        vm.solicitud.pasajeros = [{'nombre': vm.user.nombre, identificacion: parseInt(vm.user.identificacion)}];
 
         vm.showModalAddPasajero = showModalAddPasajero;
         vm.showModalEditPasajero = showModalEditPasajero;
@@ -27,12 +27,14 @@
             var popup = {
                 templateUrl: 'app/solicitudes/solicitud_vehiculo/modal_pasajero.html',
                 title: 'Agregar pasajero',
-                scope: $scope
+                scope: $scope,
+                cssClass: 'cutompopup'
             };
             if (Solicitud.data.pasajeros.length < 1) {
                 popup.buttons = [
                     {
-                        type: 'button-icon ion-plus button-positive button-clear',
+                        type: 'button button-positive',
+                        text: '<b>Agregar</b>',
                         onTap: function (e) {
                             if (!$scope.pasajero.nombre || !$scope.pasajero.identificacion) {
                                 e.preventDefault();
@@ -46,7 +48,8 @@
                 popup.buttons = [
                     {type: 'button-icon ion-reply button-positive button-clear'},
                     {
-                        type: 'button-icon ion-plus button-positive button-clear',
+                        type: 'button button-positive',
+                        text: '<b>Agregar</b>',
                         onTap: function (e) {
                             if (!$scope.pasajero.nombre || !$scope.pasajero.identificacion) {
                                 e.preventDefault();
@@ -77,6 +80,7 @@
                 templateUrl: 'app/solicitudes/solicitud_vehiculo/modal_pasajero.html',
                 title: 'Pasajero',
                 scope: $scope,
+                cssClass: 'cutompopup',
                 buttons: [
                     { //cancelar
                         type: 'button-icon ion-reply button-positive button-clear',
@@ -88,13 +92,15 @@
                         }
                     },
                     { //eliminar
-                        type: 'button-icon ion-close button-positive button-clear',
+                        type: 'button button-positive',
+                        text: '<b>Eliminar</b>',
                         onTap: function (e) {
                             return {eliminar: true, index: index};
                         }
                     },
                     { //guardar
-                        type: 'button-icon ion-checkmark button-positive button-clear',
+                        type: 'button button-positive',
+                        text: '<b>Aceptar</b>',
                         onTap: function (e) {
                             if (!$scope.pasajero.nombre || !$scope.pasajero.identificacion) {
                                 e.preventDefault();

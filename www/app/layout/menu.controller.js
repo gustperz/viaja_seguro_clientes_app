@@ -10,8 +10,10 @@
         .controller('MenuCtrl', MenuCtrl);
 
     /* @ngInject */
-    function MenuCtrl($scope, authService) {
-        $scope.menuList = [
+    function MenuCtrl(authService) {
+        var vm = this;
+        vm.nombreUsuario = authService.currentUser().nombre;
+        vm.menuList = [
             {nombre: 'Empresas',
                 statego : 'app.lista_empresas',
                 icon: 'ion-ios-list'
@@ -22,6 +24,6 @@
             }
         ];
 
-        $scope.logout = authService.logout;
+        vm.logout = authService.logout;
     }
 })();

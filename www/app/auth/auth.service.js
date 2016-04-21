@@ -6,7 +6,7 @@
         .service('authService', authService);
 
     /* @ngInject */
-    function authService($http, API_URL, jwtHelper, $state, $window, $q, pushService, $ionicHistory) {
+    function authService($http, API_URL, jwtHelper, $state, $window, $q, $ionicHistory) {
         var local = {
             setCredenciales: setCredenciales,
             getCredenciales: getCredenciales,
@@ -38,7 +38,7 @@
                     setCredenciales(usuario);
                 }
                 storeUser(p.data.token);
-                pushService.register();
+                // pushService.register();
                 defered.resolve(currentUser());
             }
             function error(error) {
@@ -68,11 +68,13 @@
         };
 
         function logout(){
-            sessionStorage.clear();
-            $ionicHistory.clearHistory();
-            $window.localStorage.removeItem('credenciales');
-            updateRegId('undefined');
-            $state.go('login');
+            var usuario_id = JSON.parse(sessionStorage.getItem('usuario')).id;
+            return $http.put(API_URL+'/usuarios/'+usuario_id+'/reg_id/undefined').then(function () {
+                sessionStorage.clear();
+                $ionicHistory.clearHistory();
+                $window.localStorage.removeItem('credenciales');
+                $state.go('login');
+            });
         };
 
         function register(usuario){

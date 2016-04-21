@@ -14,32 +14,37 @@
         var vm = this;
 
         vm.decodeDireccion = decodeDireccion;
-        vm.confirmarUbicacion = confirmarUbicacion;
 
         $scope.$on('$ionicView.beforeEnter', function(event){
             screen.lockOrientation('portrait');
-            if(!geoLocationService.checkLocation()){
-                event.preventDefault();
-            }
         });
         $scope.$on('$ionicView.leave', function(){
             screen.unlockOrientation();
         });
         $scope.$on('$ionicView.loaded',function(){
-            vm.location = posicionActual;
-            if(!posicionActual.lat || !posicionActual.lng){
-                $ionicLoading.show();
-                geoLocationService.current().then(function(){
-                    setMap();
+            $ionicLoading.show();
+            geoLocationService.checkLocation().then(function (res) {
+                if(!res){
                     $ionicLoading.hide();
-                },function(error) {});
-            } else {
-                setMap();
-            }
+                    $ionicHistory.goBack();
+                } else {
+                    vm.location = posicionActual;
+                    if(!posicionActual.latitude || !posicionActual.longitude){
+                        geoLocationService.current().then(function(){
+                            setMap();
+                            $ionicLoading.hide();
+                        },function(error) {});
+                    } else {
+                        $ionicLoading.hide();
+                        setMap();
+                    }
+                }
+            })
         });
-        $scope.$on("center_map", function(event){
+        $scope.$on('center_map', function(event){
             var map = vm.map.control.getGMap();
             map.panTo({lat: posicionActual.latitude, lng: posicionActual.longitude});
+            vm.marker.coords = {latitude: posicionActual.latitude, longitude: posicionActual.longitude};
         });
 
         function setMap(){
@@ -86,10 +91,6 @@
             geoLocationService.geocode(direccion).then(function(){
                 $scope.$emit('center_map');
             },function(error) {});
-        }
-
-        function confirmarUbicacion() {
-            $ionicHistory.goBack();
         }
     }
 })();

@@ -1,6 +1,6 @@
 <ion-view title="Informacion empresa">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <div class="list card">
+        <div class="list card-info-empresa">
 
             <div class="item item-avatar">
                 <img ng-click="showServiciosEmpresa(empresa)" ng-src="http://{{empresa.logo}}">
@@ -12,8 +12,10 @@
             <div class="item item-body row-no-padding">
                 <!img class="full-image">
                 <div class="list">
-                    <div class="item item-divider">
-                        <b>Centrales</b>
+                    <div class="item item-divider center">
+                        <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
+                            <h2 style="color: white">Centrales</h2>
+                        </div>
                     </div>
                     <div class="item" ng-repeat="central in centrales">
                         {{central.ciudad.nombre}}

@@ -1,5 +1,5 @@
-<ion-view title="Solicitar Vehiculo">
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
+<ion-view title="Solicitar servicio">
+    <ion-content overflow-scroll="true" padding="true" class="has-header" style="padding: 15px">
         <form name="formSolicitud" class="list">
             <!--ciudad destino-->
             <h4 class="padding-left">Seleccione su ciudad de destino</h4>
@@ -15,54 +15,73 @@
                 </select-box>
                 <input ng-hide="true" type="text" ng-model="vm.solicitud.data.ruta_id" ng-required="true">
             </label>
-            <div class="card positive-bg row"
+            <div class="card-cupos"
                  ng-if="vm.cupos_disponibles && !vm.sin_cupos && vm.solicitud.data.tipo  == 'vehiculo'">
-                <div class="item row">
-                    <span class="col col-90 item-text-wrap">
-                        {{vm.n_conductores_ruta}} vehículos disponibles.<br>
-                        Quedan {{vm.cupos_disponibles}} cupos para el siguiente viaje
-                        <span ng-show="vm.cupos_disponibles_siguiente && vm.cupos_disponibles_siguiente > 0">
-                            y {{vm.cupos_disponibles_siguiente}} cupos para el siguiente a este.
-                        </span>
+                <div class="item">
+                    <span id="n-vehiculos">
+                        <p ng-if="vm.n_conductores_ruta <= 1">{{vm.n_conductores_ruta}} vehículo disponible. </p>
+                        <p ng-if="vm.n_conductores_ruta > 1">{{vm.n_conductores_ruta}} vehículos disponibles. </p>
                     </span>
-                    <a ui-sref="app.datos_conductor({conductor_id: vm.conductor_id})"
+                    <span class="center">
+                        <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
+                            <h2 style="color: white">
+                                Quedan {{vm.cupos_disponibles}} cupos para el siguiente viaje
+                            </h2>
+                        </div>
+                    </span>
+                    <!--<span ng-show="vm.cupos_disponibles_siguiente && vm.cupos_disponibles_siguiente > 0">-->
+                            <!--y {{vm.cupos_disponibles_siguiente}} cupos para el siguiente a este.-->
+                    <!--</span>-->
+                    <a ui-sref="app.datos_conductor({conductor_id: vm.conductor_id})" id="ver-conductor"
                        class="button-icon button button-clear button-positive col col-center row-no-padding">
                         <i class="icon ion-android-car"></i>
                     </a>
                 </div>
             </div>
-            <div class="card positive-bg row" ng-if="vm.sin_cupos">
-                <div class="item row">
+            <div class="row card-cupos" ng-if="vm.sin_cupos">
+                <div class="item row" style="text-align: justify">
                     <span class="col col-90 item-text-wrap">
-                        No hay vehículos disponibles, por favor intente más tarde
-                        o comuníquese directamente con la empresa
+                        No hay vehículos disponibles. Intente más tarde
+                        o comuníquese con la empresa. tel: <a  ng-href="tel: {{vm.telRuta}}">{{vm.telRuta}}</a>
                     </span>
                     <a class="button-icon button button-clear button-positive col col-center row-no-padding"
-                        ng-click="vm.loadCupos(selectedValue)">
+                        ng-click="vm.loadCupos(selectedValue)" id="relaod">
                         <i class="icon ion-refresh"></i>
                     </a>
                 </div>
             </div>
-            <div class="spacer" style="height: 10px;"></div>
+            <div class="spacer" style="height: 25px;"></div>
             <div ui-view name="tipoSolicitud"></div>
+            <div class="spacer" style="height: 25px;"></div>
             <!--direccion-->
             <div class="row row-no-padding">
                 <div class="col col-80 no-padding">
                     <h4 class="padding-left">Donde sera recojido</h4>
                 </div>
                 <div class="col col-20 no-padding">
-                    <a ui-sref="app.mapa_midireccion">
-                        <button class="button button-positive icon ion-search boton-add-pasajero" type="button">
-                        </button>
-                    </a>
+                    <!--<a ui-sref="app.mapa_midireccion">-->
+                        <!--<button class="button icon ion-map button-positive boton-add-pasajero" type="button">-->
+                        <!--</button>-->
+                    <!--</a>-->
                 </div>
             </div>
-            <label class="item item-input item-button-right">
-                <input type="search" placeholder="{{vm.location.direccion}}" readonly>
-            </label>
+            <div class="col row-no-padding input-direccion">
+                <label class="item item-input">
+                    <input type="text" ng-model="vm.location.direccion" ng-change="vm.checkLength()">
+                </label>
+                <label class="item item-input" id="detalles">
+                    <span class="input-label">Detalles</span>
+                    <input type="text" placeholder="segundo piso, apto 201" ng-model="vm.location.direccion_detalles">
+                </label>
+                <a ui-sref="app.mapa_midireccion">
+                    <div style="width: 100% !important; border-radius: 25px; background-color: #d50002; height: 25px; margin-top: 10px; text-align: center">
+                        <h2 style="color: white; font-size: 16px; line-height: 1.7"><i class="icon ion-map"></i>  Editar direccion</h2>
+                    </div>
+                </a>
+            </div>
             <div class="spacer" style="height: 15px;"></div>
         </form>
-        <div class="row row-bottom">
+        <div class="boton-enviar-solicitud">
             <button class="button button-block button-positive col"
                     ng-click="vm.enviarSolicitud()" ng-disabled="formSolicitud.$invalid || vm.sin_cupos">
                 Enviar Solicitud
@@ -70,3 +89,13 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="my-popover.html" type="text/ng-template">
+    <ion-popover-view>
+        <ion-header-bar>
+            <h1 class="title">My Popover Title</h1>
+        </ion-header-bar>
+        <ion-content>
+            Hello!
+        </ion-content>
+    </ion-popover-view>
+</script>

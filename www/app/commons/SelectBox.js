@@ -17,7 +17,7 @@
             },
             template:
                 '<input  id="showed" type="text" ng-click="showSelectModal()" ' +
-                        'style="cursor:inherit;" readonly  ng-model="label"/>',
+                        'style="cursor:inherit;" readonly  ng-model="label"/><i class="icon ion-arrow-down-b"></i>',
             controller: ['$scope', '$element', '$ionicModal', '$parse', function ($scope, $element, $ionicModal, $parse) {
 
                 $scope.ngPlaceholder = ($scope.ngPlaceholder) ? $scope.ngPlaceholder : '';

@@ -49,8 +49,8 @@
                     if (status == google.maps.GeocoderStatus.OK) {
                         var res = results[0].formatted_address.split(',');
                         var resdir = res[0].replace(/^\s+|\s+$/g, "").split('-');
-                        pos.direccion = resdir[0]+'-';
-                        pos.basedir = resdir[0]+'-';
+                        pos.direccion = resdir[0];
+                        pos.basedir = resdir[0];
                         pos.ciudad = res[2].replace(/^\s+|\s+$/g, "");
                         pos.departamento = res[3].replace(/^\s+|\s+$/g, "");
                         pos.fullnameCiudad = res[2].replace(/^\s+|\s+$/g, "")+', '+res[3].replace(/^\s+|\s+$/g, "");
@@ -91,6 +91,8 @@
         function checkLocation(){
             var defered = $q.defer();
             var promise = defered.promise;
+            defered.resolve(true); //TODO: quitar
+            return promise; //TODO: quitar
             cordova.plugins.diagnostic.isLocationEnabled(
                 function(enabled) {
                     if (enabled){

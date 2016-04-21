@@ -5,12 +5,12 @@
         .controller('direccionCtrl', controls_direccion);
     
     /* @ngInject */
-    function controls_direccion($scope, posicionActual, geoLocationService) {
+    function controls_direccion($scope, posicionActual, geoLocationService, $ionicHistory) {
 
         var vm = this;
         vm.location = posicionActual;
         vm.goCurentPos = goCurentPos;
-        vm.checkLength = checkLength;
+        vm.confirmarUbicacion = confirmarUbicacion;
 
         function goCurentPos(){
             geoLocationService.current().then(function(){
@@ -18,10 +18,8 @@
             },function(error) {});
         }
 
-        function checkLength() {
-            if(vm.location.direccion.indexOf(vm.location.basedir)!== 0){
-                vm.location.direccion = vm.location.basedir;
-            }
+        function confirmarUbicacion() {
+            $ionicHistory.goBack();
         }
     }
 })();

@@ -27,9 +27,12 @@
                 '</ion-radio>',
                 title: 'Direcciones Favoritas',
                 scope: $scope,
+                cssClass: 'cutompopup',
                 buttons: [
                     { type: 'button-icon ion-reply button-positive button-clear' },
-                    { type: 'button-icon ion-checkmark button-positive button-clear',
+                    {
+                        type: 'button button-positive',
+                        text: '<b>Elegir</b>',
                         onTap: function(e) {
                             if (!$scope.selectedDireccion) {
                                 e.preventDefault();
@@ -38,7 +41,9 @@
                             }
                         }
                     },
-                    { type: 'button-icon ion-plus button-positive button-clear',
+                    {
+                        type: 'button button-positive',
+                        text: '<b>Agregar</b>',
                         onTap: function(e) {
                             return 'add';
                         }
@@ -70,13 +75,16 @@
                 '</label>',
                 title: 'Agregar Actual a Favoritas',
                 scope: $scope,
+                cssClass: 'cutompopup',
                 buttons: [
                     { type: 'button-icon ion-reply button-positive button-clear',
                         onTap: function() {
                             return 'back';
                         }
                     },
-                    { type: 'button-icon ion-checkmark button-positive button-clear',
+                    {
+                        type: 'button button-positive',
+                        text: '<b>Agregar</b>',
                         onTap: function(e) {
                             if (!$scope.direccion.nombre) {
                                 e.preventDefault();

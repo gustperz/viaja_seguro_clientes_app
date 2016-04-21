@@ -1,21 +1,20 @@
-<ion-side-menu side="left" ng-controller="MenuCtrl">
+<ion-side-menu side="left" ng-controller="MenuCtrl as vm" width="220">
     <ion-header-bar class="bar-positive">
         <h1 class="title">Viaja Seguro</h1>
     </ion-header-bar>
     <ion-content class="custom">
         <div class="home center">
             <img style="width:120px;height:120px;margin-top:10%;" src="img/profile.jpg" class="img-perfil img-rounded">
-            <p class="nombre-conductor">Cliente</p>
-            <p class="id-conductor">123456</p>
+            <p class="nombre-conductor">{{vm.nombreUsuario}}</p>
             <!--<p class="nombre-conductor">Cliente</p>-->
         </div>
         </div>
-        <ion-list class="center">
-            <ion-item ng-repeat="menu in menuList" menu-close ui-sref="{{menu.statego}}">
+        <ion-list class="center menu-list">
+            <ion-item ng-repeat="menu in vm.menuList" menu-toggle="left" ui-sref="{{menu.statego}}">
                 <i style="font-size: 25px;" class="icon {{menu.icon}}"></i>
                 <h2>{{menu.nombre}}</h2>
             </ion-item>
-            <ion-item  ng-click="logout()">
+            <ion-item  ng-click="vm.logout()">
                 <i style="font-size: 25px;" class="icon ion-ios-undo"></i>
                 <h2>Salir</h2>
             </ion-item>

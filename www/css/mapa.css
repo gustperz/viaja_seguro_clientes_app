@@ -14,14 +14,14 @@
 .button-aceptar-control-gm {
     height: 40px;
     position: absolute !important;
-    left: 5px !important;
-    right: 5px !important;
+    left: 10px !important;
+    right: 10px !important;
 }
 
 .button-aceptar-control-gm button{
     height: 40px;
     position: absolute !important;
-    bottom: 18px !important;
+    bottom: 15px !important;
     border-radius: 15px;
 }
 
@@ -32,7 +32,8 @@
     box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
     -webkit-user-select: none;
     cursor: pointer;
-    width: 38px;
+    color: #d50002;
+    width: 40px;
     height: 37.5px;
 }
 
@@ -42,8 +43,8 @@
 
 .locate{
     right: 10px !important;
-    bottom: 85px !important;
-    border-radius: 12px;
+    bottom: 75px !important;
+    border-radius: 50%;
 }
 
 .star{
@@ -71,12 +72,13 @@
 
 .control-direccion .card {
     margin: 0 0;
-    max-height: 50px;
+    max-height: 42px;
     border-radius: 15px;
-    /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
+    box-shadow: 0 0 0 transparent !important;
 }
 
 .control-direccion .card .item-input{
+    margin: 0;
     max-width: 87% !important;
     padding-left: 35px;
     /*box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;*/
