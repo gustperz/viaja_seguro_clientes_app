@@ -23,10 +23,10 @@
                         <p ng-if="vm.n_conductores_ruta > 1">{{vm.n_conductores_ruta}} vehículos disponibles. </p>
                     </span>
                     <span class="center">
-                        <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
-                            <h2 style="color: white">
-                                Quedan {{vm.cupos_disponibles}} cupos para el siguiente viaje
-                            </h2>
+                        <div style="border-radius: 15px; background-color: #d50002;
+                                    color: white; font-size: 18px; text-align: center; white-space: normal; padding-left: 7px; padding-right: 7px">
+                                <span ng-if="vm.cupos_disponibles==1">Queda {{vm.cupos_disponibles}} cupo para el próximo viaje</span>
+                                <span ng-if="vm.cupos_disponibles>1">Quedan {{vm.cupos_disponibles}} cupos para el próximo viaje</span>
                         </div>
                     </span>
                     <!--<span ng-show="vm.cupos_disponibles_siguiente && vm.cupos_disponibles_siguiente > 0">-->

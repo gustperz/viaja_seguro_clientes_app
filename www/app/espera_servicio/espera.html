@@ -8,27 +8,75 @@
             <span class="label-min">minutos</span>
         </div>
         <div class="spacer" style="height: 35px;"></div>
-        <div class="progress">
-            <div class="circle done">
-                <span class="label">&#10003;</span>
-                <span class="title"></span>
+        <div ng-show="vm.solicitud.estado == 'p'">
+            <div class="progress">
+                <div class="circle active">
+                    <span class="label">1</span>
+                    <span class="title"></span>
+                </div>
+                <span class="bar half"></span>
+                <div class="circle">
+                    <span class="label">2</span>
+                    <span class="title"></span>
+                </div>
+                <span class="bar half"></span>
+                <div class="circle">
+                    <span class="label">3</span>
+                    <span class="title"></span>
+                </div>
             </div>
-            <span class="bar done"></span>
-            <div class="circle active">
-                <span class="label">2</span>
-                <span class="title"></span>
-            </div>
-            <span class="bar half"></span>
-            <div class="circle">
-                <span class="label">3</span>
-                <span class="title"></span>
-            </div>
+            <ul class="progress-list center">
+                <li class="active">1 En espera</li>
+                <li>2 Pendiente</li>
+                <li>3 Vehiculo en camino</li>
+            </ul>
         </div>
-        <ul class="progress-list center">
-            <li>1 En espera</li>
-            <li class="active">2 Pendiente</li>
-            <li>3 Vehiculo en camino</li>
-        </ul>
+        <div ng-show="vm.solicitud.estado == 'a'">
+            <div class="progress">
+                <div class="circle done">
+                    <span class="label">&#10003;</span>
+                    <span class="title"></span>
+                </div>
+                <span class="bar done"></span>
+                <div class="circle active">
+                    <span class="label">2</span>
+                    <span class="title"></span>
+                </div>
+                <span class="bar half"></span>
+                <div class="circle">
+                    <span class="label">3</span>
+                    <span class="title"></span>
+                </div>
+            </div>
+            <ul class="progress-list center">
+                <li>1 En espera</li>
+                <li class="active">2 Pendiente</li>
+                <li>3 Vehiculo en camino</li>
+            </ul>
+        </div>
+        <div ng-show="vm.solicitud.estado == 'v'">
+            <div class="progress">
+                <div class="circle done">
+                    <span class="label">&#10003;</span>
+                    <span class="title"></span>
+                </div>
+                <span class="bar done"></span>
+                <div class="circle done">
+                    <span class="label">&#10003;</span>
+                    <span class="title"></span>
+                </div>
+                <span class="bar done"></span>
+                <div class="circle active">
+                    <span class="label">3</span>
+                    <span class="title"></span>
+                </div>
+            </div>
+            <ul class="progress-list center">
+                <li>1 En espera</li>
+                <li>2 Pendiente</li>
+                <li class="active">3 Vehiculo en camino. <a ui-sref="app.location_conductor({conductor_id: vm.solicitud.data.conductor_id})">Mapa</a></li>
+            </ul>
+        </div>
         <div class="spacer" style="height: 31px;"></div>
         <button class="button button-stable button-block icon-left ion-sad-outline"
                 ng-click="vm.cancelarSolicitud()">

@@ -7,8 +7,13 @@
 
     /* @ngInject */
     function empresasService($http, API_URL) {
-        this.getAll = function (){
-            return $http.get(API_URL+'/empresas');
+        this.getAll = function (rest){
+            rest || (rest = false);
+            if(rest){
+                return $http.get(API_URL + '/empresas?include=centrales&ciudad='+rest.ciudad);
+            }else {
+                return $http.get(API_URL + '/empresas?include=centrales');
+            }
         }
 
         this.get = function (id){

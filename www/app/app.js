@@ -12,6 +12,7 @@
             'mapa_ubicacion',
             'empresas',
             'solicitudes',
-            'espera_servicio'
+            'espera_servicio',
+            'conductor'
         ]);
 })();

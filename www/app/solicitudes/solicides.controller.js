@@ -23,7 +23,6 @@
         vm.checkLength = checkLength;
 
         $scope.$on('$ionicView.beforeEnter', function () {
-            $ionicLoading.show();
             geoLocationService.checkLocation().then(function (res) {
                 if(!res){
                     $ionicLoading.hide();
@@ -32,13 +31,16 @@
                     vm.location = posicionActual;
                     console.log(posicionActual);
                     if(!posicionActual.latitude || !posicionActual.longitude){
+                        $ionicLoading.show();
                         geoLocationService.current().then(function(){
                             loadCiudades();
+                        },function(error) {
+                            console.log(error);
                             $ionicLoading.hide();
-                        },function(error) {});
-                    } else {
+                        });
+                    }
+                    else {
                         loadCiudades();
-                        $ionicLoading.hide();
                     }
                 }
             })
@@ -49,7 +51,6 @@
                 loadRutas();
                 return;
             }
-            vm.centralLocal = {};
             var empresa_id = $stateParams.empresa_id;
             solicitudesService.getCentral(empresa_id, vm.location.ciudad).then(success, error);
             function success(p) {
@@ -64,7 +65,10 @@
         }
 
         function loadRutas() {
-            if(vm.ciudades.length) return;
+            if(vm.ciudades.length){
+                $ionicLoading.hide();
+                return
+            };
             solicitudesService.getRutasCentral(vm.centralLocal.id).then(success, error);
             function success(p) {
                 for (var i = 0; i < p.data.length; i++) {

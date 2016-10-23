@@ -17,6 +17,8 @@
                 if (window.cordova && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                     cordova.plugins.Keyboard.disableScroll(true);
+
+                    screen.lockOrientation('portrait');
                 }
                 if (window.StatusBar) {
                     // org.apache.cordova.statusbar required
@@ -25,8 +27,6 @@
 
                 autenticate();
             });
-
-            solicitusPendiente();
 
             function autenticate(){
                if(!authService.currentUser()) {

@@ -10,19 +10,16 @@
         .controller('MapaConductorCtrl', MapaConductorCtrl);
 
     /* @ngInject */
-    function MapaConductorCtrl($scope, posicionActual, geoLocationService, socketCh, $stateParams, $ionicLoading) {
+    function MapaConductorCtrl($scope, posicionActual, geoLocationService, socketCh, $stateParams, $ionicLoading, Solicitud) {
         var vm = this;
         var conductor = {};
         vm.markers = [];
 
-        $scope.$on('$ionicView.beforeEnter', function(event){
-            screen.lockOrientation('portrait');
-            if(!geoLocationService.checkLocation()){
-                event.preventDefault();
-            }
+        $scope.$on('$ionicView.beforeEnter', function () {
+            socketCh.connect();
         });
         $scope.$on('$ionicView.leave', function(){
-            screen.unlockOrientation();
+            socketCh.disconnect();
         });
         $scope.$on('$ionicView.loaded',function(){
             vm.location = posicionActual;
@@ -66,7 +63,8 @@
                 },
                 id: 'yo'
             });
-            socketCh.emit('loginCliente', {conductor_id: $stateParams.conductor_id})
+            console.log(Solicitud);
+            socketCh.emit('loginCliente', {conductor_id: Solicitud.data.conductor_id})
         }
 
         function updatePosConductor(data){

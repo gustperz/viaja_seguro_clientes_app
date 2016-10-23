@@ -7,29 +7,64 @@
 
     angular
         .module('empresas')
-        .controller('ListaEmpresasCtrl', ListaEmpresasCtrl);
+        .controller('ListaEmpresasCtrl', ListaEmpresasCtrl)
+        .filter('filterCiudadDestino', filterCiudadDestino);
 
     /* @ngInject */
-    function ListaEmpresasCtrl($scope, $state, empresasService) {
-        $scope.$on('$ionicView.loaded',function(){
-            $scope.empresas = [];
-            loadEmpresas();
+    function ListaEmpresasCtrl($scope, $state, empresasService, geoLocationService, posicionActual, $ionicLoading) {
+        var vm = this;
+
+        $scope.$on('$ionicView.beforeEnter',function(){
+            vm.empresas = [];
+            $ionicLoading.show();
+            geoLocationService.checkLocation().then(function (res) {
+                if(!res){
+                    loadEmpresas();
+                }
+                if(!posicionActual.latitude || !posicionActual.longitude){
+                    geoLocationService.current().then(function(){
+                        loadEmpresas({ciudad: posicionActual.ciudad});
+                    },function(error) {});
+                } else {
+                    loadEmpresas({ciudad: posicionActual.ciudad});
+                }
+            })
         });
 
-        $scope.showServiciosEmpresa = showServiciosEmpresa;
+        vm.infoEmpresa = infoEmpresa;
 
-        function loadEmpresas(){
-            empresasService.getAll().then(success, error);
+
+        function loadEmpresas(rest){
+            rest || (rest = false);
+            empresasService.getAll(rest).then(success, error);
             function success(p) {
-                $scope.empresas = p.data;
+                vm.empresas = p.data;
+                $ionicLoading.hide();
             }
-            function error(error) {
+            function error(error){
+                $ionicLoading.hide();
                 console.log('Error al cargar datos', error);
             }
         }
 
-        function showServiciosEmpresa(empresa){
-            $state.go('app.servicios_empresa', {'empresa_id' : 1});
+        function infoEmpresa(empresa){
+            $state.go('app.empresa_detalles', {'empresa_id' : empresa.id});
         }
     }
+
+    function filterCiudadDestino() {
+        return function (empresas, ciudad_destino) {
+            if(!ciudad_destino) return empresas;
+            var result = [];
+            angular.forEach(empresas, function (empresa, key) {
+                angular.forEach(empresa.centrales, function (central, key2) {
+                    if (central.ciudad.nombre.toLowerCase().indexOf(ciudad_destino.toLowerCase()) != -1) {
+                        result.push(empresa);
+                    }
+                })
+            });
+            return result;
+
+        }
+    };
 })();

@@ -14,13 +14,8 @@
         var vm = this;
 
         vm.decodeDireccion = decodeDireccion;
+        vm.confirmarUbicacion = confirmarUbicacion;
 
-        $scope.$on('$ionicView.beforeEnter', function(event){
-            screen.lockOrientation('portrait');
-        });
-        $scope.$on('$ionicView.leave', function(){
-            screen.unlockOrientation();
-        });
         $scope.$on('$ionicView.loaded',function(){
             $ionicLoading.show();
             geoLocationService.checkLocation().then(function (res) {
@@ -92,5 +87,10 @@
                 $scope.$emit('center_map');
             },function(error) {});
         }
+
+        function confirmarUbicacion() {
+            $ionicHistory.goBack();
+        }
+
     }
 })();

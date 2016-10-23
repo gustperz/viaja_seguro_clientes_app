@@ -1,33 +1,60 @@
 <ion-view title="Informacion empresa">
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <div class="list card-info-empresa">
-
+    <ion-content overflow-scroll="true" padding="true" class="has-header" style="background-color: white">
+        <div class="mapacentral">
+            <ui-gmap-google-map
+                    center="vm.map.center"
+                    zoom="vm.map.zoom"
+                    draggable="true"
+                    control="vm.map.control"
+                    options="vm.map.options"
+                    events="vm.map.events">
+                <ui-gmap-marker
+                        idkey="vm.marker.id"
+                        coords="vm.marker.coords"
+                        options="vm.marker.options">
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+        <div class="detalles-empresa">
             <div class="item item-avatar">
-                <img ng-click="showServiciosEmpresa(empresa)" ng-src="http://{{empresa.logo}}">
-                <h2>{{empresa.nombre}}</h2>
-                <p>Dir: {{empresa.direccion}}</p>
-                <p>Tel: {{empresa.telefono}}</p>
+                <img ng-src="http://{{vm.empresa.logo}}">
+                <h2>{{vm.empresa.nombre}}</h2>
+                <p>Dir: {{vm.empresa.direccion}}</p>
+                <p>Tel: {{vm.empresa.telefono}}</p>
             </div>
-
-            <div class="item item-body row-no-padding">
-                <!img class="full-image">
-                <div class="list">
-                    <div class="item item-divider center">
-                        <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
-                            <h2 style="color: white">Centrales</h2>
-                        </div>
-                    </div>
-                    <div class="item" ng-repeat="central in centrales">
-                        {{central.ciudad.nombre}}
-                        <span class="item-note">Tel: {{central.telefono}}</span>
-                    </div>
-                </div>
-                <!--<p class="padding">-->
-                    <!--<a href="#" class="subdued">1 Like</a>-->
-                    <!--<a href="#" class="subdued">5 Comments</a>-->
-                <!--</p>-->
+            <div class="button-bar button-positive">
+                <a class="button" ui-sref="app.empresa_centrales    ({empresa_id: vm.empresa.id})">Detalles</a>
+                <a class="button" ui-sref="app.servicios_empresa({empresa_id: vm.empresa.id})">Servicios</a>
             </div>
-
+            <div ng-show="vm.distancia" style="margin-top: 10px; text-align: center;">
+                Distacia: {{vm.distancia}}, {{vm.tiempo}}
+            </div>
         </div>
     </ion-content>
 </ion-view>
+
+<!--<div class="item item-avatar">-->
+    <!--<img ng-click="showServiciosEmpresa(empresa)" ng-src="http://{{vm.empresa.logo}}">-->
+    <!--<h2>{{vm.empresa.nombre}}</h2>-->
+    <!--<p>Dir: {{vm.empresa.direccion}}</p>-->
+    <!--<p>Tel: {{vm.empresa.telefono}}</p>-->
+<!--</div>-->
+
+<!--<div class="item item-body row-no-padding">-->
+    <!--<!img class="full-image">-->
+    <!--<div class="list">-->
+        <!--<div class="item item-divider center">-->
+            <!--<div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">-->
+                <!--<h2 style="color: white">Centrales</h2>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="item" ng-repeat="central in centrales">-->
+            <!--{{central.ciudad.nombre}}-->
+            <!--<span class="item-note">Tel: {{central.telefono}}</span>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<p class="padding">&ndash;&gt;-->
+    <!--&lt;!&ndash;<a href="#" class="subdued">1 Like</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;<a href="#" class="subdued">5 Comments</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;</p>&ndash;&gt;-->
+<!--</div>-->

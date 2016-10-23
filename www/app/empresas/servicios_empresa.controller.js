@@ -10,7 +10,7 @@
         .controller('ServiciosCtrl', ServiciosCtrl);
 
     /* @ngInject */
-    function ServiciosCtrl($scope, $stateParams, empresasService) {
+    function ServiciosCtrl($scope, $stateParams, empresasService, Solicitud) {
         var vm = this;
 
         $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -18,6 +18,7 @@
         });
         $scope.$on('$ionicView.loaded', function () {
             vm.empresa = {};
+            Solicitud.data = {};
             loadInfo();
         });
 

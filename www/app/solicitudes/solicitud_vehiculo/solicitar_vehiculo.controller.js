@@ -14,10 +14,11 @@
         var vm = this;
 
         vm.user = authService.currentUser();
-        Solicitud.data = {};
         vm.solicitud = Solicitud.data;
         Solicitud.data.tipo = 'vehiculo';
-        vm.solicitud.pasajeros = [{'nombre': vm.user.nombre, identificacion: parseInt(vm.user.identificacion)}];
+        if(!Solicitud.data.pasajeros) {
+            Solicitud.data.pasajeros = [{'nombre': vm.user.nombre, identificacion: parseInt(vm.user.identificacion)}];
+        }
 
         vm.showModalAddPasajero = showModalAddPasajero;
         vm.showModalEditPasajero = showModalEditPasajero;

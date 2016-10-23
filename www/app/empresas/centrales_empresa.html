@@ -1,0 +1,31 @@
+<ion-view title="Informacion empresa">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <div class="list card-info-empresa">
+
+            <div class="item item-avatar">
+                <img ng-click="showServiciosEmpresa(empresa)" ng-src="http://{{empresa.logo}}">
+                <h2>{{empresa.nombre}}</h2>
+            </div>
+
+            <div class="item item-body row-no-padding">
+                <!img class="full-image">
+                <div class="list">
+                    <div class="item item-divider center">
+                        <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
+                            <h2 style="color: white">Centrales</h2>
+                        </div>
+                    </div>
+                    <div class="item" ng-repeat="central in centrales">
+                        <h2>{{central.ciudad.nombre}}</h2>
+                        <p>Direccion: {{central.direccion}}, Tel: {{central.telefono}}</p>
+                    </div>
+                </div>
+                <!--<p class="padding">-->
+                    <!--<a href="#" class="subdued">1 Like</a>-->
+                    <!--<a href="#" class="subdued">5 Comments</a>-->
+                <!--</p>-->
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

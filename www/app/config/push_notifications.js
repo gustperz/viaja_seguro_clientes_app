@@ -11,11 +11,10 @@
 
 
     /* @ngInject */
-    function runconfig($ionicPlatform, $cordovaPush, $rootScope, authService) {
-        $ionicPlatform.ready(function() {
-            $rootScope.$on('$cordovaPush:notificationReceived', notificationReceived);
-        });
+    function runconfig($cordovaPush, $rootScope, authService) {
+        $rootScope.$on('$cordovaPush:notificationReceived', notificationReceived);
         function notificationReceived(event, notification) {
+            console.log(notification);
             switch (notification.event) {
                 case 'registered':
                     if (notification.regid.length > 0) {
@@ -26,11 +25,14 @@
 
                 case 'message':
                     switch (notification.payload.tipo) {
-                        case 'Confrimacion':
+                        case 'Confirmacion':
                             $rootScope.$emit('servicio_aceptado');
                             break;
                         case 'Rechazo':
-                            $rootScope.$emit('servicio_rechazado');
+                            $rootScope.$emit('servicio_rechazado', notification.payload.message);
+                            break;
+                        case 'Vehiculo en camino':
+                            $rootScope.$emit('vehiculo_en_camino');
                             break;
                     }
                     break;

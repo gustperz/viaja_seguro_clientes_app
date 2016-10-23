@@ -2,7 +2,7 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header center">
         <div ng-if="vm.pasajeros" class="card-services">
             <a class="item item-text-wrap center" ui-sref="app.solicitud.vehiculo({empresa_id: vm.empresa.id})">
-                <i style="color: grey; font-size: 100px" class="icon ion-person icon-size"></i>
+                <i style="color: grey; font-size: 100px" class="icon ion-model-s icon-size"></i>
                 <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
                     <h2 style="color: white">Solicitar vehiculo</h2>
                 </div>
@@ -10,7 +10,7 @@
         </div>
         <div ng-if="vm.encomiendas"  class="card-services" ui-sref="app.solicitud.paquete({empresa_id: vm.empresa.id})">
             <div class="item item-text-wrap center">
-                <i style="color: grey; font-size: 100px" class="icon ion-email icon-size"></i>
+                <i style="color: grey; font-size: 100px" class="icon ion-ios-box icon-size"></i>
                 <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;%">
                     <h2 style="color: white">Encomiendas</h2>
                 </div>
@@ -18,7 +18,7 @@
         </div>
         <div  ng-if="vm.giros"  class="card-services" ui-sref="app.solicitud.giro({empresa_id: vm.empresa.id})">
             <div class="item item-text-wrap center">
-                <i style="color: grey; font-size: 100px" class="icon ion-social-usd icon-size"></i>
+                <i style="color: grey; font-size: 100px" class="icon ion-cash icon-size"></i>
                 <div style="width: 100% !important; border-radius: 25px; background-color: #d50002;">
                     <h2 style="color: white">Giros</h2>
                 </div>

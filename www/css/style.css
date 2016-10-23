@@ -106,17 +106,17 @@
     margin-top: 10px;
     background-color: #ededed;
     border-radius: 25px;
-    padding: 10px;
-    min-height: 160px;
+    padding: 5px;
+    min-height: 30px;
 }
 
 .card-empresas .item{
     text-align: left;
-    background-color: inherit;
+    background-color: transparent;
     border: 0;
     padding: 0;
-    padding-left: 135px;
-    min-height: 120px;
+    padding-left: 65px;
+    min-height: 40px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -124,8 +124,8 @@
 }
 
 .card-empresas .item img{
-    max-width: 110px;
-    max-height: 110px;
+    max-width: 40px;
+    max-height: 40px;
     top: 0;
 }
 
@@ -167,13 +167,27 @@
 .card-info-empresa .item{
     background-color: transparent;
     border: 0;
+    padding: 10px;
+}
+
+.card-info-empresa .item h2{
+    margin: 0;
+}
+
+.card-info-empresa .item p{
+    margin: 0;
 }
 .card-info-empresa .item-avatar{
     padding-left: 95px;
 }
 .card-info-empresa .item-avatar img{
-    max-width: 65px;
-    max-height: 65px;
+    max-width: 55px;
+    max-height: 55px;
+}
+.card-info-empresa .item-avatar h2{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
 }
 
 .card-cupos {

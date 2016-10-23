@@ -6,7 +6,7 @@
         .service('authService', authService);
 
     /* @ngInject */
-    function authService($http, API_URL, jwtHelper, $state, $window, $q, $ionicHistory) {
+    function authService($http, API_URL, jwtHelper, $state, $window, $q, $ionicHistory, pushService) {
         var local = {
             setCredenciales: setCredenciales,
             getCredenciales: getCredenciales,
@@ -38,7 +38,7 @@
                     setCredenciales(usuario);
                 }
                 storeUser(p.data.token);
-                // pushService.register();
+                pushService.register();
                 defered.resolve(currentUser());
             }
             function error(error) {

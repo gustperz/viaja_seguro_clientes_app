@@ -10,16 +10,11 @@
         var vm = this;
         vm.location = posicionActual;
         vm.goCurentPos = goCurentPos;
-        vm.confirmarUbicacion = confirmarUbicacion;
 
         function goCurentPos(){
             geoLocationService.current().then(function(){
                 $scope.$emit('center_map');
             },function(error) {});
-        }
-
-        function confirmarUbicacion() {
-            $ionicHistory.goBack();
         }
     }
 })();

@@ -1,9 +1,15 @@
 .angular-google-map-container {
     position: absolute;
     top: 0px;
-    bottom: 0px;
+    bottom: 40px;
     right: 0;
     left: 0;
+    z-index: 20;
+}
+
+.map-container .scroll {
+    height: 100%;
+    background-color: #e5e3df;
 }
 
 #map_conductor .angular-google-map-container{
@@ -14,15 +20,15 @@
 .button-aceptar-control-gm {
     height: 40px;
     position: absolute !important;
-    left: 10px !important;
-    right: 10px !important;
+    left: 0px !important;
+    right: 0px !important;
+    bottom: 0px !important;
 }
 
 .button-aceptar-control-gm button{
     height: 40px;
-    position: absolute !important;
-    bottom: 15px !important;
-    border-radius: 15px;
+    border-radius: 0px;
+    margin: 0!important;
 }
 
 .button-control-gm {
@@ -43,7 +49,7 @@
 
 .locate{
     right: 10px !important;
-    bottom: 75px !important;
+    bottom: 25px !important;
     border-radius: 50%;
 }
 
@@ -57,6 +63,14 @@
     ppadding: 0;
     height: 118px;
     font-size: 55px;
+}
+
+.no-terminos-link {
+    width: 90px;
+    height: 16px;
+    position: absolute !important;
+    right: 0px !important;
+    bottom: 40px !important;
 }
 
 .control-direccion {

@@ -18,6 +18,10 @@
 
         vm.cancelarSolicitud = cancelarSolicitud;
 
+        $scope.$on('$ionicView.beforeEnter', function () {
+            loadSolicitud();
+        });
+
         $scope.$on('$ionicView.loaded', function () {
             $ionicHistory.clearHistory()
             starttimer();
@@ -31,13 +35,27 @@
             servicio_aceptado();
         });
 
-        $rootScope.$on('servicio_rechazado', function () {
-            servicio_rechazado();
+        $rootScope.$on('servicio_rechazado', function (mensaje) {
+            servicio_rechazado(mensaje);
         });
 
         $rootScope.$on('vehiculo_en_camino', function () {
             espera_vehiculo();
         });
+
+        function loadSolicitud() {
+            solicitudesService.getLast().then(function (s) {
+                // sino esta finalizada (f) o cancelada (c)
+                if(s.data && (['f', 'c', 'r'].indexOf(s.data.estado) === -1)){
+                    Solicitud.data = s.data;
+                    Solicitud.estado = s.data.estado;
+                    var t = s.data.created_at.split(/[- :]/);
+                    var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+                    var min = Math.ceil((new Date - d) / (1000*60))
+                    Solicitud.tTranscurrido = min;
+                }
+            });
+        }
 
         function starttimer() {
             timer = $interval(function () {
@@ -73,16 +91,18 @@
         }
 
         function servicio_aceptado() {
-            Solicitud.estado = 'a'
+            vm.solicitud.estado = 'a'
+            console.log(solicitud);
             alert('solicitud aceptada');
         }
 
-        function servicio_rechazado() {
-            alert('solicitud rechazada');
+        function servicio_rechazado(mensaje) {
+            alert('solicitud rechazada\n' + mensaje);
         }
 
         function espera_vehiculo() {
-            Solicitud.estado = 'v'
+            vm.solicitud.estado = 'v'
+            loadSolicitud();
             alert('vehiculo en camino');
         }
 

@@ -10,8 +10,9 @@
     <div class="item item-button-right item-borderless" style="padding: 16px 16px"
          ng-repeat="pasajero in vm.solicitud.pasajeros">
         {{pasajero.nombre}}
-        <button class="button button-positive button-clear" type="button" ng-click="vm.showModalEditPasajero(pasajero, $index)">
-            <i class="icon ion-edit"></i>
+        <button class="button button-positive button-clear" type="button" ng-click="vm.showModalEditPasajero(pasajero, $index)"
+                style="font-size: 16px!important; margin-top: -3px">
+            <span>Editar</span>
         </button>
     </div>
     <div style="padding: 5px">

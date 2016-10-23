@@ -10,7 +10,7 @@
         .service('pushService', pushService);
 
     /* @ngInject */
-    function pushService($cordovaPush) {
+    function pushService($cordovaPush, $ionicPlatform) {
         var config = null;
         var service = {
             register: register,
@@ -18,28 +18,31 @@
         return service;
 
         function register() {
-
-            if (ionic.Platform.isAndroid()) {
-                config = {
-                    "senderID": "984044898845"
-                };
-            } else if (ionic.Platform.isIOS()) {
-                config = {
-                    "badge": "true",
-                    "sound": "true",
-                    "alert": "true"
-                };
-            }
-
-            $cordovaPush.register(config).then(success, error);
-            function success(result) {
-                if (ionic.Platform.isIOS()) {
+            // return; // todo: quitar
+            $ionicPlatform.ready(function () {
+                if (ionic.Platform.isAndroid()) {
+                    config = {
+                        "senderID": "984044898845"
+                    };
+                } else if (ionic.Platform.isIOS()) {
+                    config = {
+                        "badge": "true",
+                        "sound": "true",
+                        "alert": "true"
+                    };
                 }
 
-            }
-            function error(err) {
-                //alert("Register error " + err)
-            }
+                $cordovaPush.register(config).then(success, error);
+                function success(result) {
+                    console.log('ready push ' + result);
+                    if (ionic.Platform.isIOS()) {
+                    }
+
+                }
+                function error(err) {
+                    console.log("Register error " + err)
+                }
+            });
         }
     }
 })();

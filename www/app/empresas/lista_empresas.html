@@ -4,19 +4,17 @@
             <label class="item item-input" style="margin: 5px 10px;">
                 <i class="icon ion-search placeholder-icon"></i>
                 &nbsp;
-                <input type="text" name="usuario" placeholder="Filtre por ciudad de destino" ng-model="filter" ng-required="true">
+                <input type="text" name="usuario" placeholder="Filtre por ciudad de destino" ng-model="search" ng-required="true">
             </label>
-            <div class="card-empresas center" ng-repeat="empresa in empresas | filter">
-                <div class="item item-avatar">
-                    <img ng-click="showServiciosEmpresa(empresa)" ng-src="http://{{empresa.logo}}">
-                    <h2 style="font-size: 20px" ng-click="showServiciosEmpresa(empresa)">{{empresa.nombre}}</h2>
-                    <p  style="font-size: 15px"ng-click="showServiciosEmpresa(empresa)">{{empresa.direccion}}</p>
-                    <p  style="font-size: 15px"ng-click="showServiciosEmpresa(empresa)">{{empresa.telefono}}</p>
+            <div class="card-empresas center" ng-repeat="empresa in vm.empresas | filterCiudadDestino:search">
+                <div class="item item-avatar" ng-click="vm.infoEmpresa(empresa)">
+                    <img  ng-src="http://{{empresa.logo}}">
+                    <h2 style="font-size: 20px" >{{empresa.nombre}}</h2>
                 </div>
-                <div class="detalles">
-                    <a style="padding-bottom: 10px; color: white;"
-                       ui-sref="app.empresa_detalles({empresa_id: '{{empresa.id}}'})">Detalles</a>
-                </div>
+                <!--<div class="detalles">-->
+                    <!--<a style="padding-bottom: 10px; color: white;"-->
+                       <!--ui-sref="app.empresa_detalles({empresa_id: '{{empresa.id}}'})">Detalles</a>-->
+                <!--</div>-->
             </div>
         </ion-list>
     </ion-content>
