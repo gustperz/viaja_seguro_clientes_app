@@ -11,7 +11,7 @@
         $ionicConfigProvider.navBar.alignTitle('center');
 
         uiGmapGoogleMapApiProvider.configure({
-            //    key: 'your api key',
+            key: 'AIzaSyD8gtDlGWJypAdXEAgLkhFagYceRve5Rz4',
             libraries: 'places,geometry,visualization',
             language: 'es'
         });

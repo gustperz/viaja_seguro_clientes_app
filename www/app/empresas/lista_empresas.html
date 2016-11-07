@@ -1,15 +1,15 @@
 <ion-view title="Empresas">
     <ion-content overflow-scroll="true" class="has-header padding">
         <ion-list >
-            <label class="item item-input" style="margin: 5px 10px;">
-                <i class="icon ion-search placeholder-icon"></i>
-                &nbsp;
-                <input type="text" name="usuario" placeholder="Filtre por ciudad de destino" ng-model="search" ng-required="true">
-            </label>
+            <!--<label class="item item-input" style="margin: 5px 10px;">-->
+                <!--<i class="icon ion-search placeholder-icon"></i>-->
+                <!--&nbsp;-->
+                <!--<input type="text" name="usuario" placeholder="Filtre por ciudad de destino" ng-model="search" ng-required="true">-->
+            <!--</label>-->
             <div class="card-empresas center" ng-repeat="empresa in vm.empresas | filterCiudadDestino:search">
                 <div class="item item-avatar" ng-click="vm.infoEmpresa(empresa)">
                     <img  ng-src="http://{{empresa.logo}}">
-                    <h2 style="font-size: 20px" >{{empresa.nombre}}</h2>
+                    <h2 style="font-size: 20px" >{{empresa.nombre_corto}}</h2>
                 </div>
                 <!--<div class="detalles">-->
                     <!--<a style="padding-bottom: 10px; color: white;"-->

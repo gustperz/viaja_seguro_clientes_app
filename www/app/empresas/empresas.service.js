@@ -10,7 +10,7 @@
         this.getAll = function (rest){
             rest || (rest = false);
             if(rest){
-                return $http.get(API_URL + '/empresas?include=centrales&ciudad='+rest.ciudad);
+                return $http.get(API_URL + '/empresas/en_ciudad/'+rest.ciudad);
             }else {
                 return $http.get(API_URL + '/empresas?include=centrales');
             }

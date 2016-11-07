@@ -12,8 +12,7 @@
 
     /* @ngInject */
     function runconfig($cordovaPush, $rootScope, authService) {
-        $rootScope.$on('$cordovaPush:notificationReceived', notificationReceived);
-        function notificationReceived(event, notification) {
+        $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
             console.log(notification);
             switch (notification.event) {
                 case 'registered':
@@ -45,6 +44,6 @@
                     alert('An unknown GCM event has occurred');
                     break;
             }
-        }
+        });
     }
 })();

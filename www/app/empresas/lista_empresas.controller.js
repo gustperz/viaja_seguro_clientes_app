@@ -22,8 +22,9 @@
                     loadEmpresas();
                 }
                 if(!posicionActual.latitude || !posicionActual.longitude){
-                    geoLocationService.current().then(function(){
-                        loadEmpresas({ciudad: posicionActual.ciudad});
+                    geoLocationService.current().then(function()    {
+                        console.log(posicionActual)
+                        loadEmpresas({ciudad: posicionActual.place_id});
                     },function(error) {});
                 } else {
                     loadEmpresas({ciudad: posicionActual.ciudad});
@@ -38,7 +39,7 @@
             rest || (rest = false);
             empresasService.getAll(rest).then(success, error);
             function success(p) {
-                vm.empresas = p.data;
+                vm.empresas = p.data.data;
                 $ionicLoading.hide();
             }
             function error(error){

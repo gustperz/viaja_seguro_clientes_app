@@ -45,7 +45,7 @@
         function loadInfo(){
             empresasService.get($stateParams.empresa_id).then(success, error);
             function success(p) {
-                vm.empresa = p.data;
+                vm.empresa = p.data.data;
             }
             function error(error) {
                 console.log('Error al cargar empresa', error);
@@ -55,9 +55,9 @@
         function loadCiudades() {
             vm.centralLocal = {};
             var empresa_id = $stateParams.empresa_id;
-            solicitudesService.getCentral(empresa_id, posicionActual.ciudad).then(success, error);
+            solicitudesService.getCentral(empresa_id, posicionActual.place_id).then(success, error);
             function success(p) {
-                vm.centralLocal = p.data;
+                vm.centralLocal = p.data.data[0];
                 $ionicLoading.hide();
                 setMap()
             }
@@ -70,7 +70,7 @@
 
         function setMap(){
             vm.map = {
-                center: {latitude: vm.centralLocal.miDireccionLa, longitude: vm.centralLocal.miDireccionLo},
+                center: {latitude: vm.centralLocal.pos_lat, longitude: vm.centralLocal.pos_lng},
                 zoom: 14,
                 options: {
                     streetViewControl: false,
@@ -80,7 +80,7 @@
                 control: {}
             };
             vm.marker = {
-                coords: {latitude: vm.centralLocal.miDireccionLa, longitude: vm.centralLocal.miDireccionLo},
+                coords: {latitude: vm.centralLocal.pos_lat, longitude: vm.centralLocal.pos_lng},
                 show: false,
                 id: 0
             };
@@ -91,7 +91,7 @@
                     var displayedMap = vm.map.  control.getGMap();
 
                     var start = new google.maps.LatLng(posicionActual.latitude, posicionActual.longitude);
-                    var end = new google.maps.LatLng(vm.centralLocal.miDireccionLa, vm.centralLocal.miDireccionLo);
+                    var end = new google.maps.LatLng(vm.centralLocal.pos_lat, vm.centralLocal.pos_lng);
 
                     var request = {
                         origin:start,

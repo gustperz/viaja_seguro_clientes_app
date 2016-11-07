@@ -12,7 +12,7 @@
     /* @ngInject */
     function solicitudesService($http, API_URL, authService) {
         this.getCentral = function (empresa_id, ciudad){
-            return $http.get(API_URL+'/empresas/'+empresa_id+'/centrales?ciudad='+ciudad);
+            return $http.get(API_URL+'/centrales?fields=pos_lng,pos_lat&ciudad_place_id='+ciudad+'&empresa='+empresa_id);
         }
         this.getRutasCentral = function (central_id){
             return $http.get(API_URL+'/centrales/'+central_id+'/rutas');

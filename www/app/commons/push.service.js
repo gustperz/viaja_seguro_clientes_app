@@ -18,7 +18,7 @@
         return service;
 
         function register() {
-            // return; // todo: quitar
+            return; // todo: quitar
             $ionicPlatform.ready(function () {
                 if (ionic.Platform.isAndroid()) {
                     config = {
