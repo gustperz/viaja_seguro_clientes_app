@@ -10,7 +10,7 @@
         .controller('RegisterCtrl', RegisterCtrl);
 
     /* @ngInject */
-    function RegisterCtrl($scope, authService, $ionicPopup, $state, GeographicService) {
+    function RegisterCtrl($scope, authService, $ionicPopup, $state) {
         var vm = this;
         $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
             viewData.enableBack = true;
@@ -24,28 +24,8 @@
             loadDepartamentos();
         });
 
-        function loadDepartamentos(){
-            GeographicService.departamentos().then(success, error);
-            function success(p) {
-                vm.departamentos = p.data;
-            }
-            function error(error) {
-            }
-
-        }
-
-        function loadCiudades(departamento_id){
-            GeographicService.ciudades(departamento_id).then(success, error);
-            function success(p) {
-                vm.ciudades = p.data;
-            }
-            function error(error) {
-            }
-
-        }
-
         function registarCliente(){
-            if(vm.usuario.contrasena != vm.usuario.confirmarContrasena){
+            if(vm.usuario.password != vm.usuario.confirmarContrasena){
                 vm.mostrarAdvertencia = true;
                 return;
             }
