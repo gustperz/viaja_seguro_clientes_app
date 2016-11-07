@@ -15,7 +15,7 @@
             return $http.get(API_URL+'/centrales?fields=pos_lng,pos_lat&ciudad_place_id='+ciudad+'&empresa='+empresa_id);
         }
         this.getRutasCentral = function (central_id){
-            return $http.get(API_URL+'/centrales/'+central_id+'/rutas');
+            return $http.get(API_URL+'/rutas?central='+central_id+'');
         }
         this.getTurnos = function (ruta_id){
             return $http.get(API_URL+'/rutas/'+ruta_id+'/turnos');
