@@ -20,7 +20,6 @@
             updateRegId: updateRegId,
             register: register,
             updatePassword: updatePassword,
-            storeUser: storeUser,
             currentUser: currentUser,
             local: local
         };
@@ -30,14 +29,14 @@
             matenerSesion || (matenerSesion = false);
             var defered = $q.defer();
             var promise = defered.promise;
-            $http.post(API_URL+'/login', usuario).then(success, error);
+            $http.post(API_URL+'/user/authentication', usuario).then(success, error);
             return promise;
 
             function success(p) {
                 if(matenerSesion == true){
                     setCredenciales(usuario);
                 }
-                storeUser(p.data.token);
+                storeUser(p.data.token, p.data.user);
                 pushService.register();
                 defered.resolve(currentUser());
             }
@@ -78,7 +77,7 @@
         };
 
         function register(usuario){
-            return $http.post(API_URL+'/usuarios/clientes', usuario);
+            return $http.post(API_URL+'/clientes', usuario);
         };
 
         function updatePassword(usuario, contrasenas){
@@ -88,9 +87,8 @@
             );
         };
 
-        function storeUser(jwt) {
+        function storeUser(jwt, usuario) {
             sessionStorage.setItem('jwt', jwt);
-            var usuario = jwtHelper.decodeToken(jwt).usuario;
             sessionStorage.setItem('usuario',JSON.stringify(usuario));
             return usuario;
         };
