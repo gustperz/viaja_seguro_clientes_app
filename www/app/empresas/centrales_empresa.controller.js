@@ -24,7 +24,7 @@
         function loadInfo(){
             empresasService.get($stateParams.empresa_id).then(success, error);
             function success(p) {
-                $scope.empresa = p.data;
+                $scope.empresa = p.data.data;
                 loadCentrales($scope.empresa.id);
             }
             function error(error) {
@@ -35,7 +35,7 @@
         function loadCentrales(empresa_id){
             empresasService.getCentrales(empresa_id).then(success, error);
             function success(p) {
-                $scope.centrales = p.data;
+                $scope.centrales = p.data.data;
             }
             function error(error) {
                 console.log('Error al cargar Centrales', error);

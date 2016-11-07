@@ -21,7 +21,7 @@
         }
 
         this.getCentrales = function (id){
-            return $http.get(API_URL+'/empresas/'+id+'/centrales');
+            return $http.get(API_URL+'/centrales?fields=ciudad,direccion,telefono&empresa='+id);
         }
     }
 })();
