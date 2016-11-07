@@ -92,8 +92,8 @@
         function checkLocation(){
             var defered = $q.defer();
             var promise = defered.promise;
-            defered.resolve(true); //TODO: quitar
-            return promise; //TODO: quitar
+            // defered.resolve(true); //TODO: quitar
+            // return promise; //TODO: quitar
             cordova.plugins.diagnostic.isLocationEnabled(
                 function(enabled) {
                     if (enabled){
