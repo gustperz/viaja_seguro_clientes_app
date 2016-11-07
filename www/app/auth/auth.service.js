@@ -36,7 +36,7 @@
                 if(matenerSesion == true){
                     setCredenciales(usuario);
                 }
-                storeUser(p.data.token, p.data.user);
+                storeUser(p.data.data.token, p.data.data.user);
                 pushService.register();
                 defered.resolve(currentUser());
             }
