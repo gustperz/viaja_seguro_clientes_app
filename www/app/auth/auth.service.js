@@ -63,7 +63,7 @@
         function updateRegId(regid){
             sessionStorage.setItem('regid', regid);
             var usuario_id = JSON.parse(sessionStorage.getItem('usuario')).id;
-            return $http.put(API_URL+'/usuarios/'+usuario_id+'/reg_id/'+regid);
+            return $http.put(API_URL+'/user/'+usuario_id+'/updateRegId/'+regid);
         };
 
         function logout(){

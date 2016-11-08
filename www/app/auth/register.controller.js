@@ -19,13 +19,17 @@
             vm.mostrarAdvertencia = false;
 
             vm.registarCliente = registarCliente;
-            vm.loadCiudades = loadCiudades;
+            vm.volver = volver
+            // vm.loadCiudades = loadCiudades;
 
-            loadDepartamentos();
+            // loadDepartamentos();
         });
 
+        function volver() {
+            $state.go('login')
+        }
         function registarCliente(){
-            if(vm.usuario.password != vm.usuario.confirmarContrasena){
+            if(vm.usuario.password !== vm.usuario.confirmarContrasena){
                 vm.mostrarAdvertencia = true;
                 return;
             }
