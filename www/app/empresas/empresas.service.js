@@ -12,7 +12,7 @@
             if(rest){
                 return $http.get(API_URL + '/empresas/en_ciudad/'+rest.ciudad);
             }else {
-                return $http.get(API_URL + '/empresas?include=centrales');
+                return $http.get(API_URL + '/empresas?populate=centrales&fields=id,nombre_corto,nombre_largo,direccion,telefono,logo');
             }
         }
 

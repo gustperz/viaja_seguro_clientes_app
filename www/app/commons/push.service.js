@@ -35,6 +35,7 @@
                 $cordovaPush.register(config).then(success, error);
                 function success(result) {
                     console.log('ready push ' + result);
+                    localStorage.setItem('regid', result.regid);
                     if (ionic.Platform.isIOS()) {
                     }
 

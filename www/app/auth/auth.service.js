@@ -37,7 +37,7 @@
                     setCredenciales(usuario);
                 }
                 storeUser(p.data.data.token, p.data.data.user);
-                pushService.register();
+                // pushService.register();
                 defered.resolve(currentUser());
             }
             function error(error) {
@@ -63,17 +63,16 @@
         function updateRegId(regid){
             sessionStorage.setItem('regid', regid);
             var usuario_id = JSON.parse(sessionStorage.getItem('usuario')).id;
-            return $http.put(API_URL+'/usuarios/'+usuario_id+'/reg_id/'+regid);
+            return $http.put(API_URL+'/user/'+usuario_id+'/updateRegId/'+regid);
         };
 
         function logout(){
-            var usuario_id = JSON.parse(sessionStorage.getItem('usuario')).id;
-            return $http.put(API_URL+'/usuarios/'+usuario_id+'/reg_id/undefined').then(function () {
+            updateRegId().then(function () {
                 sessionStorage.clear();
                 $ionicHistory.clearHistory();
                 $window.localStorage.removeItem('credenciales');
                 $state.go('login');
-            });
+            })
         };
 
         function register(usuario){
