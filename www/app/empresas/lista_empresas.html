@@ -8,7 +8,7 @@
             <!--</label>-->
             <div class="card-empresas center" ng-repeat="empresa in vm.empresas | filterCiudadDestino:search">
                 <div class="item item-avatar" ng-click="vm.infoEmpresa(empresa)">
-                    <img  ng-src="http://{{empresa.logo}}">
+                    <img  ng-src="http://api.viajaseguro.co/images/empresas/{{empresa.logo}}">
                     <h2 style="font-size: 20px" >{{empresa.nombre_corto}}</h2>
                 </div>
                 <!--<div class="detalles">-->

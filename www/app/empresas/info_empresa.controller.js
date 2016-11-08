@@ -69,6 +69,7 @@
         }
 
         function setMap(){
+            console.log(vm.centralLocal)
             vm.map = {
                 center: {latitude: vm.centralLocal.pos_lat, longitude: vm.centralLocal.pos_lng},
                 zoom: 14,

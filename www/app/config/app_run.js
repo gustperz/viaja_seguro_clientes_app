@@ -10,7 +10,7 @@
             .run(appRun);
 
         /* @ngInject */
-        function appRun($ionicPlatform, $state, authService, $ionicLoading, Solicitud, HOME, solicitudesService) {
+        function appRun($ionicPlatform, $state, authService, $ionicLoading, Solicitud, HOME, solicitudesService, $rootScope, $ionicHistory) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -23,6 +23,9 @@
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
+                $rootScope.$ionicGoBack = function(backCount) {
+                    $ionicHistory.goBack(backCount);
+                };
 
             });
 
