@@ -10,7 +10,7 @@
         .service('pushService', pushService);
 
     /* @ngInject */
-    function pushService($cordovaPush, $ionicPlatform, authService) {
+    function pushService($cordovaPush, $ionicPlatform) {
         var config = null;
         var service = {
             register: register,
@@ -36,7 +36,6 @@
                 function success(result) {
                     console.log('ready push ' + result);
                     localStorage.setItem('regid', result.regid);
-                    authService.updateRegId(localStorage.getItem('regid'));
                     if (ionic.Platform.isIOS()) {
                     }
 
