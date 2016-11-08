@@ -24,6 +24,8 @@
             }
         ];
 
-        vm.logout = authService.logout;
+        vm.logout  = function () {
+            authService.logout();
+        }
     }
 })();

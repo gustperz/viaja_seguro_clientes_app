@@ -2,7 +2,7 @@
  * Created by tav0 on 4/02/16.
  */
 
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -16,19 +16,20 @@
         vm.decodeDireccion = decodeDireccion;
         vm.confirmarUbicacion = confirmarUbicacion;
 
-        $scope.$on('$ionicView.loaded',function(){
+        $scope.$on('$ionicView.loaded', function () {
             $ionicLoading.show();
             geoLocationService.checkLocation().then(function (res) {
-                if(!res){
+                if (!res) {
                     $ionicLoading.hide();
                     $ionicHistory.goBack();
                 } else {
                     vm.location = posicionActual;
-                    if(!posicionActual.latitude || !posicionActual.longitude){
-                        geoLocationService.current().then(function(){
+                    if (!posicionActual.latitude || !posicionActual.longitude) {
+                        geoLocationService.current().then(function () {
                             setMap();
                             $ionicLoading.hide();
-                        },function(error) {});
+                        }, function (error) {
+                        });
                     } else {
                         $ionicLoading.hide();
                         setMap();
@@ -36,23 +37,26 @@
                 }
             })
         });
-        $scope.$on('center_map', function(event){
+        $scope.$on('center_map', function (event) {
             var map = vm.map.control.getGMap();
             map.panTo({lat: posicionActual.latitude, lng: posicionActual.longitude});
             vm.marker.coords = {latitude: posicionActual.latitude, longitude: posicionActual.longitude};
         });
 
-        function setMap(){
+        function setMap() {
             vm.map = {
-                center: {latitude: posicionActual.latitude, longitude: posicionActual.longitude},
+                center: {
+                    latitude: posicionActual.latitude,
+                    longitude: posicionActual.longitude
+                },
                 zoom: 17,
                 options: {
                     streetViewControl: false,
                     zoomControl: false,
                     mapTypeControl: false
                 },
-                events:{
-                    dragend: function(){
+                events: {
+                    dragend: function () {
                         $timeout(decodeLocation, 900);
                     }
                 },
@@ -71,21 +75,22 @@
             };
         }
 
-        function decodeLocation(){
-        posicionActual.latitude = vm.map.center.latitude;
+        function decodeLocation() {
+            posicionActual.latitude = vm.map.center.latitude;
             posicionActual.longitude = vm.map.center.longitude;
             geoLocationService.decode(posicionActual)
-                .then(function(pos){
-            },function(){
-                console.log('error');
-            });
+                .then(function (pos) {
+                }, function () {
+                    console.log('error');
+                });
         }
 
-        function decodeDireccion(){
-            var direccion = vm.location.ciudad+', colombia, '+vm.location.direccion;
-            geoLocationService.geocode(direccion).then(function(){
+        function decodeDireccion() {
+            var direccion = vm.location.ciudad + ', colombia, ' + vm.location.direccion;
+            geoLocationService.geocode(direccion).then(function () {
                 $scope.$emit('center_map');
-            },function(error) {});
+            }, function (error) {
+            });
         }
 
         function confirmarUbicacion() {

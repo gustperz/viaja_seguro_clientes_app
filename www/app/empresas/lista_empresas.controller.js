@@ -19,10 +19,12 @@
             $ionicLoading.show();
             geoLocationService.checkLocation().then(function (res) {
                 if(!res){
+                    console.log(res)
                     loadEmpresas();
                 }
                 if(!posicionActual.latitude || !posicionActual.longitude){
-                    geoLocationService.current().then(function()    {
+                    geoLocationService.current().then(function(res){
+                        console.log(res)
                         console.log(posicionActual)
                         loadEmpresas({ciudad: posicionActual.place_id});
                     },function(error) {});
