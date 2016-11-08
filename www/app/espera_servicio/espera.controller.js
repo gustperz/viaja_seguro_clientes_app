@@ -111,7 +111,7 @@
             vm.tTranscurrido = 0;
             $interval.cancel(timer);
             timer = undefined;
-            solicitudesService.put({'estado': 'c', 'id': Solicitud.data.id}).then(success, error);
+            solicitudesService.cancel({'id': Solicitud.data.id}).then(success, error);
             function success() {
                 $state.go(HOME);
             }

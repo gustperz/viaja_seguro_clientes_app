@@ -140,7 +140,7 @@
             solicitud.codigo_ruta = vm.codigo_ruta;
             solicitud.direccion = vm.location.direccion+' '+vm.location.direccion_detalles;
             solicitud.tipo = 'Pasajeros';
-            solicitud.estado = 'a';
+            solicitud.estado = 'p';
             solicitud.cliente = authService.currentUser().identificacion;
             solicitud.pasajeros = Solicitud.data.pasajeros;
             solicitud.central = vm.centralLocal.id;

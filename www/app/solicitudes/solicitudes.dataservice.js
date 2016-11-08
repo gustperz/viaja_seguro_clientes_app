@@ -32,6 +32,11 @@
                 '/solicitudes/'+solicitud.id, solicitud
             );
         }
+        this.cancel = function(solicitud) {
+            return $http.post(
+                API_URL+'/solicitudes/'+solicitud.id+'/cancel'
+            );
+        }
         this.getLast = function() {
             return $http.get(API_URL+'/clientes/'+authService.currentUser().cliente_id+'/solicitudes');
         }
