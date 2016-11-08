@@ -47,14 +47,15 @@
                 var deferred = $q.defer();
                 geocoder.geocode({'latLng': latlng}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
+                        console.log(results)
                         var res = results[0].formatted_address.split(',');
                         var resdir = res[0].replace(/^\s+|\s+$/g, "").split('-');
                         pos.direccion = resdir[0];
                         pos.basedir = resdir[0];
                         pos.place_id = results[0].place_id;
-                        pos.ciudad = res[2].replace(/^\s+|\s+$/g, "");
-                        pos.departamento = res[3].replace(/^\s+|\s+$/g, "");
-                        pos.fullnameCiudad = res[2].replace(/^\s+|\s+$/g, "")+', '+res[3].replace(/^\s+|\s+$/g, "");
+                        pos.ciudad = res[1].replace(/^\s+|\s+$/g, "");
+                        pos.departamento = res[2].replace(/^\s+|\s+$/g, "");
+                        pos.fullnameCiudad = res[1].replace(/^\s+|\s+$/g, "")+', '+res[2].replace(/^\s+|\s+$/g, "");
                         return deferred.resolve(pos);
                     }
                     return deferred.reject();

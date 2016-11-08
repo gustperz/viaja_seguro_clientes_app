@@ -42,6 +42,7 @@
             empresasService.getAll(rest).then(success, error);
             function success(p) {
                 vm.empresas = p.data.data;
+                if(!vm.empresas.length) return loadEmpresas();
                 $ionicLoading.hide();
             }
             function error(error){
