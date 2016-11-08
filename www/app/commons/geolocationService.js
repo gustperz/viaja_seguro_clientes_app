@@ -52,7 +52,11 @@
                         var resdir = res[0].replace(/^\s+|\s+$/g, "").split('-');
                         pos.direccion = resdir[0];
                         pos.basedir = resdir[0];
-                        pos.place_id = results[0].place_id;
+
+                        pos.place_id = results.find(function (res) {
+                            return res.types[0] == 'administrative_area_level_2';
+                        }).place_id;
+
                         pos.ciudad = res[1].replace(/^\s+|\s+$/g, "");
                         pos.departamento = res[2].replace(/^\s+|\s+$/g, "");
                         pos.fullnameCiudad = res[1].replace(/^\s+|\s+$/g, "")+', '+res[2].replace(/^\s+|\s+$/g, "");
