@@ -64,7 +64,7 @@
             var usuario_id = JSON.parse(sessionStorage.getItem('usuario')).id;
             var pet = {
                 method: 'PUT',
-                url: api + '/user/' + usuario_id + '/updateRegId',
+                url: API_URL + '/user/' + usuario_id + '/updateRegId',
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 },
