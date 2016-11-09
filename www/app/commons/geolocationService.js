@@ -53,8 +53,16 @@
                         pos.direccion = resdir[0];
                         pos.basedir = resdir[0];
 
+                        pos.place = {
+                            administrative_area: results.find(function (res) {
+                                return res.types[0] == 'administrative_area_level_2';
+                            }).place_id,
+                            locality: results.find(function (res) {
+                                return res.types[0] == 'locality';
+                            }).place_id,
+                        };
                         pos.place_id = results.find(function (res) {
-                            return res.types[0] == 'administrative_area_level_2';
+                            return res.types[0] == 'locality';
                         }).place_id;
 
                         pos.ciudad = res[1].replace(/^\s+|\s+$/g, "");

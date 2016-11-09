@@ -26,10 +26,12 @@
                     geoLocationService.current().then(function(res){
                         console.log(res)
                         console.log(posicionActual)
-                        loadEmpresas({ciudad: posicionActual.place_id});
+                        vm.place = posicionActual.place
+                        vm.place.solo_locality = true;
+                        loadEmpresas({ciudad: vm.place.locality});
                     },function(error) {});
                 } else {
-                    loadEmpresas({ciudad: posicionActual.ciudad});
+                    loadEmpresas();
                 }
             })
         });
@@ -42,7 +44,15 @@
             empresasService.getAll(rest).then(success, error);
             function success(p) {
                 vm.empresas = p.data.data;
-                if(!vm.empresas.length) return loadEmpresas();
+                if(!vm.empresas.length && vm.place.solo_locality) {
+                    vm.place.solo_locality = false;
+                    posicionActual.place_id = vm.place.administrative_area;
+                    return loadEmpresas({ciudad: vm.place.administrative_area});
+                }
+                else if(!vm.empresas.length) {
+                    posicionActual.place_id = undefined;
+                    return loadEmpresas();
+                }
                 $ionicLoading.hide();
             }
             function error(error){

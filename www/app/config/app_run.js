@@ -65,11 +65,12 @@
             }
 
             function hideSplash() {
-                if(navigator.splashscreen){
-                    setTimeout(function () {
+                $ionicPlatform.ready(function() {
+                    console.log('que monda')
+                    setTimeout(function() {
                         navigator.splashscreen.hide();
-                    }, 100);
-                }
+                    }, 300);
+                });
             }
         }
     })();
