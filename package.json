@@ -15,12 +15,12 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "cordova-plugin-device",
-    "cordova-plugin-console",
     "cordova-plugin-whitelist",
+    "cordova-plugin-device",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-console",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard",
     "cordova.plugins.diagnostic",
     "cordova-plugin-screen-orientation",
     {
@@ -31,7 +31,13 @@
       "locator": "https://github.com/katzer/cordova-plugin-background-mode.git",
       "id": "cordova-plugin-background-mode"
     },
-    "cordova-plugin-geolocation"
+    "cordova-plugin-geolocation",
+    "cordova-plugin-compat",
+    {
+      "locator": "https://github.com/katzer/cordova-plugin-local-notifications.git",
+      "id": "de.appplant.cordova.plugin.local-notification"
+    },
+    "cordova-plugin-app-event"
   ],
   "cordovaPlatforms": [
     "android"

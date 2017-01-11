@@ -7,6 +7,7 @@
             '$selectBox',
             'uiGmapgoogle-maps',
             'ngCordova',
+            'ngSails',
 
             'auth',
             'mapa_ubicacion',

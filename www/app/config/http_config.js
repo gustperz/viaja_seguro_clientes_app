@@ -12,7 +12,7 @@
 
 
     /* @ngInject */
-    function config(API_URL, jwtInterceptorProvider, $httpProvider  ) {
+    function config(API_URL, jwtInterceptorProvider, $httpProvider, $sailsProvider) {
         jwtInterceptorProvider.tokenGetter = tokenGetter;
         // Enable cross domain calls
         $httpProvider.defaults.useXDomain = true;
@@ -44,5 +44,7 @@
                 }
             }
         }
+
+        $sailsProvider.url = API_URL;
     }
 })();

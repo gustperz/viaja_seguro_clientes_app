@@ -138,18 +138,16 @@
             var solicitud = {};
             solicitud.conductor = vm.conductor_id;
             solicitud.codigo_ruta = vm.codigo_ruta;
-            solicitud.direccion = vm.location.direccion+' '+vm.location.direccion_detalles;
+            solicitud.direccion = vm.location.direccion_detalles ? vm.location.direccion+' '+vm.location.direccion_detalles : vm.location.direccion;
             solicitud.tipo = 'Pasajeros';
             solicitud.estado = 'p';
-            solicitud.cliente = authService.currentUser().identificacion;
+            solicitud.cliente = authService.currentUser().cliente_id;
             solicitud.pasajeros = Solicitud.data.pasajeros;
             solicitud.central = vm.centralLocal.id;
 
             solicitudesService.post(solicitud).then(success);
             function success(p) {
                 mostrarAlert('', 'Solicitud Enviada', function () {
-                    Solicitud.estado = 'p';
-                    Solicitud.data.id = p.data;
                     $rootScope.$emit('contarstart');
                     $state.go('app.espera_servicio');
                 });

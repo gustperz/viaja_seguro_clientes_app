@@ -11,12 +11,13 @@
 
     /* @ngInject */
     function EsperaServicioCtrl($rootScope, $scope, $interval, $ionicHistory, solicitudesService, Solicitud,
-                                $state, HOME) {
+                                $state, HOME, $sails, $cordovaLocalNotification) {
         var vm = this;
         var timer;
         vm.solicitud = Solicitud;
 
         vm.cancelarSolicitud = cancelarSolicitud;
+        vm.recogido = recogido;
 
         $scope.$on('$ionicView.beforeEnter', function () {
             loadSolicitud();
@@ -31,29 +32,41 @@
             starttimer();
         });
 
-        $rootScope.$on('servicio_aceptado', function () {
-            servicio_aceptado();
+        $sails.on('updateEstado', function (params) {
+            if(params.estado == 'p'){
+              vm.solicitud.estado = 'p'
+              notificate('Solicitud pendiente', 'esperando la disponibilidad de un conductor ');
+              alert('solicitud en espera');
+            }
+
+            if(params.estado == 'a') {
+              vm.solicitud.estado = 'a'
+              notificate('Solicitud asignada', 'ha sido asignado a un conductor, al completar el cupo, se realizara el despacho ');
+              alert('solicitud aceptada');
+            };
         });
 
-        $rootScope.$on('servicio_rechazado', function (mensaje) {
-            servicio_rechazado(mensaje);
-        });
+       $sails.on('reject', function (mensaje) {
+         notificate('Solicitud rechazada', 'No puede ser atendido en este momento');
+         alert('solicitud rechazada\n');
+         $state.go(HOME);
+       });
 
-        $rootScope.$on('vehiculo_en_camino', function () {
-            espera_vehiculo();
+       $sails.on('vehiculo_en_camino', function () {
+         vm.solicitud.estado = 'v'
+         notificate('Vehiculo en camino', 'El conductor ya salio, llegara pronto por usted');
+         alert('vehiculo en camino');
+         localStorage.setItem('vehiculo_en_camino', JSON.stringify(Solicitud));
         });
 
         function loadSolicitud() {
-            solicitudesService.getLast().then(function (s) {
-                // sino esta finalizada (f) o cancelada (c)
-                if(s.data && (['f', 'c', 'r'].indexOf(s.data.estado) === -1)){
-                    Solicitud.data = s.data;
-                    Solicitud.estado = s.data.estado;
-                    var t = s.data.created_at.split(/[- :]/);
-                    var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-                    var min = Math.ceil((new Date - d) / (1000*60))
-                    Solicitud.tTranscurrido = min;
-                }
+          if(Solicitud.stada == 'v') return;
+            solicitudesService.getLast().then(function (data) {
+              Solicitud.data = data;
+              Solicitud.estado = data.estado;
+              var d = new Date(Solicitud.data.createdAt);
+              var min = Math.ceil((new Date() - d) / (1000*60))
+              Solicitud.tTranscurrido = min;
             });
         }
 
@@ -84,40 +97,37 @@
             // });
         }
 
-        function solicitud_enviada() {
-            cordova.plugins.backgroundMode.configure({
-                text:'Solicitud enviada, esperando respuesta'
-            });
-        }
-
-        function servicio_aceptado() {
-            vm.solicitud.estado = 'a'
-            console.log(solicitud);
-            alert('solicitud aceptada');
-        }
-
-        function servicio_rechazado(mensaje) {
-            alert('solicitud rechazada\n' + mensaje);
-        }
-
-        function espera_vehiculo() {
-            vm.solicitud.estado = 'v'
-            loadSolicitud();
-            alert('vehiculo en camino');
-        }
-
         function cancelarSolicitud() {
             console.log(Solicitud);
             vm.tTranscurrido = 0;
             $interval.cancel(timer);
             timer = undefined;
-            solicitudesService.cancel({'id': Solicitud.data.id}).then(success, error);
+            solicitudesService.cancel(Solicitud.data.id).then(success, error);
             function success() {
                 $state.go(HOME);
             }
             function error() {
 
             }
+        }
+
+        function recogido() {
+            console.log(Solicitud);
+            vm.tTranscurrido = 0;
+            $interval.cancel(timer);
+            timer = undefined;
+            $state.go(HOME);
+        }
+
+        function notificate(title, text) {
+          $cordovaLocalNotification.clearAll();
+          $cordovaLocalNotification.schedule({
+            title: title,
+            text: text,
+            icon: "http://api.viajaseguro.co/images/icono.png",
+          }).then(function (result) {
+            // ...
+          });
         }
 
     }
